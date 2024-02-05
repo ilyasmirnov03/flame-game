@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->mediumInteger('score_needed');
-            $table->string('image');
+            $table->string('icon');
+            $table->string('on_player_image');
+            $table->tinyInteger('position');
         });
 
         Schema::create('user_rewards', function (Blueprint $table) {
