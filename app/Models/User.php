@@ -50,15 +50,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Automatically load relationships.
-     *
-     * @var array
-     */
-    protected $with = [
-        'user_groups'
-    ];
-
-    /**
      * Get groups of user
      * @return BelongsToMany
      */
@@ -74,6 +65,10 @@ class User extends Authenticatable
         return $this->hasMany(UserScore::class);
     }
 
+    /**
+     * Get rewards of user
+     * @return BelongsToMany
+     */
     public function rewards(): BelongsToMany {
         return $this->belongsToMany(Reward::class, 'user_rewards');
     }
