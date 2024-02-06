@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_scores', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->integer('score');
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Group::class)->nullable(true);
-        });
+        if (!Schema::hasTable('user_scores')) {
+            Schema::create('user_scores', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->integer('score');
+                $table->foreignIdFor(User::class);
+                $table->foreignIdFor(Group::class)->nullable(true);
+            });
+        }
     }
 
     /**

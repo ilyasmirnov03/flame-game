@@ -13,21 +13,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 16);
-            $table->string('image')->nullable(true);
-            $table->boolean('private');
-            $table->tinyInteger('max_members');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('groups')) {
+            Schema::create('groups', function (Blueprint $table) {
+                $table->id();
+                $table->string('name', 16);
+                $table->string('image')->nullable(true);
+                $table->boolean('private');
+                $table->tinyInteger('max_members');
+                $table->timestamps();
+            });
+        }
 
-        Schema::create('group_members', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Group::class);
-            $table->timestamp('created_at')->useCurrent();
-        });
+        if (!Schema::hasTable('group_members')) {
+            Schema::create('group_members', function (Blueprint $table) {
+                $table->id();
+                $table->foreignIdFor(User::class);
+                $table->foreignIdFor(Group::class);
+                $table->timestamp('created_at')->useCurrent();
+            });
+        }
     }
 
     /**
