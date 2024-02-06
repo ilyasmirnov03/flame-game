@@ -1,0 +1,46 @@
+:root {
+    --white: #f1f1f1;
+    --black: #020d19;
+    --yellow: #fac219;
+    --blue: #4785ff;
+    --blue-light: #c0d4fb;
+    --red: #d23c48;
+    --green: #60c744;
+    --green-light: #b9e2ae;
+    --grey: #948686;
+    --inactiv: #c2c2c2;
+}
+
+@font-face {
+    font-family: "Baloo";
+    src: url(./../fonts/baloo/baloo-font.ttf);
+}
+@font-face {
+    font-family: "K2DBold";
+    src: url(./../fonts/K2D/K2D-Bold.ttf);
+}
+@font-face {
+    font-family: "K2D";
+    src: url(./../fonts/K2D/K2D-Regular.ttf);
+}
+
+h1 {
+    font-family: "Baloo";
+    font-size: calc(20px + 1.390625vw);
+}
+h2 {
+    font-family: "Baloo";
+    font-size: calc(15px + 0.390625vw);
+}
+h3 {
+    font-family: "Baloo";
+    font-size: calc(13px + 0.390625vw);
+}
+p {
+    font-family: "K2D";
+    font-size: calc(13px + 0.390625vw);
+}
+p .bold {
+    font-family: "K2DBold";
+    font-size: calc(13px + 0.390625vw);
+}
