@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Baloo";
+    src: url(./../fonts/baloo/static/Baloo2-Bold.ttf);
+}
+@font-face {
+    font-family: "K2DBold";
+    src: url(./../fonts/K2D/K2D-Bold.ttf);
+}
+@font-face {
+    font-family: "K2D";
+    src: url(./../fonts/K2D/K2D-Regular.ttf);
+}
+
+h1 {
+    font-family: "Baloo";
+    font-size: calc(20px + 1.390625vw);
+}
+h2 {
+    font-family: "Baloo";
+    font-size: calc(18px + 1.390625vw);
+}
+h3 {
+    font-family: "Baloo";
+    font-size: calc(16px + 1.390625vw);
+}
+p {
+    font-family: "K2D";
+    font-size: calc(13px + 1.390625vw);
+}
+.p_bold {
+    font-family: "K2DBold";
+}

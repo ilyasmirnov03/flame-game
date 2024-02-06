@@ -29,6 +29,13 @@
             </svg>     
         </a>           
     </header>
+    <section>
+        <button> Connexion </button>
+        <button> Inscription</button>
+        <div class="connexion"></div>
+        <div class="inscription"></div>
+    </section>
+    
 </body>
 
 </html>
