@@ -12,21 +12,21 @@
 }
 
 h1 {
-    font-family: "Baloo";
+    font-family: "Baloo", sans-serif;
     font-size: calc(1.25rem + 1.390625vw);
 }
 h2 {
-    font-family: "Baloo";
+    font-family: "Baloo", sans-serif;
     font-size: calc(1.125rem + 1.390625vw);
 }
 h3 {
-    font-family: "Baloo";
+    font-family: "Baloo", sans-serif;
     font-size: calc(1rem + 1.390625vw);
 }
 p {
-    font-family: "K2D";
+    font-family: "K2D", sans-serif;
     font-size: calc(0.813rem + 1.390625vw);
 }
 .p_bold {
-    font-family: "K2DBold";
+    font-family: "K2DBold", sans-serif;
 }

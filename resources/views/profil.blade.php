@@ -15,13 +15,13 @@
         <a href="{{route('home')}}" class="header__logo"> LOGO </a>
         <a class="header__link">
             <img src="{{ asset('images/pwa.svg')}}" alt="Télécharger la PWA">
-        </a> 
+        </a>
         <a class="header__link">
             <img src="{{ asset('images/recompenses.svg')}}" alt="Voir ses récompenses">
-        </a> 
+        </a>
         <a href="{{route('profil')}}" class="header__link">
             <img src="{{ asset('images/profil.svg')}}" alt="Voir son profil">
-        </a>           
+        </a>
     </header>
     <!-- IF DISCONNECTED -->
     <section class="forms-section">
@@ -33,8 +33,11 @@
             </button>
             <form class="form form-login">
               <fieldset>
-                    <input class="connexion__mail" type="email" placeholder="Adresse Mail" name="email" id="email_connexion" required />
-                    <input class="connexion__mdp" type="password" placeholder="Mot de passe" name="mdp" id="mdp_connexion" required />
+                <legend>Saisissez vos identifiants de connexion.</legend>
+                    <input class="connexion__mail" type="email" placeholder="Adresse Mail"
+                    name="email" id="email_connexion" required />
+                    <input class="connexion__mdp" type="password" placeholder="Mot de passe"
+                    name="mdp" id="mdp_connexion" required />
               </fieldset>
               <input class="btn__blue" type="submit" value="Connexion" />
               <a class="connexion__miss-mdp" href="#"> Mot de passe oublié? </a>
@@ -47,9 +50,13 @@
             </button>
             <form class="form form-signup">
               <fieldset>
-                <input class="inscription__name" type="name" placeholder="Votre pseudo" name="name" id="name_inscription" required />
-                <input class="inscription__mail" type="email" placeholder="Adresse Mail" name="email" id="email_inscription" required />
-                <input class="inscription__mdp" type="password" placeholder="Mot de passe" name="mdp" id="mdp_inscription" required />
+                <legend>Créer votre compte.</legend>
+                <input class="inscription__name" type="name" placeholder="Votre pseudo"
+                name="name" id="name_inscription" required />
+                <input class="inscription__mail" type="email" placeholder="Adresse Mail"
+                name="email" id="email_inscription" required />
+                <input class="inscription__mdp" type="password" placeholder="Mot de passe"
+                name="mdp" id="mdp_inscription" required />
               </fieldset>
               <input class="btn__blue" type="submit" value="Inscription" />
             </form>
@@ -57,7 +64,6 @@
         </div>
       </section>
     <!--  -->
-    
 </body>
 
 </html>

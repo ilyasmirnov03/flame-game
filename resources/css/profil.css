@@ -8,7 +8,7 @@
         background-color: transparent;
         border: none;
         text-transform: uppercase;
-        font-family: "Baloo";
+        font-family: "Baloo", sans-serif;
         font-size: calc(1rem + 1.390625vw);
     }
     .actif {
@@ -65,7 +65,7 @@ fieldset {
 .inscription__mail,
 .inscription__mdp {
     margin: 1rem 0rem;
-    font-family: "K2D";
+    font-family: "K2D", sans-serif;
     color: var(--black);
     font-size: calc(0.75rem + 1.390625vw);
     background-color: transparent;
@@ -84,7 +84,7 @@ fieldset {
 .inscription__name::placeholder,
 .inscription__mail::placeholder,
 .inscription__mdp::placeholder {
-    font-family: "K2D";
+    font-family: "K2D", sans-serif;
     color: var(--black);
     font-size: calc(0.75rem + 1.390625vw);
 }
@@ -97,7 +97,7 @@ fieldset {
     margin-left: auto;
     padding: 0;
     text-transform: uppercase;
-    font-family: "Baloo";
+    font-family: "Baloo", sans-serif;
     font-size: calc(1rem + 1.390625vw);
     letter-spacing: 0.5px;
     color: var(--black);
