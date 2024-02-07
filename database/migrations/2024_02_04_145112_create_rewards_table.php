@@ -11,19 +11,6 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 
     /**
-     * Rewards to populate the database with
-     * @var array|array[]
-     */
-    private array $rewards = [
-        [
-            'score_needed' => 1000,
-            'icon' => 'icon',
-            'on_player_image' => 'on_player_image',
-            'position' => RewardPlayerPosition::HEAD
-        ]
-    ];
-
-    /**
      * Run the migrations.
      */
     public function up(): void
@@ -48,7 +35,9 @@ return new class extends Migration {
         }
 
         if (DB::table('rewards')->count() == 0) {
-            DB::table('rewards')->insert($this->rewards);
+            $rewards = config('static.rewards', []);
+
+            DB::table('rewards')->insert($rewards);
         }
     }
 
