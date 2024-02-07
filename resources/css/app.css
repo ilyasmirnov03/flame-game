@@ -1,0 +1,26 @@
+@import "./font.css";
+@import "./btn.css";
+@import "./header.css";
+@import "./profil.css";
+@import "./nav.css";
+
+:root {
+    --white: #f1f1f1;
+    --black: #020d19;
+    --yellow: #fac219;
+    --blue: #4785ff;
+    --blue-light: #c0d4fb;
+    --red: #d23c48;
+    --green: #60c744;
+    --green-light: #b9e2ae;
+    --grey: #948686;
+    --inactiv: #c2c2c2;
+}
+
+* {
+    background-color: var(--white);
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}

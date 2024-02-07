@@ -1,0 +1,29 @@
+.navbar {
+    position: fixed;
+    bottom: 0;
+    background-color: var(--blue-light);
+    padding: 1.5rem 1rem;
+    width: 100%;
+    ul {
+        display: flex;
+        justify-content: space-around;
+        background-color: transparent;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        li {
+            background-color: transparent;
+            a {
+                background-color: transparent;
+                text-decoration: none;
+                img {
+                    background-color: transparent;
+                    filter: brightness(0%);
+                }
+            }
+        }
+    }
+}
+.active img {
+    filter: none !important;
+}
