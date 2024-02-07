@@ -31,6 +31,7 @@ return new class extends Migration {
                 $table->id();
                 $table->foreignIdFor(User::class);
                 $table->foreignIdFor(Reward::class);
+                $table->boolean('selected')->default(true);
             });
         }
 
