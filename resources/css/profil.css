@@ -9,7 +9,7 @@
         border: none;
         text-transform: uppercase;
         font-family: "Baloo";
-        font-size: calc(16px + 1.390625vw);
+        font-size: calc(1rem + 1.390625vw);
     }
     .actif {
         color: var(--yellow);
@@ -67,7 +67,7 @@ fieldset {
     margin: 1rem 0rem;
     font-family: "K2D";
     color: var(--black);
-    font-size: calc(12px + 1.390625vw);
+    font-size: calc(0.75rem + 1.390625vw);
     background-color: transparent;
     border: none;
     border-bottom: 2px solid var(--black);
@@ -86,7 +86,7 @@ fieldset {
 .inscription__mdp::placeholder {
     font-family: "K2D";
     color: var(--black);
-    font-size: calc(12px + 1.390625vw);
+    font-size: calc(0.75rem + 1.390625vw);
 }
 
 .switcher {
@@ -98,7 +98,7 @@ fieldset {
     padding: 0;
     text-transform: uppercase;
     font-family: "Baloo";
-    font-size: calc(16px + 1.390625vw);
+    font-size: calc(1rem + 1.390625vw);
     letter-spacing: 0.5px;
     color: var(--black);
     background-color: transparent;
