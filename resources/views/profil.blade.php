@@ -29,12 +29,40 @@
             </svg>     
         </a>           
     </header>
-    <section>
-        <button> Connexion </button>
-        <button> Inscription</button>
-        <div class="connexion"></div>
-        <div class="inscription"></div>
-    </section>
+    <!-- IF DISCONNECTED -->
+    <section class="forms-section">
+        <div class="forms">
+          <div class="form-wrapper is-active">
+            <button type="button" class="switcher switcher-login">
+              Connexion
+              <span class="underline"></span>
+            </button>
+            <form class="form form-login">
+              <fieldset>
+                    <input class="connexion__mail" type="email" placeholder="Adresse Mail" name="email" id="email" required />
+                    <input class="connexion__mdp" type="password" placeholder="Mot de passe" name="mdp" id="mdp" required />
+              </fieldset>
+              <input class="btn__blue" type="submit" value="Connexion" />
+              <a class="connexion__miss-mdp" href="#"> Mot de passe oublié? </a>
+            </form>
+          </div>
+          <div class="form-wrapper">
+            <button type="button" class="switcher switcher-signup">
+             Inscription
+              <span class="underline"></span>
+            </button>
+            <form class="form form-signup">
+              <fieldset>
+                <input class="inscription__name" type="name" placeholder="Votre pseudo" name="name" id="name" required />
+                <input class="inscription__mail" type="email" placeholder="Adresse Mail" name="email" id="email" required />
+                <input class="inscription__mdp" type="password" placeholder="Mot de passe" name="mdp" id="mdp" required />
+              </fieldset>
+              <input class="btn__blue" type="submit" value="Inscription" />
+            </form>
+          </div>
+        </div>
+      </section>
+    <!--  -->
     
 </body>
 
