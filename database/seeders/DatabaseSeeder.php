@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
      * Amount of groups to generate
      * @var int
      */
-    private int $groups_amount = 5;
+    private int $groupsAmount = 5;
 
     /**
      * Amount of users to generate
      * @var int
      */
-    private int $users_amount = 50;
+    private int $usersAmount = 50;
 
     /**
      * Seed the application's database.
@@ -28,17 +28,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Generate groups
-        $groups = Group::factory($this->groups_amount)
+        $groups = Group::factory($this->groupsAmount)
             ->create();
 
         // Generate users
-        $users = User::factory($this->users_amount)
+        $users = User::factory($this->usersAmount)
             ->create();
 
         // Generate group members and scores
         foreach ($users as &$user) {
             $user_score_is_in_group = fake()->boolean(40);
-            $random_group = rand(0, $this->groups_amount - 1);
+            $random_group = rand(0, $this->groupsAmount - 1);
             $score_number = rand(0, 5);
 
             DB::table('group_members')->insert([
