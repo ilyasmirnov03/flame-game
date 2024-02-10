@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="daltonism-container">
     @include('nav')
     @include('header')
     <!-- IF DISCONNECTED -->

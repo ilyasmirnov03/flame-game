@@ -1,0 +1,117 @@
+.params {
+    padding: 1rem 2rem;
+    .params__top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-size: calc(1.75rem + 1.390625vw);
+            margin: 0;
+        }
+
+        .reset__btn {
+            border: none;
+            background-color: transparent;
+            margin-left: auto;
+        }
+    }
+
+    .notif__div,
+    .access__div {
+        padding-left: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .access__div--select {
+            border-color: var(--grey);
+            width: 30%;
+            border-radius: 1rem;
+            padding: 0.2rem;
+            font-family: "K2D";
+            font-size: calc(0.813rem + 1.390625vw);
+        }
+    }
+    .access__div--font {
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        label {
+            font-size: calc(0.813rem + 1.390625vw);
+            font-family: "K2D";
+        }
+    }
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid var(--grey);
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 0;
+    bottom: 0;
+    background-color: var(--grey);
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    border-color: var(--blue);
+}
+
+input:checked + .slider:before {
+    transform: translateX(35px);
+    background-color: var(--blue);
+}
+
+/* DALTONISME */
+.daltonism-protanopia {
+    filter: grayscale(100%) sepia(50%) hue-rotate(-30deg) brightness(80%)
+        contrast(80%);
+    height: 100vh;
+}
+
+.daltonism-deuteranopia {
+    filter: grayscale(80%) sepia(20%) hue-rotate(40deg) brightness(80%)
+        contrast(80%);
+    height: 100vh;
+}
+
+.daltonism-tritanopia {
+    filter: grayscale(5%) sepia(25%) hue-rotate(150deg) brightness(80%)
+        contrast(80%);
+    height: 100vh;
+}
+
+.daltonism-achromatopsia {
+    filter: grayscale(100%);
+    height: 100vh;
+}

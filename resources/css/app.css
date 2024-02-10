@@ -3,6 +3,7 @@
 @import "./header.css";
 @import "./profil.css";
 @import "./nav.css";
+@import "./params.css";
 
 :root {
     --white: #f1f1f1;
