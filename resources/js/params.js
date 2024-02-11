@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     applyStoredSettings();
     updateFormValues();
 
-    fontSizeElement.addEventListener("input", function () {
+    fontSizeElement.addEventListener("change", function () {
         applyFontSize(this.value);
     });
 

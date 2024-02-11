@@ -15,7 +15,7 @@
     src: url(./../fonts/Dyslexie.otf);
 }
 .dyslexique {
-    font-family: "OpenDyslexic" !important;
+    font-family: "OpenDyslexic", sans-serif !important;
 }
 
 h1,
