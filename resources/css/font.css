@@ -10,6 +10,24 @@
     font-family: "K2D";
     src: url(./../fonts/K2D/K2D-Regular.ttf);
 }
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url(./../fonts/Dyslexie.otf);
+}
+.dyslexique {
+    font-family: "OpenDyslexic", sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+p,
+label,
+select,
+option,
+button {
+    color: var(--black);
+}
 
 h1 {
     font-family: "Baloo", sans-serif;

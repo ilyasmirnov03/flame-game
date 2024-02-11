@@ -1,1 +1,2 @@
 import "./profil";
+import "./params";
