@@ -4,6 +4,7 @@
     background-color: var(--blue-light);
     padding: 1.5rem 1rem;
     width: 100%;
+    z-index: 999;
     ul {
         display: flex;
         justify-content: space-around;
