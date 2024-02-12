@@ -25,6 +25,18 @@ Route::get('/flamme', function () {
     return view('flamme');
 })->name("flamme");
 
+Route::get('/flamme/solo', function () {
+    return view('flamme_indiv');
+})->name("flamme_indiv");
+
+Route::get('/flamme/solo/games', function () {
+    return view('select_game');
+})->name("select_game");
+
+Route::get('/flamme/solo/games/run', function () {
+    return view('course');
+})->name("course");
+
 Route::get('/params', function () {
     return view('params');
 })->name("params");

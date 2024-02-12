@@ -24,6 +24,7 @@
         justify-content: space-between;
         align-items: center;
         .access__div--select {
+            background-color: var(--white);
             border-color: var(--grey);
             width: 30%;
             border-radius: 1rem;

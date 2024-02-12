@@ -4,6 +4,10 @@
 @import "./profil.css";
 @import "./nav.css";
 @import "./params.css";
+@import "./flamme.css";
+@import "./flamme_indiv.css";
+@import "./select_games.css";
+@import "./course.css";
 
 :root {
     --white: #f1f1f1;
@@ -19,9 +23,9 @@
 }
 
 * {
-    background-color: var(--white);
     box-sizing: border-box;
 }
 body {
     margin: 0;
+    background-color: var(--white);
 }
