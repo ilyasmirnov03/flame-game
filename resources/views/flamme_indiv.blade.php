@@ -18,7 +18,7 @@
         <div class="univ__bg">
             <img class="univ__bg--img" src="{{ asset('images/flamme_univ.png')}}" alt="Univers de votre flamme">
             <img class="univ__bg--logo" src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flamme">
-            <p class="univ__bg--points"> 3245 points </p>
+            <p class="univ__bg--points"> 3245</p>
         </div>
         <a href="{{ route('select_game')}}"> Avancer </a>
     </section>

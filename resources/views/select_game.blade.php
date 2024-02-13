@@ -16,18 +16,12 @@
     @include('header')
     <section class="games">
         <h1> Choisissez votre défi </h1>
-        <a>
-            <img src="{{ asset('images/quizz_logo.svg')}}" alt="Logo du Quizz">
-            <h2> Quizz </h2>
-        </a>
-        <a>
-            <img src="{{ asset('images/idk_logo.svg')}}" alt="Logo d'un autre défi">
-            <h2> Autre </h2>
-        </a>
-        <a href="{{ route('course')}}">
-            <img src="{{ asset('images/run_logo.svg')}}" alt="Logo de la Course">
-            <h2> Course </h2>
-        </a>
+        @foreach(config('minigames') as $key => $minigame)
+            <a href="{{ route('play', ['game' => $key]) }}">
+                <img src="{{ asset($minigame['img']) }}" alt="Logo {{ $minigame['label'] }}">
+                <h2>{{ $minigame['label'] }}</h2>
+            </a>
+        @endforeach
     </section>
 </body>
 

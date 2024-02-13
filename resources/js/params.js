@@ -12,25 +12,35 @@ document.addEventListener("DOMContentLoaded", function () {
     applyStoredSettings();
     updateFormValues();
 
-    fontSizeElement.addEventListener("change", function () {
-        applyFontSize(this.value);
-    });
+    if (fontSizeElement) {
+        fontSizeElement.addEventListener("change", function () {
+            applyFontSize(this.value);
+        });
+    }
 
-    dyslexieElement.addEventListener("click", function () {
-        toggleDyslexie();
-    });
+    if (dyslexieElement) {
+        dyslexieElement.addEventListener("click", function () {
+            toggleDyslexie();
+        });
+    }
 
-    selectDaltonisme.addEventListener("change", function () {
-        applyDaltonisme(this.value);
-    });
+    if (selectDaltonisme) {
+        selectDaltonisme.addEventListener("change", function () {
+            applyDaltonisme(this.value);
+        });
+    }
 
-    darkModeToggle.addEventListener("change", function () {
-        applyDarkMode(this.checked);
-    });
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener("change", function () {
+            applyDarkMode(this.checked);
+        });
+    }
 
-    resetButton.addEventListener("click", function () {
-        resetSettings();
-    });
+    if (resetButton) {
+        resetButton.addEventListener("click", function () {
+            resetSettings();
+        });
+    }
 
     function applyStoredSettings() {
         const storedFontSize = localStorage.getItem("fontSize");
@@ -55,10 +65,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateFormValues() {
-        fontSizeElement.value = localStorage.getItem("fontSize") || 4;
-        dyslexieElement.checked = localStorage.getItem("dyslexie") === "true";
-        selectDaltonisme.value = localStorage.getItem("daltonisme") || "none";
-        darkModeToggle.checked = localStorage.getItem("darkMode") === "true";
+        if (fontSizeElement) {
+            fontSizeElement.value = localStorage.getItem("fontSize") || 4;
+        }
+        if (dyslexieElement) {
+            dyslexieElement.checked =
+                localStorage.getItem("dyslexie") === "true";
+        }
+        if (selectDaltonisme) {
+            selectDaltonisme.value =
+                localStorage.getItem("daltonisme") || "none";
+        }
+        if (darkModeToggle) {
+            darkModeToggle.checked =
+                localStorage.getItem("darkMode") === "true";
+        }
     }
 
     function applyFontSize(value) {

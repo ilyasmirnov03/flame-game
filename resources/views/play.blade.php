@@ -14,6 +14,11 @@
     @section('flamme-active', 'active')
     @include('nav')
     @include('header')
+    <section class="minigame">
+        <a class="minigame__return--a" href="{{ route('select_game') }}"> <img class="minigame__return" src="{{ asset('images/return.svg')}}" alt="Retourner en arrière"> </a>
+        <h1 class="minigame__header"> {{ $minigame['header'] }} </h1>
+        <h2 class="minigame__title"> {{ $minigame['title'] }} </h2>
+    </section>
 </body>
 
 </html>

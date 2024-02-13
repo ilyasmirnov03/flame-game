@@ -1,0 +1,30 @@
+.minigame {
+    position: relative;
+    padding: 2rem;
+    .minigame__header {
+        font-size: calc(3rem + 1.390625vw);
+        color: var(--blue-light);
+        position: absolute;
+        top: -1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+    .minigame__return--a {
+        z-index: 999;
+        position: absolute;
+        top: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .minigame__return {
+        width: 2.5rem;
+    }
+    .minigame__title {
+        position: relative;
+        text-align: center;
+        font-size: calc(2rem + 1.390625vw);
+        z-index: 900;
+        line-height: 1;
+    }
+}

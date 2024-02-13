@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Config;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,10 +33,6 @@ Route::get('/flamme/solo/games', function () {
     return view('select_game');
 })->name("select_game");
 
-Route::get('/flamme/solo/games/run', function () {
-    return view('course');
-})->name("course");
-
 Route::get('/params', function () {
     return view('params');
 })->name("params");
@@ -44,3 +40,11 @@ Route::get('/params', function () {
 Route::get('/score', function () {
     return view('score');
 })->name("score");
+
+Route::get('/flamme/solo/games/{game}', function ($game) {
+    if (!array_key_exists($game, Config::get('minigames'))) {
+        abort(404);
+    }
+    $minigameInfo = Config::get("minigames.$game");
+    return view('play', ['minigame' => $minigameInfo]);
+})->name('play');
