@@ -12,35 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
     applyStoredSettings();
     updateFormValues();
 
-    if (fontSizeElement) {
-        fontSizeElement.addEventListener("change", function () {
-            applyFontSize(this.value);
-        });
-    }
-
-    if (dyslexieElement) {
-        dyslexieElement.addEventListener("click", function () {
-            toggleDyslexie();
-        });
-    }
-
-    if (selectDaltonisme) {
-        selectDaltonisme.addEventListener("change", function () {
-            applyDaltonisme(this.value);
-        });
-    }
-
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener("change", function () {
-            applyDarkMode(this.checked);
-        });
-    }
-
-    if (resetButton) {
-        resetButton.addEventListener("click", function () {
-            resetSettings();
-        });
-    }
+    fontSizeElement?.addEventListener("change", () =>
+        applyFontSize(fontSizeElement.value)
+    );
+    dyslexieElement?.addEventListener("click", toggleDyslexie);
+    selectDaltonisme?.addEventListener("change", () =>
+        applyDaltonisme(selectDaltonisme.value)
+    );
+    darkModeToggle?.addEventListener("change", () =>
+        applyDarkMode(darkModeToggle.checked)
+    );
+    resetButton?.addEventListener("click", resetSettings);
 
     function applyStoredSettings() {
         const storedFontSize = localStorage.getItem("fontSize");
@@ -65,21 +47,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateFormValues() {
-        if (fontSizeElement) {
-            fontSizeElement.value = localStorage.getItem("fontSize") || 4;
+        if (!fontSizeElement) {
+            return;
         }
-        if (dyslexieElement) {
-            dyslexieElement.checked =
-                localStorage.getItem("dyslexie") === "true";
-        }
-        if (selectDaltonisme) {
-            selectDaltonisme.value =
-                localStorage.getItem("daltonisme") || "none";
-        }
-        if (darkModeToggle) {
-            darkModeToggle.checked =
-                localStorage.getItem("darkMode") === "true";
-        }
+
+        fontSizeElement.value =
+            localStorage.getItem("fontSize") !== null
+                ? localStorage.getItem("fontSize")
+                : 4;
+
+        dyslexieElement.checked = localStorage.getItem("dyslexie") === "true";
+        selectDaltonisme.value = localStorage.getItem("daltonisme") || "none";
+        darkModeToggle.checked = localStorage.getItem("darkMode") === "true";
     }
 
     function applyFontSize(value) {
@@ -111,23 +90,22 @@ document.addEventListener("DOMContentLoaded", function () {
             "daltonism-tritanopia",
             "daltonism-achromatopsia"
         );
-        if (value !== "none") {
+        value !== "none" &&
             daltonismContainer.classList.add(`daltonism-${value}`);
-        }
         localStorage.setItem("daltonisme", value);
     }
 
     function applyDarkMode(isDarkMode) {
-        if (isDarkMode) {
-            htmlElement.style.setProperty("--white", "#020d19");
-            htmlElement.style.setProperty("--black", "#f1f1f1");
-            pwaImage.src = window.pwaWhiteImagePath;
-        } else {
-            htmlElement.style.setProperty("--white", "#f1f1f1");
-            htmlElement.style.setProperty("--black", "#020d19");
-            pwaImage.src = window.pwaImagePath;
-        }
-        localStorage.setItem("darkMode", isDarkMode.toString());
+        const whiteValue = isDarkMode ? "#020d19" : "#f1f1f1";
+        const blackValue = isDarkMode ? "#f1f1f1" : "#020d19";
+
+        htmlElement.style.setProperty("--white", whiteValue);
+        htmlElement.style.setProperty("--black", blackValue);
+        pwaImage.src = isDarkMode
+            ? window.pwaWhiteImagePath
+            : window.pwaImagePath;
+
+        localStorage.setItem("darkMode", isDarkMode?.toString());
     }
 
     function resetSettings() {

@@ -11,10 +11,10 @@
 </head>
 
 <body class="daltonism-container">
-    @section('flamme-active', 'active')
+    @section('flame-active', 'active')
     @include('nav')
     @include('header')
-    <a href="{{ route('flamme_indiv')}}">
+    <a href="{{ route('solo_flame')}}">
         <div class="flamme__indiv">
             <img src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flame">
             <h1 class="font dyslexie"> Ma <br> flamme </h1>

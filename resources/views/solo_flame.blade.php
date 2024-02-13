@@ -11,7 +11,7 @@
 </head>
 
 <body class="daltonism-container">
-    @section('flamme-active', 'active')
+    @section('flame-active', 'active')
     @include('nav')
     @include('header')
     <section class="univ">
