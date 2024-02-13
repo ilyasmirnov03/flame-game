@@ -11,7 +11,7 @@
 </head>
 
 <body class="daltonism-container">
-    @section('score-active', 'active')
+    @section('flame-active', 'active')
     @include('globals/nav')
     @include('globals/header')
 </body>

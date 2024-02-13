@@ -11,15 +11,16 @@
 </head>
 
 <body class="daltonism-container">
-    @section('flamme-active', 'active')
-    @include('nav')
-    @include('header')
+    @section('flame-active', 'active')
+    @include('globals/nav')
+    @include('globals/header')
     <section class="games">
         <h1> Choisissez votre défi </h1>
         @foreach(config('static.minigames') as $key => $minigame)
-            <a href="{{ route('play', ['game' => $key]) }}">
+            <a href="{{ route('game-' . $minigame['route']) }}">
                 <img src="{{ asset($minigame['img']) }}" alt="Logo {{ $minigame['label'] }}">
                 <h2>{{ $minigame['label'] }}</h2>
+                <img class="games__info" src="{{ asset('images/info.svg')}}" alt="Info">
             </a>
         @endforeach
     </section>

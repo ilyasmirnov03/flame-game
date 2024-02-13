@@ -11,8 +11,8 @@
 </head>
 
 <body class="daltonism-container">
-    @include('nav')
-    @include('header')
+  @include('globals/nav')
+  @include('globals/header')
     <!-- IF DISCONNECTED -->
     <section class="forms-section">
         <div class="forms">

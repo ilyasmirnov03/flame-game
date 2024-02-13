@@ -12,8 +12,8 @@
 
 <body class="daltonism-container">
     @section('flame-active', 'active')
-    @include('nav')
-    @include('header')
+    @include('globals/nav')
+    @include('globals/header')
     <a href="{{ route('solo_flame')}}">
         <div class="flamme__indiv">
             <img src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flame">

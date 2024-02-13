@@ -19,14 +19,14 @@ return [
         'quizz' => [
             'label' => 'Quizz',
             'img' => 'images/quizz_logo.svg',
-            'header' => 'Question',
-            'title' => 'Votre quizz quotidien',
+            'info' => 'Les infos nécessaires pour le quizz',
+            'route' => 'quizz',
         ],
         'running' => [
             'label' => 'Course',
             'img' => 'images/run_logo.svg',
-            'header' => 'Course',
-            'title' => 'Votre course quotidienne',
+            'info' => 'Les infos nécessaires pour la course',
+            'route' => 'run',
         ],
     ]
 ];

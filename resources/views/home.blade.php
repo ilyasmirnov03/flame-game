@@ -12,8 +12,8 @@
 
 <body class="daltonism-container">
     @section('home-active', 'active')
-    @include('nav')
-    @include('header')
+    @include('globals/nav')
+    @include('globals/header')
 </body>
 
 </html>
