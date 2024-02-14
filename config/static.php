@@ -10,6 +10,8 @@ return [
     'rewards' => [
         [
             'score_needed' => 1000,
+            'name' => 'test_hat',
+            'description' => 'This is a hat.',
             'icon' => 'icon',
             'on_player_image' => 'on_player_image',
             'position' => RewardPlayerPosition::HEAD
