@@ -12,4 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 class Language extends Model
 {
     use HasFactory;
+
+    /**
+     * Not use timestamps for this model.
+     * @var bool
+     */
+    public $timestamps = false;
 }

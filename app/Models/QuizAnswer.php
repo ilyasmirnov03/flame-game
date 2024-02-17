@@ -6,17 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class QuizzAnswer extends Model
+class QuizAnswer extends Model
 {
     use HasFactory;
 
-    protected $table = 'og_quizz_answers';
+    protected $table = 'og_quiz_answers';
 
     protected $hidden = [
         'is_right'
     ];
 
+    /**
+     * Not use timestamps for this model.
+     * @var bool
+     */
+    public $timestamps = false;
+
     public function translations(): HasMany {
-        return $this->hasMany(QuizzAnswersTranslation::class);
+        return $this->hasMany(QuizAnswersTranslation::class);
     }
 }
