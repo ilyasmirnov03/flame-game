@@ -19,7 +19,7 @@ return new class extends Migration
                 $table->timestamps();
                 $table->integer('score');
                 $table->foreignIdFor(User::class);
-                $table->foreignIdFor(Group::class)->nullable(true);
+                $table->foreignIdFor(Group::class)->nullable();
             });
         }
     }
