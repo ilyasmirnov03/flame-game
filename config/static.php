@@ -5,7 +5,7 @@ use App\Enums\RewardPlayerPosition;
 return [
 
     /**
-     * Rewards to populate the database with
+     * Rewards to populate the database with.
      */
     'rewards' => [
         [
@@ -17,8 +17,12 @@ return [
             'position' => RewardPlayerPosition::HEAD
         ]
     ],
+
+    /**
+     * Application's minigames.
+     */
     'minigames' => [
-        'quizz' => [
+        'quiz' => [
             'label' => 'Quizz',
             'img' => 'images/quizz_logo.svg',
             'header' => 'Question',
