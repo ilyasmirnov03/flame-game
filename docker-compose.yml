@@ -1,5 +1,6 @@
 services:
-    flame-game-app:
+    app:
+        container_name: flame-game-app
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
             dockerfile: Dockerfile
@@ -22,12 +23,11 @@ services:
         networks:
             - sail
         depends_on:
-            - flame-game-db
-            - flame-game-redis
-    flame-game-db:
+            - db
+            - redis
+    db:
+        container_name: flame-game-db
         image: 'mysql/mysql-server:8.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: '%'
@@ -48,10 +48,19 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
-    flame-game-redis:
-        image: 'redis:alpine'
+    adminer:
+        container_name: flame-game-adminer
+        image: adminer:4.8.1
+        restart: always
+        networks:
+            - sail
         ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+            - '${ADMINER_PORT:-8080}:8080'
+        depends_on:
+            - db
+    redis:
+        container_name: flame-game-redis
+        image: 'redis:alpine'
         volumes:
             - 'sail-redis:/data'
         networks:
