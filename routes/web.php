@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 /*
@@ -17,21 +18,29 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
-Route::get('/profil', function () {
-    return view('profil');
-})->name("profil");
+Route::get('/login', function () {
+    return view('auth', ['baseActive' => 'connexion']);
+})->name("profil")->middleware(['guest']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/signup', function () {
+    return view('auth', ['baseActive' => 'inscription']);
+})->name("profil")->middleware(['guest']);
+Route::post('/signup', [AuthController::class, 'login']);
+
+Route::delete('/logout', [AuthController::class, 'logout']);
 
 Route::get('/flamme', function () {
     return view('flame');
-})->name("flame");
+})->name("flame")->middleware(['auth']);
 
 Route::get('/flamme/solo', function () {
     return view('solo_flame');
-})->name("solo_flame");
+})->name("solo_flame")->middleware(['auth']);;
 
 Route::get('/flamme/solo/games', function () {
     return view('select_game');
-})->name("select_game");
+})->name("select_game")->middleware(['auth']);;
 
 Route::get('/params', function () {
     return view('params');
@@ -39,7 +48,7 @@ Route::get('/params', function () {
 
 Route::get('/score', function () {
     return view('score');
-})->name("score");
+})->name("score")->middleware(['auth']);;
 
 Route::get('/flamme/solo/games/{game}', function ($game) {
     $minigames = config('static.minigames');
@@ -50,4 +59,4 @@ Route::get('/flamme/solo/games/{game}', function ($game) {
     } else {
         abort(404, 'Jeu non trouvé');
     }
-})->name('play');
+})->name('play')->middleware(['auth']);;
