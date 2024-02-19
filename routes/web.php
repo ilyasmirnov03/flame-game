@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
+Route::get('/home', function () {
+    return view('home');
+})->name("home");
+
 Route::get('/login', function () {
     return view('auth', ['baseActive' => 'connexion']);
 })->name("profil")->middleware(['guest']);
