@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('og_quiz_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('label', 16);
+            $table->string('label', 16)->nullable();
         });
 
         Schema::create('og_quiz_answers', function (Blueprint $table) {
