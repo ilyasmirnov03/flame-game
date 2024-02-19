@@ -60,10 +60,10 @@ fieldset {
 }
 
 .connexion__mail,
-.connexion__mdp,
+.connexion__password,
 .inscription__name,
 .inscription__mail,
-.inscription__mdp {
+.inscription__password {
     margin: 1rem 0rem;
     font-family: "K2D", sans-serif;
     color: var(--black);
@@ -73,17 +73,17 @@ fieldset {
     border-bottom: 2px solid var(--black);
     outline: none;
 }
-.connexion__miss-mdp {
+.connexion__miss-password {
     background-color: transparent;
     color: var(--black);
     text-align: center;
     margin-top: -2rem;
 }
 .connexion__mail::placeholder,
-.connexion__mdp::placeholder,
+.connexion__password::placeholder,
 .inscription__name::placeholder,
 .inscription__mail::placeholder,
-.inscription__mdp::placeholder {
+.inscription__password::placeholder {
     font-family: "K2D", sans-serif;
     color: var(--black);
     font-size: calc(0.75rem + 1.390625vw);
@@ -284,4 +284,10 @@ fieldset {
     opacity: 1;
     transform: translateX(0);
     transition: all 0.4s ease-in;
+}
+
+/* doesnt apply as far as i have tried. idk how it works. */
+.connexion__error, .inscription__error {
+    background: none;
+    color: red;
 }

@@ -29,14 +29,14 @@
                         @error('email')
                             <span class="connexion__error">{{ $message }}</span>
                         @enderror
-                        <input class="connexion__mdp" type="password" placeholder="Mot de passe" name="mdp"
-                            id="mdp_connexion" required />
+                        <input class="connexion__password" type="password" placeholder="Mot de passe" name="password"
+                            id="password_connexion" required />
                         @error('password')
                             <span class="connexion__error">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <input class="btn__blue" type="submit" value="Connexion" />
-                    <a class="connexion__miss-mdp" href="#"> Mot de passe oublié? </a>
+                    <a class="connexion__miss-password" href="#"> Mot de passe oublié? </a>
                 </form>
             </div>
             <div class="form-wrapper @if ($baseActive == 'inscription') is-active @endif">
@@ -58,8 +58,8 @@
                         @error('email')
                             <span class="inscription__error">{{ $message }}</span>
                         @enderror
-                        <input class="inscription__mdp" type="password" placeholder="Mot de passe" name="mdp"
-                            id="mdp_inscription" required />
+                        <input class="inscription__password" type="password" placeholder="Mot de passe" name="password"
+                            id="password_inscription" required />
                         @error('password')
                             <span class="inscription__error">{{ $message }}</span>
                         @enderror
