@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Config;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,13 +60,11 @@ Route::get('/score', function () {
     return view('score');
 })->name("score")->middleware(['auth']);;
 
-Route::get('/flamme/solo/games/{game}', function ($game) {
-    $minigames = config('static.minigames');
+Route::get('/flamme/solo/games/{game}', function (string $game) {
+    $minigame = config('static.minigames.' . $game);
 
-    if (array_key_exists($game, $minigames)) {
-        $minigame = $minigames[$game];
-        return view('play', compact('minigame'));
-    } else {
+    if ($minigame == null) {
         abort(404, 'Jeu non trouvé');
     }
-})->name('play')->middleware(['auth']);;
+    return view('play', compact('minigame', 'game'));
+})->name('play')->middleware(['auth']);
