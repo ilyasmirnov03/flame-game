@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-})->name("home");
-
-Route::get('/home', function () {
     return view('home');
 })->name("home");
 
@@ -40,17 +37,37 @@ Route::get('/profil', function () {
     return view('profil');
 })->name("profil")->middleware(['auth']);
 
-Route::get('/flamme', function () {
-    return view('flame');
-})->name("flame")->middleware(['auth']);
+/**
+ * Flame pages
+ */
+Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        $user = Auth::user()->load('user_groups');
+        $score = $user->scores->sum('score');
+        return view('flame', [
+            'user' => $user,
+            'score' => $score,
+        ]);
+    })->name('index');
 
-Route::get('/flamme/solo', function () {
-    return view('solo_flame');
-})->name("solo_flame")->middleware(['auth']);
+    Route::get('/solo', function () {
+        $score = Auth::user()->scores->sum('score');
+        return view('solo_flame', ['score' => $score]);
+    })->name('solo');
 
-Route::get('/flamme/solo/games', function () {
-    return view('select_game');
-})->name("select_game")->middleware(['auth']);
+    Route::get('/solo/games', function () {
+        return view('select_game');
+    })->name('select_game');
+
+    Route::get('/solo/games/{game}', function (string $game) {
+        $minigame = config('static.minigames.' . $game);
+
+        if ($minigame == null) {
+            abort(404, 'Jeu non trouvé');
+        }
+        return view('play', compact('minigame', 'game'));
+    })->name('play');
+});
 
 Route::get('/params', function () {
     return view('params');
@@ -59,12 +76,3 @@ Route::get('/params', function () {
 Route::get('/score', function () {
     return view('score');
 })->name("score")->middleware(['auth']);
-
-Route::get('/flamme/solo/games/{game}', function (string $game) {
-    $minigame = config('static.minigames.' . $game);
-
-    if ($minigame == null) {
-        abort(404, 'Jeu non trouvé');
-    }
-    return view('play', compact('minigame', 'game'));
-})->name('play')->middleware(['auth']);

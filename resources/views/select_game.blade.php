@@ -17,7 +17,7 @@
     <section class="games">
         <h1> Choisissez votre défi </h1>
         @foreach(config('static.minigames') as $key => $minigame)
-            <a href="{{ route('play', ['game' => $key]) }}">
+            <a href="{{ route('flame.play', ['game' => $key]) }}">
                 <img src="{{ asset($minigame['img']) }}" alt="Logo {{ $minigame['label'] }}">
                 <h2>{{ $minigame['label'] }}</h2>
             </a>
