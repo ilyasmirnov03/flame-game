@@ -34,7 +34,7 @@ Route::get('/signup', function () {
 
 Route::post('/signup', [AuthController::class, 'signup']);
 
-Route::delete('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/profil', function () {
     return view('profil');
