@@ -13,6 +13,9 @@
 <body class="daltonism-container">
     @include('nav')
     @include('header')
+    <form action="logout" method="POST">
+        <button>Deconnexion</button>
+    </form>
 </body>
 
 </html>
