@@ -34,7 +34,7 @@ Route::get('/signup', function () {
 
 Route::post('/signup', [AuthController::class, 'signup']);
 
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/profil', function () {
     return view('profil');
