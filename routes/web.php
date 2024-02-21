@@ -46,11 +46,11 @@ Route::get('/flamme', function () {
 
 Route::get('/flamme/solo', function () {
     return view('solo_flame');
-})->name("solo_flame")->middleware(['auth']);;
+})->name("solo_flame")->middleware(['auth']);
 
 Route::get('/flamme/solo/games', function () {
     return view('select_game');
-})->name("select_game")->middleware(['auth']);;
+})->name("select_game")->middleware(['auth']);
 
 Route::get('/params', function () {
     return view('params');
@@ -58,7 +58,7 @@ Route::get('/params', function () {
 
 Route::get('/score', function () {
     return view('score');
-})->name("score")->middleware(['auth']);;
+})->name("score")->middleware(['auth']);
 
 Route::get('/flamme/solo/games/{game}', function ($game) {
     $minigames = config('static.minigames');
@@ -69,4 +69,4 @@ Route::get('/flamme/solo/games/{game}', function ($game) {
     } else {
         abort(404, 'Jeu non trouvé');
     }
-})->name('play')->middleware(['auth']);;
+})->name('play')->middleware(['auth']);
