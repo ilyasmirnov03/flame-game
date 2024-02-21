@@ -46,6 +46,6 @@ class AuthController extends Controller {
      */
     public function logout(): RedirectResponse {
         Auth::logout();
-        return to_route('profil');
+        return to_route('home');
     }
 }
