@@ -38,7 +38,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/profil', function () {
     return view('profil');
-})->name("profil")->middleware(['guest']);
+})->name("profil")->middleware(['auth']);
 
 Route::get('/flamme', function () {
     return view('flame');
