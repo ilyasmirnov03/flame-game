@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\Group;
+use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +44,7 @@ Route::get('/profil', function () {
  */
 Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function () {
     Route::get('/', function () {
-        $user = Auth::user()->load('user_groups');
+        $user = Auth::user()->load('userGroups');
         $score = $user->scores->sum('score');
         return view('flame', [
             'user' => $user,
@@ -67,6 +69,16 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
         }
         return view('play', compact('minigame', 'game'));
     })->name('play');
+});
+
+Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
+    Route::get('/{group}', function (Group $group) {
+        $score = UserScore::where('group_id', $group->id)->sum('score');
+        return view('group.index', [
+            'group' => $group,
+            'score' => $score,
+        ]);
+    })->name('index')->middleware('user.in.group');
 });
 
 Route::get('/params', function () {
