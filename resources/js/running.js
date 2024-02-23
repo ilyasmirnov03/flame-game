@@ -27,16 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
         resultMessage.style.display = "none";
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition(function () {
                 isRaceStarted = true;
 
                 timer = setInterval(function () {
                     totalTime += 1;
                     updateTimerDisplay();
                 }, 1000);
-
-                const startLatitude = position.coords.latitude;
-                const startLongitude = position.coords.longitude;
 
                 let lastPosition;
 
@@ -75,14 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
         const R = 6371e3;
-        const φ1 = (lat1 * Math.PI) / 180;
-        const φ2 = (lat2 * Math.PI) / 180;
-        const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-        const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+        const phi1 = (lat1 * Math.PI) / 180;
+        const phi2 = (lat2 * Math.PI) / 180;
+        const deltaPhi = ((lat2 - lat1) * Math.PI) / 180;
+        const deltaLambda = ((lon2 - lon1) * Math.PI) / 180;
 
         const a =
-            Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-            Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+            Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+            Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return R * c;
@@ -117,8 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
         resultMessage.style.display = "block";
 
         if (totalDistance >= 1000 && totalTime <= 131) {
-            const points = calculatePoints(totalTime);
-            resultValue.textContent = points;
+            resultValue.textContent = calculatePoints(totalTime).toString();
         } else {
             resultValue.textContent = "Aucun point (distance insuffisantes)";
         }
