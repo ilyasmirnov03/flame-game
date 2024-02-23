@@ -11,11 +11,10 @@
 </head>
 
 <body class="daltonism-container">
+    @section('flame-active', 'active')
     @include('globals/nav')
     @include('globals/header')
-    <form action="logout" method="POST">
-        <button>Deconnexion</button>
-    </form>
+
 </body>
 
 </html>

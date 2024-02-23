@@ -12,8 +12,8 @@
 
 <body class="daltonism-container">
     @section('flame-active', 'active')
-    @include('nav')
-    @include('header')
+    @include('globals/nav')
+    @include('globals/header')
     <section class="univ">
         <div class="univ__bg">
             <img class="univ__bg--img" src="{{ asset('images/flamme_univ.png')}}" alt="Univers de votre flamme">

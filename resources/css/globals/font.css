@@ -1,18 +1,18 @@
 @font-face {
     font-family: "Baloo";
-    src: url(./../fonts/baloo/static/Baloo2-Bold.ttf);
+    src: url(./../../fonts/baloo/static/Baloo2-Bold.ttf);
 }
 @font-face {
     font-family: "K2DBold";
-    src: url(./../fonts/K2D/K2D-Bold.ttf);
+    src: url(./../../fonts/K2D/K2D-Bold.ttf);
 }
 @font-face {
     font-family: "K2D";
-    src: url(./../fonts/K2D/K2D-Regular.ttf);
+    src: url(./../../fonts/K2D/K2D-Regular.ttf);
 }
 @font-face {
     font-family: "OpenDyslexic";
-    src: url(./../fonts/Dyslexie.otf);
+    src: url(./../../fonts/Dyslexie.otf);
 }
 .dyslexique {
     font-family: "OpenDyslexic", sans-serif !important;

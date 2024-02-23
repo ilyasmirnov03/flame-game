@@ -40,17 +40,26 @@ Route::get('/profil', function () {
     return view('profil');
 })->name("profil")->middleware(['auth']);
 
-Route::get('/flamme', function () {
-    return view('flame');
+Route::get('/flame', function () {
+    return view('flame/flame');
 })->name("flame")->middleware(['auth']);
 
-Route::get('/flamme/solo', function () {
-    return view('solo_flame');
+Route::get('/flame/solo', function () {
+    return view('flame/solo_flame');
 })->name("solo_flame")->middleware(['auth']);
 
-Route::get('/flamme/solo/games', function () {
-    return view('select_game');
+Route::get('/flame/solo/games', function () {
+    return view('games/select_game');
 })->name("select_game")->middleware(['auth']);
+
+Route::get('/flame/solo/games/{game}', function (string $game) {
+    $minigame = config('static.minigames.' . $game);
+
+    if ($minigame == null) {
+        abort(404, 'Jeu non trouvé');
+    }
+    return view('games.' . $game, compact('minigame', 'game'));
+})->name('flame.game')->middleware(['auth']);
 
 Route::get('/params', function () {
     return view('params');
@@ -59,12 +68,3 @@ Route::get('/params', function () {
 Route::get('/score', function () {
     return view('score');
 })->name("score")->middleware(['auth']);
-
-Route::get('/flamme/solo/games/{game}', function (string $game) {
-    $minigame = config('static.minigames.' . $game);
-
-    if ($minigame == null) {
-        abort(404, 'Jeu non trouvé');
-    }
-    return view('play', compact('minigame', 'game'));
-})->name('play')->middleware(['auth']);
