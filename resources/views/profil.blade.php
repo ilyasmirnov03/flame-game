@@ -11,8 +11,8 @@
 </head>
 
 <body class="daltonism-container">
-    @include('nav')
-    @include('header')
+    @include('globals/nav')
+    @include('globals/header')
     <form action="logout" method="POST">
         <button>Deconnexion</button>
     </form>

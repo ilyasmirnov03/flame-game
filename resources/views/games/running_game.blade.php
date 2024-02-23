@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FlameGame</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/js/running.js'])
 </head>
 
 <body class="daltonism-container">
