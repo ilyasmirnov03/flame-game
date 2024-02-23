@@ -11,8 +11,8 @@
 </head>
 
 <body class="daltonism-container">
-    @include('nav')
-    @include('header')
+    @include('globals/nav')
+    @include('globals/header')
     <form action="{{route('logout')}}" method="POST">
         @csrf
         <button>Deconnexion</button>

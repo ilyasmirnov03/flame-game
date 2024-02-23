@@ -1,13 +1,13 @@
-@import "./font.css";
-@import "./btn.css";
-@import "./header.css";
+@import "./globals/font.css";
+@import "./globals/btn.css";
+@import "./globals/header.css";
+@import "./globals/nav.css";
 @import "./profil.css";
-@import "./nav.css";
 @import "./params.css";
-@import "./flamme.css";
-@import "./flamme_indiv.css";
-@import "./select_games.css";
-@import "./minigame.css";
+@import "./flamme/flamme.css";
+@import "./flamme/flamme_indiv.css";
+@import "./game/minigame.css";
+@import "./game/select_games.css";
 
 :root {
     --white: #f1f1f1;

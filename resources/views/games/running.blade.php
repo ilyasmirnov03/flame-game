@@ -8,19 +8,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FlameGame</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/js/running.js'])
 </head>
 
 <body class="daltonism-container">
     @section('flame-active', 'active')
-    @include('nav')
-    @include('header')
-    <section class="univ">
-        <div class="univ__bg">
-            <img class="univ__bg--img" src="{{ asset('images/flamme_univ.png')}}" alt="Univers de votre flamme">
-            <img class="univ__bg--logo" src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flamme">
-            <p class="univ__bg--points"> {{ $score }}</p>
-        </div>
-        <a href="{{ route('flame.select_game')}}"> Avancer </a>
+    @include('globals/nav')
+    @include('globals/header')
+    <section>
+        <h1>Votre course quotidienne</h1>
+        <h2> Course </h2>
+    
+        <button id="startButton">Commencer</button>
+        <p id="timer"><span id="timeDisplay">0:00</span></p>
+        <p id="distanceDisplay"></p>
+        <p id="result">Résultat : <span id="resultValue">-</span> points</p>
     </section>
 </body>
 

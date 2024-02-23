@@ -46,7 +46,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     Route::get('/', function () {
         $user = Auth::user()->load('userGroups');
         $score = $user->scores->sum('score');
-        return view('flame', [
+        return view('flame.flame', [
             'user' => $user,
             'score' => $score,
         ]);
@@ -54,11 +54,11 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
 
     Route::get('/solo', function () {
         $score = Auth::user()->scores->sum('score');
-        return view('solo_flame', ['score' => $score]);
+        return view('flame.solo_flame', ['score' => $score]);
     })->name('solo');
 
     Route::get('/solo/games', function () {
-        return view('select_game');
+        return view('games.select_game');
     })->name('select_game');
 
     Route::get('/solo/games/{game}', function (string $game) {
@@ -68,7 +68,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
             abort(404, 'Jeu non trouvé');
         }
         return view('play', compact('minigame', 'game'));
-    })->name('play');
+    })->name('flame.game');
 });
 
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {

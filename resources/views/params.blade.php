@@ -12,8 +12,8 @@
 
 <body class="daltonism-container">
     @section('params-active', 'active')
-    @include('nav')
-    @include('header')
+    @include('globals/nav')
+    @include('globals/header')
     <section class="params">
         <div class="params__top">
             <h1 class="font dyslexie"> Paramètres </h1>
