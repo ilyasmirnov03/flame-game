@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
         $users = User::factory($this->usersAmount)
             ->create();
 
+        $games = config('static.minigames');
+
         // Generate group members and scores
         foreach ($users as &$user) {
             $user_score_is_in_group = fake()->boolean(40);
@@ -50,7 +52,10 @@ class DatabaseSeeder extends Seeder
                 DB::table('user_scores')->insert([
                     'user_id' => $user->id,
                     'group_id' => $user_score_is_in_group ? $groups[$random_group]->id : null,
-                    'score' => rand(1, 1000)
+                    'score' => rand(1, 1000),
+                    'started_at' => fake()->dateTime(),
+                    'finished_at' => fake()->dateTime(),
+                    'game' => array_rand($games)
                 ]);
             }
         }
