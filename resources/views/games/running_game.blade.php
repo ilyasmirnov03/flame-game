@@ -14,6 +14,15 @@
     @section('flame-active', 'active')
     @include('globals/nav')
     @include('globals/header')
+    <section>
+        <h1>Votre course quotidienne</h1>
+        <h2> Course </h2>
+    
+        <button id="startButton">Commencer</button>
+        <p id="timer"><span id="timeDisplay">0:00</span></p>
+        <p id="distanceDisplay"></p>
+        <p id="result">Résultat : <span id="resultValue">-</span> points</p>
+    </section>
 </body>
 
 </html>
