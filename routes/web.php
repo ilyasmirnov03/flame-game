@@ -67,8 +67,8 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
         if ($minigame == null) {
             abort(404, 'Jeu non trouvé');
         }
-        return view('play', compact('minigame', 'game'));
-    })->name('flame.game');
+        return view('games.' . $game, compact('minigame', 'game'));
+    })->name('game');
 });
 
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {

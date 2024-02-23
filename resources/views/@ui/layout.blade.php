@@ -8,15 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FlameGame</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('assets')
 </head>
 
 <body class="daltonism-container">
 @section('flame-active', 'active')
-@include('header')
+@include('@ui.header')
 <main>
     @yield('content')
 </main>
-@include('nav')
+@include('@ui.nav')
 
 </body>
 
