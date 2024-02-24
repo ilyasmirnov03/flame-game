@@ -6,7 +6,7 @@
             </a>
         </li>
         <li class="{{ Request::is('flame*') ? 'active' : '' }}">
-            <a href="{{ route('flame') }}">
+            <a href="{{ route('flame.index') }}">
                 <img src="{{ asset('images/flamme.svg')}}" alt="Ma flamme virtuel">
             </a>
         </li>

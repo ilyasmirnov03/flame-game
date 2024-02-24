@@ -1,42 +1,25 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('@ui.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FlameGame</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="daltonism-container">
-    @section('flame-active', 'active')
-    @include('globals/nav')
-    @include('globals/header')
-    <a href="{{ route('solo_flame')}}">
+@section('content')
+    <a href="{{ route('flame.solo')}}">
         <div class="flamme__indiv">
             <img src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flame">
             <h1 class="font dyslexie"> Ma <br> flamme </h1>
-            <h2 class="font dyslexie"> 3245 </h2>
+            <h2 class="font dyslexie"> {{$score}} </h2>
         </div>
     </a>
     <section class="allgroups">
         <h2 class="font dyslexie"> Mes groupes </h2>
         <div class="groups">
-            <div class="groups__div">
-                <img src="{{ asset('images/logo.png')}}" alt="Logo de votre groupe">
-                <p class="font dyslexie"> Nova </p>
-            </div>
-            <div class="groups__div">
-                <img src="{{ asset('images/logo.png')}}" alt="Logo de votre groupe">
-                <p class="font dyslexie"> Nova </p>
-            </div>
+            @foreach ($user->userGroups as $group)
+                <a href="{{ route('group.index', ['group' => $group]) }}" class="groups__div">
+                    <img src="{{ asset('images/logo.png')}}" alt="Logo de votre groupe">
+                    <p class="font dyslexie"> {{$group->name}} </p>
+                </a>
+            @endforeach
             <div class="groups__add">
                 <img src="{{ asset('images/add.svg')}}" alt="Ajouter ou créer un groupe">
             </div>
         </div>
     </section>
-</body>
-
-</html>
+@endsection
