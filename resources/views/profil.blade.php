@@ -1,8 +1,6 @@
 @extends('@ui.layout')
 
 @section('content')
-    @include('nav')
-    @include('header')
     <div class="profilwrapper">
         <div class="flame">
             <img class="flame__img" src="{{ asset('images/flamme_logo.svg') }}" alt="Skin de votre flame">
@@ -26,5 +24,4 @@
             </form>
         @endif
     </div>
-
 @endsection
