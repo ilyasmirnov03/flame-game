@@ -7,6 +7,7 @@
 @import "./flamme/flamme.css";
 @import "./flamme/flamme_indiv.css";
 @import "./game/minigame.css";
+@import "./game/running_game.css";
 @import "./game/select_games.css";
 
 :root {
@@ -22,6 +23,9 @@
     --inactiv: #c2c2c2;
 }
 
+.hidden {
+    display: none;
+}
 * {
     box-sizing: border-box;
 }
