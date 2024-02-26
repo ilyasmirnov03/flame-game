@@ -42,16 +42,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('/profile')->name('profile.')->group(function () {
 
     Route::get('/', function () {
-        return view('profil', ['user' => Auth::user()]);
+        return view('profile.profile', ['user' => Auth::user()]);
     })->name("profile")->middleware(['auth']);
 
     Route::get('/edit', function () {
-        return view('profil.edit');
+        return view('profile.edit');
     })->name("edit");
 
     Route::get('/{userId}', function (string $userId) {
         $user = DB::table('users')->find($userId);
-        return view('profil', ['user' => $user]);
+        return view('profile.profile', ['user' => $user]);
     })->name("consult");
 });
 
