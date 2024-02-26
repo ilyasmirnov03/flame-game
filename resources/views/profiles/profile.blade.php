@@ -1,7 +1,7 @@
 @extends('@ui.layout')
 
 @section('content')
-    <div class="profilwrapper">
+    <div class="profilewrapper">
         <div class="flame">
             <img class="flame__img" src="{{ asset('images/flamme_logo.svg') }}" alt="Skin de votre flame">
             <div class="flame__scorewrapper">

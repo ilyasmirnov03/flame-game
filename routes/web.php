@@ -39,11 +39,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 /**
  * Profile pages
  */
-Route::prefix('/profil')->name('profil.')->group(function () {
+Route::prefix('/profile')->name('profile.')->group(function () {
 
     Route::get('/', function () {
         return view('profil', ['user' => Auth::user()]);
-    })->name("profil")->middleware(['auth']);
+    })->name("profile")->middleware(['auth']);
 
     Route::get('/edit', function () {
         return view('profil.edit');
