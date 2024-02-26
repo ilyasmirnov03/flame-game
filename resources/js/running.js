@@ -3,12 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const timeDisplay = document.getElementById("timeDisplay");
     const distanceDisplay = document.getElementById("distanceDisplay");
     const resultValue = document.getElementById("resultValue");
-    const resultMessage = document.getElementById("result");
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("popupMessage");
+    const popupResult = document.getElementById("popupResult");
+    const mainSection = document.getElementById("mainSection");
+    const bonusPoint = document.getElementById("bonusPoint");
 
     let timer;
     let totalTime = 0;
     let totalDistance = 0;
     let isRaceStarted = false;
+    let startedAt;
+    let finishedAt;
+    let popupVisible = false;
+
+    function getCSRFToken() {
+        const metaTag = document.querySelector('meta[name="csrf-token"]');
+        return metaTag ? metaTag.getAttribute("content") : null;
+    }
 
     startButton.addEventListener("click", function () {
         if (!isRaceStarted) {
@@ -21,10 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function startRace() {
+        if (!popup.classList.contains("hidden")) {
+            popup.classList.add("hidden");
+        }
+        if (!mainSection.classList.contains("section-filtered ")) {
+            mainSection.classList.remove("section-filtered");
+        }
         totalTime = 0;
         totalDistance = 0;
+        startedAt = new Date().toISOString();
         resultValue.textContent = "-";
-        resultMessage.style.display = "none";
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function () {
@@ -79,7 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const a =
             Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
-            Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+            Math.cos(phi1) *
+                Math.cos(phi2) *
+                Math.sin(deltaLambda / 2) *
+                Math.sin(deltaLambda / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return R * c;
@@ -111,16 +132,91 @@ document.addEventListener("DOMContentLoaded", function () {
     function stopRace() {
         isRaceStarted = false;
         clearInterval(timer);
-        resultMessage.style.display = "block";
 
-        if (totalDistance >= 1000 && totalTime <= 131) {
-            resultValue.textContent = calculatePoints(totalTime).toString();
+        finishedAt = new Date().toISOString();
+
+        if (totalDistance >= 1000) {
+            fetch("/api/run_result", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": getCSRFToken(),
+                },
+                body: JSON.stringify({
+                    startedAt: startedAt,
+                    finishedAt: finishedAt,
+                    game: "running",
+                }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(
+                            `HTTP error! Status: ${response.status}`
+                        );
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+
+                    popup.style.borderColor = "green";
+                    popupMessage.textContent = "Course réussie!";
+                    popupResult.classList.remove("hidden");
+                    resultValue.textContent =
+                        data.scoreWithoutBonus + " points";
+
+                    if (data.scoreWithBonus !== 0) {
+                        bonusPoint.textContent = ` + ${
+                            data.scoreWithBonus - data.scoreWithoutBonus
+                        }`;
+                        bonusPoint.classList.add("bonus__point");
+                    } else {
+                        bonusPoint.classList.add("withoutbonus__point");
+                    }
+                    popup.classList.remove("hidden");
+
+                    mainSection.classList.add("section-filtered");
+
+                    popupVisible = true;
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+
+                    popup.style.borderColor = "red";
+                    popupMessage.textContent =
+                        "Une erreur est survenue! Nous sommes désolé...";
+                    popupResult.classList.add("hidden");
+                    popup.classList.remove("hidden");
+
+                    mainSection.classList.add("section-filtered");
+
+                    popupVisible = true;
+                });
         } else {
-            resultValue.textContent = "Aucun point (distance insuffisantes)";
+            popup.style.borderColor = "red";
+            popupMessage.textContent = "Aucun point (distance insuffisante)";
+            popupResult.classList.add("hidden");
+            popup.classList.remove("hidden");
+
+            mainSection.classList.add("section-filtered");
+
+            popupVisible = true;
         }
+
+        setTimeout(function () {
+            mainSection.addEventListener("click", function (event) {
+                if (popupVisible && !popup.contains(event.target)) {
+                    closePopup();
+                }
+            });
+        }, 2000);
     }
 
-    function calculatePoints(time) {
-        return Math.max(0, 100 - time);
+    function closePopup() {
+        popup.classList.add("hidden");
+
+        mainSection.classList.remove("section-filtered");
+
+        popupVisible = false;
     }
 });

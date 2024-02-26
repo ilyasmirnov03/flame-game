@@ -13,6 +13,14 @@ class UserScore extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'finished_at',
+        'score',
+        'user_id',
+        'started_at',
+        'game',
+    ];
+
     /**
      * Not fill timestamps automatically on this model.
      * @var bool
