@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\UserScore;
 use Illuminate\Support\Carbon;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoreController extends Controller
 {
-    public function saveResult(Request $request)
+    public function saveResult(Request $request): JsonResponse
     {
         $startedAt = $request->input('startedAt');
         $finishedAt = $request->input('finishedAt');
@@ -41,7 +42,7 @@ class ScoreController extends Controller
 
         return response()->json(['message' => 'Score enregistré avec succès', 'scoreWithoutBonus' => $scoreWithoutBonus, 'scoreBonus' => $scoreBonus]);
     }
-    public function calculateScoreBasedOnTime($elapsedTime)
+    public function calculateScoreBasedOnTime(int $elapsedTime)
     {
         $maxScore = 1000;
         $maxTime = 2 * 60 + 30;
@@ -57,22 +58,20 @@ class ScoreController extends Controller
         return $score;
     }
 
-    public function calculateScoreBonus($userId, $game, $currentElapsedTime)
+    public function calculateScoreBonus(string $userId, string $game, int $currentElapsedTime): int
     {
         $averageTime = UserScore::where('user_id', $userId)
             ->where('game', $game)
             ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, finished_at)) as average_time')
             ->value('average_time');
 
-        if ($averageTime !== null && $currentElapsedTime < $averageTime) {
+        if ($averageTime !== null && $currentElapsedTime < (int)$averageTime) {
             $timeDifference = $averageTime - $currentElapsedTime;
 
             $bonus = $timeDifference * 2;
 
             $maxBonus = 100;
-            $bonus = min($bonus, $maxBonus);
-
-            return $bonus;
+            return min($bonus, $maxBonus);
         }
 
         return 0;
