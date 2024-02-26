@@ -36,15 +36,25 @@ Route::post('/signup', [AuthController::class, 'signup']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/profil', function () {
-    return view('profil', ['user' => Auth::user()]);
-})->name("profil")->middleware(['auth']);
+/**
+ * Profile pages
+ */
+Route::prefix('/profil')->name('profil.')->group(function () {
 
-Route::get('/profil/{userId}', function (string $userId) {
-    $user = DB::table('users')->find($userId);
+    Route::get('/', function () {
+        return view('profil', ['user' => Auth::user()]);
+    })->name("profil")->middleware(['auth']);
 
-    return view('profil', ['user' => $user]);
-})->name("see_profil");
+    Route::get('/edit', function () {
+        return view('profil.edit');
+    })->name("edit");
+
+    Route::get('/{userId}', function (string $userId) {
+        $user = DB::table('users')->find($userId);
+        return view('profil', ['user' => $user]);
+    })->name("consult");
+});
+
 /**
  * Flame pages
  */
