@@ -27,12 +27,12 @@
                     <a class="connexion__miss-password" href="#"> Mot de passe oublié? </a>
                 </form>
             </div>
-            <div class="form-wrapper @if ($baseActive == 'inscription') is-active @endif">
+            <div class="form-wrapper @if ($baseActive == 'signup') is-active @endif">
                 <button type="button" class="switcher switcher-signup">
                     Inscription
                     <span class="underline"></span>
                 </button>
-                <form class="form form-signup" method="post">
+                <form class="form form-signup" action="{{ route('signup') }}" method="post">
                     @csrf
                     <fieldset>
                         <legend>Créer votre compte.</legend>
