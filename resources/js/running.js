@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let popupVisible = false;
 
     function getCSRFToken() {
-        var metaTag = document.querySelector('meta[name="csrf-token"]');
+        const metaTag = document.querySelector('meta[name="csrf-token"]');
         return metaTag ? metaTag.getAttribute("content") : null;
     }
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finishedAt = new Date().toISOString();
 
         if (totalDistance >= 1000) {
-            fetch("/run_result", {
+            fetch("/api/run_result", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ScoreController;
 use App\Models\Group;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-/*  API  */
-
-Route::post('/run_result', [ScoreController::class, 'saveResult']);
-
 
 Route::get('/', function () {
     return view('home');

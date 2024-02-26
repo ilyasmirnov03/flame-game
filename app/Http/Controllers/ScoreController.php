@@ -61,7 +61,6 @@ class ScoreController extends Controller
     {
         $averageTime = UserScore::where('user_id', $userId)
             ->where('game', $game)
-            ->where('finished_at', '<', now())
             ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, finished_at)) as average_time')
             ->value('average_time');
 
