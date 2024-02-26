@@ -22,17 +22,19 @@
             </div>
         </div>
         <div class="avatar">
-            <h2 class="avatar__name dyslexie">Mulx</h2>
+            <h2 class="avatar__name dyslexie">{{ $user->name }}</h2>
             <div class="avatar__displaywrapper">
                 <img class="avatar__display" src="{{ asset('images/avatar.png') }}" alt="votre avatar">
             </div>
         </div>
-        <form action="logout" method="POST">
-            @csrf
-            <button class="logout__button">
-                <h2 class="logout__message font dyslexie">Déconnexion</h2>
-            </button>
-        </form>
+        @if (Auth::user() == $user)
+            <form action="logout" method="POST">
+                @csrf
+                <button class="logout__button">
+                    <h2 class="logout__message font dyslexie">Déconnexion</h2>
+                </button>
+            </form>
+        @endif
     </div>
 </body>
 
