@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('@ui.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FlameGame</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="daltonism-container">
-    @section('params-active', 'active')
-    @include('nav')
-    @include('header')
+@section('content')
     <section class="params">
         <div class="params__top">
             <h1 class="font dyslexie"> Paramètres </h1>
-            <button class="reset__btn" id="resetButton">  <img src="{{ asset('images/reset.svg')}}" alt="Réinitialiser les paramètres"> </button>
+            <button class="reset__btn" id="resetButton">
+                <img src="{{ asset('images/reset.svg')}}" alt="Réinitialiser les paramètres">
+            </button>
         </div>
         <div class="notif">
             <h2 class="font dyslexie"> Notifications </h2>
@@ -45,7 +34,7 @@
             <div class="access__div">
                 <p class="font dyslexie"> Mode dyslexie </p>
                 <label class="toggle-switch">
-                    <input  id="dyslexie" type="checkbox">
+                    <input id="dyslexie" type="checkbox">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -68,6 +57,4 @@
             </div>
         </div>
     </section>
-</body>
-
-</html>
+@endsection

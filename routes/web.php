@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\Group;
+use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +22,6 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
-Route::get('/home', function () {
-    return view('home');
-})->name("home");
-
 Route::get('/login', function () {
     return view('auth', ['baseActive' => 'connexion']);
 })->name("login")->middleware(['guest']);
@@ -36,7 +34,7 @@ Route::get('/signup', function () {
 
 Route::post('/signup', [AuthController::class, 'signup']);
 
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/profil', function () {
     return view('profil', ['user' => Auth::user()]);
@@ -47,18 +45,47 @@ Route::get('/profil/{userId}', function (string $userId) {
 
     return view('profil', ['user' => $user]);
 })->name("see_profil");
+/**
+ * Flame pages
+ */
+Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        $user = Auth::user()->load('userGroups');
+        $score = $user->scores->sum('score');
+        return view('flame.flame', [
+            'user' => $user,
+            'score' => $score,
+        ]);
+    })->name('index');
 
-Route::get('/flamme', function () {
-    return view('flame');
-})->name("flame")->middleware(['auth']);
+    Route::get('/solo', function () {
+        $score = Auth::user()->scores->sum('score');
+        return view('flame.solo_flame', ['score' => $score]);
+    })->name('solo');
 
-Route::get('/flamme/solo', function () {
-    return view('solo_flame');
-})->name("solo_flame")->middleware(['auth']);
+    Route::get('/solo/games', function () {
+        return view('games.select_game');
+    })->name('select_game');
 
-Route::get('/flamme/solo/games', function () {
-    return view('select_game');
-})->name("select_game")->middleware(['auth']);
+    Route::get('/solo/games/{game}', function (string $game) {
+        $minigame = config('static.minigames.' . $game);
+
+        if ($minigame == null) {
+            abort(404, 'Jeu non trouvé');
+        }
+        return view('games.' . $game, compact('minigame', 'game'));
+    })->name('game');
+});
+
+Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
+    Route::get('/{group}', function (Group $group) {
+        $score = UserScore::where('group_id', $group->id)->sum('score');
+        return view('group.index', [
+            'group' => $group,
+            'score' => $score,
+        ]);
+    })->name('index')->middleware('user.in.group');
+});
 
 Route::get('/params', function () {
     return view('params');
@@ -67,12 +94,3 @@ Route::get('/params', function () {
 Route::get('/score', function () {
     return view('score');
 })->name("score")->middleware(['auth']);
-
-Route::get('/flamme/solo/games/{game}', function (string $game) {
-    $minigame = config('static.minigames.' . $game);
-
-    if ($minigame == null) {
-        abort(404, 'Jeu non trouvé');
-    }
-    return view('play', compact('minigame', 'game'));
-})->name('play')->middleware(['auth']);

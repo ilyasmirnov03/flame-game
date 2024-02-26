@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
+@extends('@ui.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FlameGame</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="daltonism-container">
-    @include('nav')
-    @include('header')
+@section('content')
     <section class="forms-section">
         <div class="forms">
             <div class="form-wrapper @if ($baseActive == 'connexion') is-active @endif">
@@ -25,17 +13,17 @@
                     <fieldset>
                         <legend>Saisissez vos identifiants de connexion.</legend>
                         <input class="connexion__mail" type="email" placeholder="Adresse Mail" name="email"
-                            id="email_connexion" required />
+                               id="email_connexion" required/>
                         @error('email')
-                            <span class="connexion__error">{{ $message }}</span>
+                        <span class="connexion__error">{{ $message }}</span>
                         @enderror
                         <input class="connexion__password" type="password" placeholder="Mot de passe" name="password"
-                            id="password_connexion" required />
+                               id="password_connexion" required/>
                         @error('password')
-                            <span class="connexion__error">{{ $message }}</span>
+                        <span class="connexion__error">{{ $message }}</span>
                         @enderror
                     </fieldset>
-                    <input class="btn__blue" type="submit" value="Connexion" />
+                    <input class="btn__blue" type="submit" value="Connexion"/>
                     <a class="connexion__miss-password" href="#"> Mot de passe oublié? </a>
                 </form>
             </div>
@@ -49,26 +37,24 @@
                     <fieldset>
                         <legend>Créer votre compte.</legend>
                         <input class="inscription__name" type="name" placeholder="Votre pseudo" name="name"
-                            id="name_inscription" required />
+                               id="name_inscription" required/>
                         @error('name')
-                            <span class="inscription__error">{{ $message }}</span>
+                        <span class="inscription__error">{{ $message }}</span>
                         @enderror
                         <input class="inscription__mail" type="email" placeholder="Adresse Mail" name="email"
-                            id="email_inscription" required />
+                               id="email_inscription" required/>
                         @error('email')
-                            <span class="inscription__error">{{ $message }}</span>
+                        <span class="inscription__error">{{ $message }}</span>
                         @enderror
                         <input class="inscription__password" type="password" placeholder="Mot de passe" name="password"
-                            id="password_inscription" required />
+                               id="password_inscription" required/>
                         @error('password')
-                            <span class="inscription__error">{{ $message }}</span>
+                        <span class="inscription__error">{{ $message }}</span>
                         @enderror
                     </fieldset>
-                    <input class="btn__blue" type="submit" value="Inscription" />
+                    <input class="btn__blue" type="submit" value="Inscription"/>
                 </form>
             </div>
         </div>
     </section>
-</body>
-
-</html>
+@endsection
