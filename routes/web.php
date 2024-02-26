@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,14 @@ Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/profil', function () {
-    return view('profil');
+    return view('profil', ['user' => Auth::user()]);
 })->name("profil")->middleware(['auth']);
+
+Route::get('/profil/{userId}', function (string $userId) {
+    $user = DB::table('users')->find($userId);
+
+    return view('profil', ['user' => $user]);
+})->name("see_profil");
 
 Route::get('/flamme', function () {
     return view('flame');
