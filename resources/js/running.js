@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let popupVisible = false;
 
     function getCSRFToken() {
-        return $('meta[name="csrf-token"]').attr("content");
+        var metaTag = document.querySelector('meta[name="csrf-token"]');
+        return metaTag ? metaTag.getAttribute("content") : null;
     }
 
     startButton.addEventListener("click", function () {
@@ -135,41 +136,51 @@ document.addEventListener("DOMContentLoaded", function () {
         finishedAt = new Date().toISOString();
 
         if (totalDistance >= 1000) {
-            $.ajax({
-                url: "/run_result",
+            fetch("/run_result", {
                 method: "POST",
-                data: {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": getCSRFToken(),
+                },
+                body: JSON.stringify({
                     startedAt: startedAt,
                     finishedAt: finishedAt,
                     game: "running",
-                },
-                headers: {
-                    "X-CSRF-TOKEN": getCSRFToken(),
-                },
-                success: function (response) {
-                    console.log(response);
+                }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(
+                            `HTTP error! Status: ${response.status}`
+                        );
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
 
                     popup.style.borderColor = "green";
                     popupMessage.textContent = "Course réussie!";
                     popupResult.classList.remove("hidden");
                     resultValue.textContent =
-                        response.scoreWithoutBonus + " points";
-                    if (response.scoreWithBonus !== 0) {
+                        data.scoreWithoutBonus + " points";
+
+                    if (data.scoreWithBonus !== 0) {
                         bonusPoint.textContent = ` + ${
-                            response.scoreWithBonus - response.scoreWithoutBonus
+                            data.scoreWithBonus - data.scoreWithoutBonus
                         }`;
-                        bonusPoint.classList.add = "bonus__point";
+                        bonusPoint.classList.add("bonus__point");
                     } else {
-                        bonusPoint.classList.add = "withoutbonus__point";
+                        bonusPoint.classList.add("withoutbonus__point");
                     }
                     popup.classList.remove("hidden");
 
                     mainSection.classList.add("section-filtered");
 
                     popupVisible = true;
-                },
-                error: function (error) {
-                    console.error(error);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
 
                     popup.style.borderColor = "red";
                     popupMessage.textContent =
@@ -180,8 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     mainSection.classList.add("section-filtered");
 
                     popupVisible = true;
-                },
-            });
+                });
         } else {
             popup.style.borderColor = "red";
             popupMessage.textContent = "Aucun point (distance insuffisante)";

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoreController extends Controller
 {
-    public function saveresult(Request $request)
+    public function saveResult(Request $request)
     {
         $startedAt = $request->input('startedAt');
         $finishedAt = $request->input('finishedAt');
@@ -59,27 +59,23 @@ class ScoreController extends Controller
 
     public function calculateScoreBonus($userId, $game, $currentElapsedTime)
     {
-        // Calculer la moyenne des temps précédents pour le même jeu
         $averageTime = UserScore::where('user_id', $userId)
             ->where('game', $game)
             ->where('finished_at', '<', now())
-            ->avg('finished_at');
+            ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, finished_at)) as average_time')
+            ->value('average_time');
 
-        // Si la moyenne est disponible et que le joueur a amélioré son temps
         if ($averageTime !== null && $currentElapsedTime < $averageTime) {
-            // Bonus basé sur la différence entre le temps actuel et la moyenne
             $timeDifference = $averageTime - $currentElapsedTime;
 
-            // Appliquer un facteur (par exemple, *2) à la différence en secondes
             $bonus = $timeDifference * 2;
 
-            // Limiter le bonus à une certaine valeur (ajuste selon tes préférences)
-            $maxBonus = 100; // Par exemple, un bonus maximal de 100 points
+            $maxBonus = 100;
             $bonus = min($bonus, $maxBonus);
 
             return $bonus;
         }
 
-        return 0; // Pas de bonus si le joueur n'a pas amélioré son temps
+        return 0;
     }
 }

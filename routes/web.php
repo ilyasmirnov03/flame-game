@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 /*  API  */
 
-Route::post('/run_result', [ScoreController::class, 'saveresult']);
+Route::post('/run_result', [ScoreController::class, 'saveResult']);
 
 
 Route::get('/', function () {
