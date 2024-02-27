@@ -24,15 +24,15 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('auth', ['baseActive' => 'connexion']);
-})->name("login")->middleware(['guest']);
-
-Route::post('/login', [AuthController::class, 'login']);
+})->name("login.view")->middleware(['guest']);
 
 Route::get('/signup', function () {
-    return view('auth', ['baseActive' => 'inscription']);
-})->name("signup")->middleware(['guest']);
+    return view('auth', ['baseActive' => 'signup']);
+})->name("signup.view")->middleware(['guest']);
 
-Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
