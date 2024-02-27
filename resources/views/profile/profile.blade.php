@@ -14,6 +14,10 @@
             <div class="avatar__displaywrapper">
                 <img class="avatar__display" src="{{ asset('images/avatar.png') }}" alt="votre avatar">
             </div>
+            @if (Auth::user() == $user)
+                <a class="avatar__edit" href="{{ route('profile.edit') }}">
+                    <img src="{{ asset('images/edit.svg') }}" alt="modifier le profil"></a>
+            @endif
         </div>
         @if (Auth::user() == $user)
             <form action="logout" method="POST">

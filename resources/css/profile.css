@@ -44,10 +44,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .avatar__name {
     margin: 0;
+}
+
+
+.avatar__edit {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
 
 .logout__button {
