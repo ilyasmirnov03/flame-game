@@ -1,0 +1,94 @@
+.flamme__indiv {
+    cursor: pointer;
+    position: relative;
+    margin: 2rem;
+    background-color: var(--blue-light);
+    border-radius: 2rem;
+    height: 16vh;
+    overflow: hidden;
+
+    img {
+        position: absolute;
+        left: 1rem;
+        top: 0.2rem;
+    }
+
+    h1,
+    h2 {
+        line-height: 0.6;
+        margin: 0;
+        text-transform: uppercase;
+        position: absolute;
+        font-size: calc(3rem + 1.390625vw);
+        right: 1rem;
+        text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
+        -2px 0 0 var(--white), 0 -2px 0 var(--white);
+    }
+
+    h1 {
+        top: 1rem;
+    }
+
+    h2 {
+        bottom: 1rem;
+    }
+}
+
+.allgroups {
+    padding: 0rem 2rem;
+
+    h2 {
+        text-transform: uppercase;
+        font-size: calc(3rem + 1.390625vw);
+        margin-bottom: 0;
+    }
+
+    .groups {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+
+        .groups__div {
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 1rem;
+            background-color: var(--green-light);
+            width: 40%;
+            height: 14vh;
+            padding: 1rem;
+
+            img {
+                width: 5rem;
+            }
+
+            p {
+                margin: 0;
+                margin-top: -0.5rem;
+                font-size: calc(1.5rem + 1.390625vw);
+                text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
+                -2px 0 0 var(--white), 0 -2px 0 var(--white);
+            }
+        }
+
+        .groups__add {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            border: dashed var(--inactiv);
+            width: 40%;
+            height: 14vh;
+            padding: 1rem;
+
+            img {
+                width: 3rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,2 @@
+import "./profil";
+import "./params";

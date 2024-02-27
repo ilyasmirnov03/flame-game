@@ -1,0 +1,22 @@
+.btn__blue {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1.5rem;
+    background-color: var(--blue);
+    color: var(--white);
+    font-family: "Baloo", sans-serif;
+    font-size: calc(18px + 1.390625vw);
+    text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+        -1px 0 0 var(--black), 0 -1px 0 var(--black);
+}
+.btn__green {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.2rem 1.5rem;
+    background-color: var(--green);
+    color: var(--white);
+    font-family: "Baloo", sans-serif;
+    font-size: calc(20px + 1.390625vw);
+    text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+        -1px 0 0 var(--black), 0 -1px 0 var(--black);
+}

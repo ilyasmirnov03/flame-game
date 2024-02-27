@@ -1,0 +1,39 @@
+.games {
+    padding: 2rem;
+    h1 {
+        line-height: 1;
+        margin: 0;
+        text-align: center;
+        font-size: calc(3rem + 1.390625vw);
+    }
+    a {
+        position: relative;
+        text-decoration: none;
+        overflow: hidden;
+        height: 10vh;
+        margin: 2rem 0rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: var(--green);
+        border-radius: 1rem;
+        z-index: 1;
+        img {
+            margin-top: 1rem;
+            width: 7rem;
+        }
+        h2 {
+            margin: 0;
+            font-size: calc(3rem + 1.390625vw);
+            color: var(--white);
+        }
+    }
+    .games__info {
+        z-index: 999;
+        margin: 0;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 2rem;
+    }
+}
