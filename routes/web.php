@@ -46,7 +46,8 @@ Route::prefix('/profile')->name('profile.')->group(function () {
     })->name("profile")->middleware(['auth']);
 
     Route::get('/edit', function () {
-        return view('profile.edit');
+        $user = Auth::user();
+        return view('profile.edit', ['user' => $user]);
     })->name("edit")->middleware(['auth']);
 
     Route::get('/{userId}', function (string $userId) {
