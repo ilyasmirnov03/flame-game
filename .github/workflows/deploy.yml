@@ -9,6 +9,8 @@ jobs:
 
     runs-on: self-hosted
 
+    environment: deploy
+  
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,6 +30,8 @@ jobs:
 
     needs: setup
 
+    environment: deploy
+
     steps:
 
       - name: Install composer dependencies
@@ -38,9 +42,11 @@ jobs:
 
   build:
 
+    runs-on: self-hosted
+
     needs: install-dependencies
 
-    runs-on: self-hosted
+    environment: deploy
 
     steps:
 
@@ -52,9 +58,11 @@ jobs:
 
   cache:
 
+    runs-on: self-hosted
+
     needs: build
 
-    runs-on: self-hosted
+    environment: deploy
 
     steps:
       - name: Cache configuration
