@@ -22,9 +22,6 @@ jobs:
       - name: Start docker compose
         run: DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} docker compose -f docker-compose.prod.yml up -d --build
 
-      - name: Run migrations
-        run:  docker exec flame-game-app php artisan migrate --force
-
   install-dependencies:
 
     runs-on: self-hosted
@@ -49,6 +46,9 @@ jobs:
 
       - name: Build assets
         run: docker exec flame-game-app npm run build
+
+      - name: Run migrations
+        run:  docker exec flame-game-app php artisan migrate --force
 
   cache:
 
