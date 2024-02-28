@@ -22,9 +22,6 @@ jobs:
       - name: Start docker compose
         run: DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} docker compose -f docker-compose.prod.yml up -d --build
 
-      - name: Generate key
-        run: docker exec flame-game-app php artisan key:generate
-
       - name: Run migrations
         run:  docker exec flame-game-app php artisan migrate --force
 
@@ -65,3 +62,6 @@ jobs:
 
       - name: Cache views
         run: docker exec flame-game-app php artisan view:cache
+
+      - name: Generate key
+        run: docker exec flame-game-app php artisan key:generate
