@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home')->name('home');
-
+/**
+ * Authentication pages
+ */
 Route::get('/login', function () {
     return view('auth', ['baseActive' => 'connexion']);
 })->name("login.view")->middleware(['guest']);
@@ -92,6 +93,11 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
         ]);
     })->name('flame')->middleware('user.in.group');
 });
+
+/**
+ * Views
+ */
+Route::view('/', 'home')->name('home');
 
 Route::view('/params', 'params')->name('params');
 
