@@ -15,7 +15,7 @@ class GroupController extends Controller
         $request->validate([
             'name' => 'required|string|max:16',
             'max_members' => 'required|integer|min:1|max:50',
-            'private' => 'accepted',
+            'private' => 'boolean',
         ]);
 
         $group = Group::create([
@@ -30,6 +30,6 @@ class GroupController extends Controller
             'group_id' => $group->id,
         ]);
 
-        return redirect()->route('group.index', ['group' => $group->id]);
+        return redirect()->route('group.flame', ['group' => $group->id]);
     }
 }
