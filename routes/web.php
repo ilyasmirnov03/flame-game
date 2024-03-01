@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GroupController;
 use App\Models\Group;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,16 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
         ]);
     })->name('index')->middleware('user.in.group');
 });
+
+Route::get('/create_group', function () {
+    return view('group.create');
+})->name("create");
+
+Route::get('/join_group', function () {
+    return view('group.search');
+})->name("join");
+
+Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
 
 Route::get('/params', function () {
     return view('params');

@@ -17,9 +17,14 @@
                     <p class="font dyslexie"> {{$group->name}} </p>
                 </a>
             @endforeach
-            <div class="groups__add">
+            <div class="groups__add" id="openPopup">
                 <img src="{{ asset('images/add.svg')}}" alt="Ajouter ou créer un groupe">
             </div>
+                <div class="popup__content hidden" id="popupGroup">
+                    <a href="{{ route('create')}}">Créer un groupe</a>
+                    <a href="{{ route('join')}}">Rejoindre un groupe</a>
+                    <span class="popup-close" id="closePopup"><img src="{{ asset('images/close.svg')}}" alt="Fermer la popup"></span>
+                </div>
         </div>
     </section>
 @endsection
