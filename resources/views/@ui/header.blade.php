@@ -6,7 +6,7 @@
     <a class="header__link">
         <img src="{{ asset('images/recompenses.svg')}}" alt="Voir ses récompenses">
     </a>
-    <a href="{{route('profil')}}" class="header__link">
+    <a href="{{route('profile')}}" class="header__link">
         <img src="{{ asset('images/profil.svg')}}" alt="Voir son profil">
     </a>
 </header>
