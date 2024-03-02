@@ -2,6 +2,7 @@
 
 use App\Models\Game;
 use App\Models\Language;
+use App\Models\Reward;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -35,6 +36,8 @@ return new class extends Migration {
             $table->id();
             $table->string('title', 16);
             $table->text('description');
+            $table->foreignIdFor(Reward::class);
+            $table->foreignIdFor(Language::class);
         });
 
         Schema::table('user_scores', function (Blueprint $table) {
@@ -54,6 +57,10 @@ return new class extends Migration {
         Schema::table('rewards', function (Blueprint $table) {
             $table->renameColumn('label', 'name');
             $table->text('description');
+        });
+        Schema::table('user_scores', function (Blueprint $table) {
+           $table->string('game', 16);
+           $table->dropForeignIdFor(Game::class);
         });
     }
 };
