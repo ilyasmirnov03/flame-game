@@ -1,10 +1,5 @@
 @extends('@ui.layout')
 
-@section('assets')
-    @vite(['resources/js/groups.js'])
-    @vite(['resources/js/flame.js'])
-@endsection
-
 @section('content')
     <a href="{{ route('flame.solo')}}">
         <div class="flamme__indiv">
