@@ -11,20 +11,13 @@ use App\Models\QuizQuestion;
 use App\Models\QuizTranslation;
 use Illuminate\Database\Seeder;
 
-class QuizSeeder extends Seeder
-{
+class QuizSeeder extends Seeder {
 
     /**
      * How many quizzes to generate.
      * @var int
      */
     private int $quizAmount = 100;
-
-    /**
-     * How many languages to generate.
-     * @var int
-     */
-    private int $languagesAmount = 3;
 
     /**
      * How many quiz answers to generate.
@@ -43,12 +36,11 @@ class QuizSeeder extends Seeder
      */
     public function run(): void
     {
-        $languages = Language::factory($this->languagesAmount)
-            ->create()
-            ->toArray();
+        $languages = Language::get();
+        $languagesAmount = $languages->count();
 
         QuizQuestion::factory($this->quizAmount)
-            ->has(QuizTranslation::factory($this->languagesAmount)
+            ->has(QuizTranslation::factory($languagesAmount)
                 ->sequence(
                     ['language_id' => $languages[0]['id']],
                     ['language_id' => $languages[1]['id']],
@@ -57,7 +49,7 @@ class QuizSeeder extends Seeder
                 'translations'
             )
             ->has(QuizAnswer::factory($this->quizAnswersAmount)
-                ->has(QuizAnswersTranslation::factory($this->languagesAmount)
+                ->has(QuizAnswersTranslation::factory($languagesAmount)
                     ->sequence(
                         ['language_id' => $languages[0]['id']],
                         ['language_id' => $languages[1]['id']],
@@ -70,7 +62,7 @@ class QuizSeeder extends Seeder
             ->create();
 
         FunFact::factory($this->funFactsAmount)
-            ->has(FunFactTranslation::factory($this->languagesAmount)
+            ->has(FunFactTranslation::factory($languagesAmount)
                 ->sequence(
                     ['language_id' => $languages[0]['id']],
                     ['language_id' => $languages[1]['id']],
@@ -79,6 +71,5 @@ class QuizSeeder extends Seeder
                 'translations'
             )
             ->create();
-
     }
 }

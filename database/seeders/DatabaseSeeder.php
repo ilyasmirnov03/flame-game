@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -20,13 +21,23 @@ class DatabaseSeeder extends Seeder
      * Amount of users to generate
      * @var int
      */
-    private int $usersAmount = 50;
+    private int $usersAmount = 20;
 
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
+        $this->call([
+            LanguageSeeder::class,
+            QuizSeeder::class,
+            RewardsSeeder::class,
+            GameTranslationSeeder::class,
+        ]);
+
+        // Get games
+        $games = Game::get(['id'])->toArray();
+
         // Generate groups
         $groups = Group::factory($this->groupsAmount)
             ->create();
@@ -34,8 +45,6 @@ class DatabaseSeeder extends Seeder
         // Generate users
         $users = User::factory($this->usersAmount)
             ->create();
-
-        $games = config('static.minigames');
 
         // Generate group members and scores
         foreach ($users as &$user) {
@@ -55,7 +64,7 @@ class DatabaseSeeder extends Seeder
                     'score' => rand(1, 1000),
                     'started_at' => fake()->dateTime(),
                     'finished_at' => fake()->dateTime(),
-                    'game' => array_rand($games)
+                    'game_id' => $games[array_rand($games)]['id']
                 ]);
             }
         }

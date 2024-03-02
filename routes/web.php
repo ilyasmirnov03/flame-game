@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
+use App\Models\Game;
 use App\Models\Group;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
@@ -58,16 +59,12 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('solo');
 
     Route::get('/solo/games', function () {
-        return view('games.select_game');
+        $games = Game::get();
+        return view('games.select_game', ['games' => $games]);
     })->name('select_game');
 
-    Route::get('/solo/games/{game}', function (string $game) {
-        $minigame = config('static.minigames.' . $game);
-
-        if ($minigame == null) {
-            abort(404, 'Jeu non trouvé');
-        }
-        return view('games.' . $game, compact('minigame', 'game'));
+    Route::get('/solo/games/{game}', function (Game $game) {
+        return view('games.' . $game->label, ['minigame' => $game]);
     })->name('game');
 });
 
