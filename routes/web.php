@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Group;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
@@ -45,10 +46,14 @@ Route::prefix('/profile')->name('profile.')->group(function () {
         return view('profile.profile', ['user' => Auth::user()]);
     })->name("profile")->middleware(['auth']);
 
+    // Access edit page
     Route::get('/edit', function () {
         $user = Auth::user();
         return view('profile.edit', ['user' => $user]);
     })->name("edit")->middleware(['auth']);
+
+    // Request an edit
+    Route::post('/edit', [ProfileController::class, 'changeInfos'])->name("edit")->middleware(['auth']);
 
     Route::get('/{userId}', function (string $userId) {
         $user = DB::table('users')->find($userId);

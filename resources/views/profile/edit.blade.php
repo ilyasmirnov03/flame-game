@@ -7,7 +7,9 @@
                 @csrf
                 <input class="profileInfos__input" type="text" name="name" value="{{ $user->name }}">
                 <input class="profileInfos__input" type="mail" name="email" value="{{ $user->email }}">
-                <input class="profileInfos__input" type="password" name="password" value="">
+                @if ($message = Session::get('success'))
+                    <span>{{ Session::get('success') }}</span>
+                @endif
                 <button class="profileInfos__submit">
                     <img src="{{ asset('images/checkmark.svg') }}" alt="">
                 </button>
