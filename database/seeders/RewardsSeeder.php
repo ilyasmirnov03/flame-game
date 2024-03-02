@@ -2,23 +2,37 @@
 
 namespace Database\Seeders;
 
+use App\Models\Language;
 use App\Models\Reward;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\RewardTranslation;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class RewardsSeeder extends Seeder
 {
+
     /**
-     * Run the database seeds.
+     * Rewards amount to generate
+     * @var int
+     */
+    private int $rewardsAmount = 25;
+
+    /**
+     * Create rewards and their translations
      */
     public function run(): void
     {
-        $rewards = config('static.rewards', []);
-        if (DB::table('rewards')->count() != count($rewards)) {
-            foreach ($rewards as $reward) {
-                Reward::updateOrCreate(['name' => $reward['name']], $reward);
-            }
-        }
+        $languages = Language::get();
+        $languagesAmount = $languages->count();
+
+        Reward::factory($this->rewardsAmount)
+            ->has(RewardTranslation::factory($languagesAmount)
+                ->sequence(
+                    ['language_id' => $languages[0]->id],
+                    ['language_id' => $languages[1]->id],
+                    ['language_id' => $languages[2]->id],
+                ),
+                'translations'
+            )
+            ->create();
     }
 }
