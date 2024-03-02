@@ -60,7 +60,7 @@ class QuizQuestion extends Model
      * @param string $lang
      * @return array
      */
-    public function getManyTranslated(int $limit, string $lang): array {
+    public function getManyRandomisedTranslated(int $limit, string $lang): array {
         $questions = $this
             ->inRandomOrder()
             ->limit($limit)
