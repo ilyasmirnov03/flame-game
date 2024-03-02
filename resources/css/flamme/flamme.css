@@ -22,7 +22,7 @@
         font-size: calc(3rem + 1.390625vw);
         right: 1rem;
         text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
-        -2px 0 0 var(--white), 0 -2px 0 var(--white);
+            -2px 0 0 var(--white), 0 -2px 0 var(--white);
     }
 
     h1 {
@@ -71,7 +71,7 @@
                 margin-top: -0.5rem;
                 font-size: calc(1.5rem + 1.390625vw);
                 text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
-                -2px 0 0 var(--white), 0 -2px 0 var(--white);
+                    -2px 0 0 var(--white), 0 -2px 0 var(--white);
             }
         }
 

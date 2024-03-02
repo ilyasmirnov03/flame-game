@@ -13,12 +13,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Group extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'max_members',
+        'private',
+    ];
 
     /**
      * Get users of a group
      * @return BelongsToMany
      */
-    public function users(): BelongsToMany {
+    public function users(): BelongsToMany
+    {
         return $this->belongsToMany(User::class, 'group_members');
     }
 }
