@@ -8,6 +8,8 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/js/running.js",
+                "resources/js/groups.js",
+                "resources/js/flame.js",
             ],
             refresh: true,
         }),

@@ -1,12 +1,16 @@
 @extends('@ui.layout')
 
+@section('assets')
+    @vite(['resources/js/groups.js'])
+@endsection
+
 @section('content')
 <h2 class="group__title">Créer un groupe</h2>
 
 <form class="group__form" action="{{ route('groups.store') }}" method="post">
     @csrf
 
-    <input class="group__form--input" placeholder="Nom" type="text" name="name" required>
+    <input class="group__form--input" maxlength="16" placeholder="Nom" type="text" name="name" required>
 
     <div class="group__form--range">
         <label class="group__form--range-label" for="max_members">Nombre de participants max</label>
