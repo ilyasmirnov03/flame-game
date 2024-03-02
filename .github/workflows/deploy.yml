@@ -9,29 +9,28 @@ jobs:
 
     runs-on: self-hosted
 
+    environment: deploy
+  
     steps:
-      - name: Stop docker compose
-        run: docker compose -f docker-compose.prod.yml down
-
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Stop docker compose
+        run: docker compose -f docker-compose.prod.yml down
 
       - name: Make .env file
         run: cp .env.example .env
 
       - name: Start docker compose
-        run: DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} \
-          docker compose -f docker-compose.prod.yml up -d --build
-
-      - name: Generate key
-        run: docker exec flame-game-app php artisan key:generate
-
-      - name: Run migrations
-        run:  docker exec flame-game-app php artisan migrate --force
+        run: DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} docker compose -f docker-compose.prod.yml up -d --build
 
   install-dependencies:
 
     runs-on: self-hosted
+
+    needs: setup
+
+    environment: deploy
 
     steps:
 
@@ -45,14 +44,25 @@ jobs:
 
     runs-on: self-hosted
 
+    needs: install-dependencies
+
+    environment: deploy
+
     steps:
 
       - name: Build assets
         run: docker exec flame-game-app npm run build
 
+      - name: Run migrations
+        run:  docker exec flame-game-app php artisan migrate --force
+
   cache:
 
     runs-on: self-hosted
+
+    needs: build
+
+    environment: deploy
 
     steps:
       - name: Cache configuration
@@ -60,3 +70,6 @@ jobs:
 
       - name: Cache views
         run: docker exec flame-game-app php artisan view:cache
+
+      - name: Generate key
+        run: docker exec flame-game-app php artisan key:generate
