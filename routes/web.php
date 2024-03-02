@@ -18,10 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name("home");
-
+/**
+ * Authentication pages
+ */
 Route::get('/login', function () {
     return view('auth', ['baseActive' => 'connexion']);
 })->name("login.view")->middleware(['guest']);
@@ -36,9 +35,9 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/profil', function () {
-    return view('profil');
-})->name("profil")->middleware(['auth']);
+Route::view('/profile', 'profile')
+    ->name('profile')
+    ->middleware(['auth']);
 
 /**
  * Flame pages
@@ -72,30 +71,36 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('game');
 });
 
+/**
+ * Group pages
+ */
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
-    Route::get('/{group}', function (Group $group) {
+    // Groups search page
+    Route::view('/', 'group.search')->name('search');
+
+    // Create group
+    Route::post('/', [GroupController::class, 'store'])->name('store');
+
+    // Create group view
+    Route::view('/create','group.create')->name("create");
+
+    // Group space
+    Route::get('/flame/{group}', function (Group $group) {
         $score = UserScore::where('group_id', $group->id)->sum('score');
         return view('group.index', [
             'group' => $group,
             'score' => $score,
         ]);
-    })->name('index')->middleware('user.in.group');
+    })->name('flame')->middleware('user.in.group');
 });
 
-Route::get('/create_group', function () {
-    return view('group.create');
-})->name("create");
+/**
+ * Views
+ */
+Route::view('/', 'home')->name('home');
 
-Route::get('/join_group', function () {
-    return view('group.search');
-})->name("join");
+Route::view('/params', 'params')->name('params');
 
-Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
-
-Route::get('/params', function () {
-    return view('params');
-})->name("params");
-
-Route::get('/score', function () {
-    return view('score');
-})->name("score")->middleware(['auth']);
+Route::view('/score', 'score')
+    ->name('score')
+    ->middleware(['auth']);

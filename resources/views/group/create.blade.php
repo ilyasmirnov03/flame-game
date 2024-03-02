@@ -7,7 +7,7 @@
 @section('content')
 <h2 class="group__title">Créer un groupe</h2>
 
-<form class="group__form" action="{{ route('groups.store') }}" method="post">
+<form class="group__form" action="{{ route('group.store') }}" method="post">
     @csrf
 
     <input class="group__form--input" maxlength="16" placeholder="Nom" type="text" name="name" required>
