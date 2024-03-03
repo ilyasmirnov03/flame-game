@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\GroupMemberRole;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\GroupMember;
@@ -28,6 +29,7 @@ class GroupController extends Controller
         GroupMember::create([
             'user_id' => $user->id,
             'group_id' => $group->id,
+            'role' => GroupMemberRole::OWNER->value
         ]);
 
         return redirect()->route('group.flame', ['group' => $group->id]);
