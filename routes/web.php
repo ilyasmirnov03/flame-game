@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GroupController;
+use App\Models\Game;
 use App\Models\Group;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name("home");
-
+/**
+ * Authentication pages
+ */
 Route::get('/login', function () {
     return view('auth', ['baseActive' => 'connexion']);
 })->name("login.view")->middleware(['guest']);
@@ -35,9 +36,9 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/profil', function () {
-    return view('profil');
-})->name("profil")->middleware(['auth']);
+Route::view('/profile', 'profile')
+    ->name('profile')
+    ->middleware(['auth']);
 
 /**
  * Flame pages
@@ -58,33 +59,45 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('solo');
 
     Route::get('/solo/games', function () {
-        return view('games.select_game');
+        $games = Game::get();
+        return view('games.select_game', ['games' => $games]);
     })->name('select_game');
 
-    Route::get('/solo/games/{game}', function (string $game) {
-        $minigame = config('static.minigames.' . $game);
-
-        if ($minigame == null) {
-            abort(404, 'Jeu non trouvé');
-        }
-        return view('games.' . $game, compact('minigame', 'game'));
+    Route::get('/solo/games/{game}', function (Game $game) {
+        return view('games.' . $game->label, ['minigame' => $game]);
     })->name('game');
 });
 
+/**
+ * Group pages
+ */
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
-    Route::get('/{group}', function (Group $group) {
+    // Groups search page
+    Route::view('/', 'group.search')->name('search');
+
+    // Create group
+    Route::post('/', [GroupController::class, 'store'])->name('store');
+
+    // Create group view
+    Route::view('/create','group.create')->name("create");
+
+    // Group space
+    Route::get('/flame/{group}', function (Group $group) {
         $score = UserScore::where('group_id', $group->id)->sum('score');
         return view('group.index', [
             'group' => $group,
             'score' => $score,
         ]);
-    })->name('index')->middleware('user.in.group');
+    })->name('flame')->middleware('user.in.group');
 });
 
-Route::get('/params', function () {
-    return view('params');
-})->name("params");
+/**
+ * Views
+ */
+Route::view('/', 'home')->name('home');
 
-Route::get('/score', function () {
-    return view('score');
-})->name("score")->middleware(['auth']);
+Route::view('/params', 'params')->name('params');
+
+Route::view('/score', 'score')
+    ->name('score')
+    ->middleware(['auth']);
