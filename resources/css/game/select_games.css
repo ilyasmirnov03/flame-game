@@ -1,5 +1,6 @@
 .games {
     padding: 2rem;
+    margin-bottom: 9rem;
     h1 {
         line-height: 1;
         margin: 0;
@@ -20,11 +21,12 @@
         z-index: 1;
         img {
             margin-top: 1rem;
-            width: 7rem;
+            width: 5rem;
         }
         h2 {
+            text-transform: capitalize;
             margin: 0;
-            font-size: calc(3rem + 1.390625vw);
+            font-size: calc(2.5rem + 1.390625vw);
             color: var(--white);
         }
     }
