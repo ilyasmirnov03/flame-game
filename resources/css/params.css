@@ -1,5 +1,6 @@
 .params {
     padding: 1rem 2rem;
+    margin-bottom: 9rem;
     .params__top {
         display: flex;
         justify-content: center;
