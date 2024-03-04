@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finishedAt = new Date().toISOString();
 
         if (totalDistance >= 1000) {
-            fetch("/api/run_result", {
+            fetch("/api/user_score", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
