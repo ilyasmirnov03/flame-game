@@ -52,7 +52,7 @@
         margin: auto;
         text-decoration: none;
         text-align: center;
-        background-color: #60c744ba;
+        background-color: var(--green);
         border-radius: 1rem;
         font-size: calc(2rem + 1.390625vw);
         color: var(--white);
