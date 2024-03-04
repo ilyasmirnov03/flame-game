@@ -1,11 +1,13 @@
 <?php
 
+use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +61,10 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('solo');
 
     Route::get('/solo/games', function () {
-        $games = Game::get();
+        $games = Game::get()->toArray();
+        foreach ($games as $key => $game) {
+            $games[$key]['hasPlayed'] = Cache::get(CacheKeysManager::soloPlayed(Auth::user()->id, $game['id']));
+        }
         return view('games.select_game', ['games' => $games]);
     })->name('select_game');
 
