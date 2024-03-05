@@ -5,7 +5,7 @@ namespace App\Classes\Factories\Score;
 use App\Models\UserScore;
 
 class RunningScore extends ScoreFactory {
-    public function calculateScore(string $userId, string $gameId, int $elapsedTime): int
+    public function calculateScore(string $userId, string $gameId, int $elapsedTime): array
     {
         $maxScore = 1000;
         $maxTime = 2 * 60 + 30;
@@ -20,7 +20,11 @@ class RunningScore extends ScoreFactory {
 
         $bonusPoints = $this->calculateScoreBonus($userId, $gameId, $elapsedTime);
 
-        return min($score + $bonusPoints, $maxScore);
+        return [
+            'score' => $score,
+            'bonus' => $bonusPoints,
+            'total' => min($score + $bonusPoints, $maxScore)
+        ];
     }
 
     public function calculateScoreBonus(string $userId, string $gameId, int $elapsedTime): int

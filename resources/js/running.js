@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finishedAt = new Date().toISOString();
 
         if (totalDistance >= 1000) {
-            fetch("/api/user_score", {
+            fetch("/user_score", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -163,12 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     popupMessage.textContent = "Course réussie!";
                     popupResult.classList.remove("hidden");
                     resultValue.textContent =
-                        data.scoreWithoutBonus + " points";
+                        data.score + " points";
 
-                    if (data.scoreWithBonus !== 0) {
-                        bonusPoint.textContent = ` + ${
-                            data.scoreWithBonus - data.scoreWithoutBonus
-                        }`;
+                    if (data.bonus !== 0) {
+                        bonusPoint.textContent = ` + ${data.bonus}`;
                         bonusPoint.classList.add("bonus__point");
                     } else {
                         bonusPoint.classList.add("withoutbonus__point");

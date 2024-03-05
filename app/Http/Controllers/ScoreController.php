@@ -28,14 +28,14 @@ class ScoreController extends Controller {
         $elapsedTime = $finishedAt->diffInSeconds($startedAt);
 
         $scoreCalculator = ScoreFactory::getScoreCalculator($game->label);
-        $score = $scoreCalculator->calculateScore(Auth::user()->id, $game->id, $elapsedTime);
+        $score = $scoreCalculator->calculateScore(Auth::id(), $game->id, $elapsedTime);
 
         $userScoreArray = [
             'game_id' => $game->id,
             'finished_at' => $finishedAt,
             'started_at' => $startedAt,
-            'score' => $score,
-            'user_id' => Auth::user()->id,
+            'score' => $score['total'],
+            'user_id' => Auth::id(),
         ];
 
         if ($groupId !== null) {
@@ -46,7 +46,12 @@ class ScoreController extends Controller {
 
         $this->saveToCache($userScore->toArray());
 
-        return response()->json(['message' => 'Score enregistré avec succès', 'score' => $score]);
+        return response()->json([
+            'message' => 'Score enregistré avec succès',
+            'score' => $score['score'],
+            'bonus' => $score['bonus'],
+            'total' => $score['total']
+        ]);
     }
 
     /**

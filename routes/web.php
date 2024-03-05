@@ -3,6 +3,7 @@
 use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ScoreController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\UserScore;
@@ -97,6 +98,13 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
         ]);
     })->name('flame')->middleware('user.in.group');
 });
+
+/**
+ * User score
+ */
+
+Route::post('/user_score', [ScoreController::class, 'saveResult'])
+    ->middleware('auth');
 
 /**
  * Views
