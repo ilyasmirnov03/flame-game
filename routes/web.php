@@ -73,13 +73,16 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
  */
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
     // Groups search page
-    Route::view('/', 'group.search')->name('search');
+    Route::get('/', [GroupController::class, 'showGroups'])->name('search');
+
+    // Join group 
+    Route::post('/join', [GroupController::class, 'joinGroup'])->name('join');
 
     // Create group
     Route::post('/', [GroupController::class, 'store'])->name('store');
 
     // Create group view
-    Route::view('/create','group.create')->name("create");
+    Route::view('/create', 'group.create')->name("create");
 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {

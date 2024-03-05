@@ -7,6 +7,7 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\GroupMember;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class GroupController extends Controller
 {
@@ -33,5 +34,34 @@ class GroupController extends Controller
         ]);
 
         return redirect()->route('group.flame', ['group' => $group->id]);
+    }
+
+    public function showGroups()
+    {
+        $userId = Auth::id();
+
+        $groups = Group::where('private', 0)->get();
+
+        $groups->each(function ($group) use ($userId) {
+            $group->is_member = $group->isMember($userId);
+            $group->total_score = $group->calculateTotalScore();
+        });
+
+        return view('group.search', compact('groups'));
+    }
+
+    public function joinGroup(Request $request)
+    {
+        $groupId = $request->input('group_id');
+        $userId = Auth::id();
+
+        $group = Group::findOrFail($groupId);
+        if (!$group->isMember($userId)) {
+            $group->members()->attach($userId, ['role' => 'member']);
+
+            return redirect()->route('group.flame', ['group' => $group->id]);
+        }
+
+        return Redirect::back()->with('error', 'Vous êtes déjà membre de ce groupe');
     }
 }
