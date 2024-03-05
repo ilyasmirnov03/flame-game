@@ -6,7 +6,7 @@
             <img class="flame__img" src="{{ asset('images/flamme_logo.svg') }}" alt="Skin de votre flame">
             <div class="flame__scorewrapper">
                 <h1 class="flame__score"> Score </h1>
-                <h2 class="flame__score"> 3245 </h2>
+                <h2 class="flame__score"> {{$user->scores->sum('score')}} </h2>
             </div>
         </div>
         <div class="avatar">
