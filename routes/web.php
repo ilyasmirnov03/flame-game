@@ -93,6 +93,16 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('game');
 });
 
+Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
+    Route::get('/solo', function () {
+        return view('leaderboard');
+    })->name('leaderboard.solo');
+
+    Route::get('/group', function () {
+        return view('leaderboard');
+    })->name('leaderboard.group');
+});
+
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
     Route::get('/{group}', function (Group $group) {
         $score = UserScore::where('group_id', $group->id)->sum('score');
