@@ -35,7 +35,7 @@
     text-transform: uppercase;
     font-size: min(calc(1.5rem + 5vw), 4rem);
     text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
-        -2px 0 0 var(--white), 0 -2px 0 var(--white);
+    -2px 0 0 var(--white), 0 -2px 0 var(--white);
 }
 
 .avatar {
@@ -51,7 +51,6 @@
     margin: 0;
 }
 
-
 .avatar__edit {
     position: absolute;
     top: 1rem;
@@ -63,12 +62,10 @@
     border: none;
     outline: none;
     padding: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
     background-color: var(--red);
+    color: var(--white);
     border-radius: 1rem;
     cursor: pointer;
-}
-
-.logout__message {
-    margin: 0;
-    color: var(--white);
 }

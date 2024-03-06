@@ -21,10 +21,10 @@
             @endif
         </div>
         @if (Auth::user() == $user)
-            <form action="logout" method="POST">
+            <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button class="logout__button">
-                    <h2 class="logout__message font dyslexie">Déconnexion</h2>
+                <button class="logout__button font dyslexie">
+                    Déconnexion
                 </button>
             </form>
         @endif

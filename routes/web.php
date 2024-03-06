@@ -57,7 +57,7 @@ Route::prefix('/profile')->name('profile.')->group(function () {
     Route::post('/edit', [ProfileController::class, 'changeInfos'])->name("edit")->middleware(['auth']);
 
     Route::get('/{user}', function (User $user) {
-        return view('profile.profile', ['user' => $user]);
+        return view('profile.index', ['user' => $user]);
     })->name("consult");
 });
 
