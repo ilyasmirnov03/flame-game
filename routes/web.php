@@ -89,14 +89,27 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('game');
 });
 
+/**
+ * Leaderboard routes
+ */
 Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
-    Route::get('/solo', function () {
-        return view('leaderboard');
-    })->name('leaderboard.solo');
+    Route::prefix('/solo')->name('solo.')->group(function () {
+        Route::get('/', function () {
+            return view('leaderboard');
+        })->name('index');
 
-    Route::get('/group', function () {
-        return view('leaderboard');
-    })->name('leaderboard.group');
+        // Returns a page of leaderboard
+        Route::post('/fetch', [AuthController::class, 'fetchSolo'])->name('fetch');
+    });
+
+    Route::prefix('/group')->name('group.')->group(function () {
+        Route::get('/group', function () {
+            return view('leaderboard');
+        })->name('index');
+
+        // Returns a page of leaderboard
+        Route::post('/fetch', [AuthController::class, 'fetchGroup'])->name('fetch');
+    });
 });
 
 /**
@@ -128,7 +141,3 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
 Route::view('/', 'home')->name('home');
 
 Route::view('/params', 'params')->name('params');
-
-Route::view('/score', 'score')
-    ->name('score')
-    ->middleware(['auth']);
