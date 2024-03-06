@@ -1,0 +1,37 @@
+.leaderboard__podium {
+    padding: 1rem;
+    background-color: var(--blue-light);
+    width: 100%;
+    border-radius: 3rem;
+}
+
+.leaderboard__ranking {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.ranking {
+    border-top: 1px solid black;
+}
+
+.ranking__cell {
+    text-align: center;
+    vertical-align: middle;
+    padding: calc(0.5rem + 1vh);
+    white-space: nowrap;
+    font-family: Baloo;
+}
+
+.ranking__rating {
+    width: 20%;
+}
+
+.ranking__name {
+    text-align: left;
+}
+
+.ranking__score {
+    text-align: right;
+    width: 30%;
+}
