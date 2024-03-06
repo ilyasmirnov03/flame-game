@@ -56,19 +56,22 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
         ]);
     })->name('index');
 
+    // Solo flame page
     Route::get('/solo', function () {
         $score = Auth::user()->scores->sum('score');
         return view('flame.solo_flame', ['score' => $score]);
     })->name('solo');
 
+    // Solo game selection
     Route::get('/solo/games', function () {
         $games = Game::get()->toArray();
-        foreach ($games as $key => $game) {
-            $games[$key]['hasPlayed'] = Cache::get(CacheKeysManager::soloPlayed(Auth::user()->id, $game['id']));
+        foreach ($games as &$game) {
+            $game['timeToNextGame'] = Cache::get(CacheKeysManager::soloPlayed(Auth::id(), $game['id']));
         }
-        return view('games.select_game', ['games' => $games]);
+        return view('games.select_game', ['games' => $games, 'route' => 'flame.game']);
     })->name('select_game');
 
+    // Solo games page
     Route::get('/solo/games/{game}', function (Game $game) {
         return view('games.' . $game->label, ['minigame' => $game]);
     })
@@ -92,11 +95,27 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {
         $score = UserScore::where('group_id', $group->id)->sum('score');
-        return view('group.index', [
+        return view('group.space', [
             'group' => $group,
             'score' => $score,
         ]);
     })->name('flame')->middleware('user.in.group');
+
+    // Group games selection
+    Route::get('/flame/{group}/games', function (Group $group) {
+        $games = Game::get()->toArray();
+        foreach ($games as &$game) {
+            $game['timeToNextGame'] = Cache::get(CacheKeysManager::groupPlayed(Auth::id(), $group->id, $game['id']));
+        }
+        return view('games.select_game', ['games' => $games, 'route' => 'group.game', 'group' => $group]);
+    })->name('select_game');
+
+    // Group games page
+    Route::get('/flame/{group}/games/{game}', function (Group $group, Game $game) {
+        return view('games.' . $game->label, ['minigame' => $game]);
+    })
+        ->middleware('user.can.play.group')
+        ->name('game');
 });
 
 /**

@@ -1,6 +1,8 @@
 @extends('@ui.layout')
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
 @section('assets')
     @vite(['resources/js/running.js'])

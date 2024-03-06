@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Classes\CacheKeysManager;
 use App\Classes\Factories\Score\ScoreFactory;
 use App\Models\Game;
-use DateInterval;
+use DateTime;
+use DateTimeZone;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\UserScore;
@@ -17,6 +19,7 @@ class ScoreController extends Controller {
 
     /**
      * Save game result
+     * @throws Exception
      */
     public function saveResult(Request $request): JsonResponse
     {
@@ -56,13 +59,22 @@ class ScoreController extends Controller {
 
     /**
      * Save played game to the cache
+     * @throws Exception
      */
     private function saveToCache(array $userScore): void
     {
-        $interval = DateInterval::createFromDateString('next day');
+        // Create interval to the next 12pm utc time
+        $utcDateTimeZone = new DateTimeZone('UTC');
+        $currentDateTime = new DateTime('now', $utcDateTimeZone);
+        $targetTime = new DateTime(
+            (int)$currentDateTime->format('H') < 12 ? '12:00:00' : 'tomorrow 12:00:00',
+            $utcDateTimeZone
+        );
+        $interval = $currentDateTime->diff($targetTime);
+
         $cacheKey = array_key_exists('group_id', $userScore) ?
             CacheKeysManager::groupPlayed($userScore['user_id'], $userScore['group_id'], $userScore['game_id']) :
             CacheKeysManager::soloPlayed($userScore['user_id'], $userScore['game_id']);
-        Cache::set($cacheKey, true, $interval);
+        Cache::set($cacheKey, $targetTime->getTimestamp(), $interval);
     }
 }
