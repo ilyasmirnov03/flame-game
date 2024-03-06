@@ -161,4 +161,32 @@
         width: 60%;
         margin: auto;
     }
+    .group__form--icon {
+        display: flex;
+        flex-direction: column;
+        .group__form--icon-label {
+            font-family: "K2D", sans-serif;
+            color: var(--black);
+            font-size: calc(1rem + 1.390625vw);
+            margin-bottom: 1rem;
+        }
+
+        .group__form--icon-selection {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .group__form--icon-option {
+            width: 5rem;
+            height: 5rem;
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .group__form--icon-option:hover {
+            border: 2px solid var(--black);
+        }
+    }
 }

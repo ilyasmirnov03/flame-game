@@ -17,6 +17,7 @@ class Group extends Model
         'name',
         'max_members',
         'private',
+        'image',
     ];
 
     /**
