@@ -45,7 +45,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('/profile')->name('profile.')->group(function () {
 
     Route::get('/', function () {
-        return view('profile.profile', ['user' => Auth::user()]);
+        return view('profile.index', ['user' => Auth::user()]);
     })->name("profile")->middleware(['auth']);
 
     // Access edit page
@@ -69,7 +69,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     Route::get('/', function () {
         $user = Auth::user()->load('userGroups');
         $score = $user->scores->sum('score');
-        return view('flame.flame', [
+        return view('flame.index', [
             'user' => $user,
             'score' => $score,
         ]);
