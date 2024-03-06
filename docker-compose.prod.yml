@@ -1,0 +1,84 @@
+services:
+
+  app:
+    build:
+      args:
+        user: flame-game
+        uid: 1000
+      context: ./docker/app
+      dockerfile: Dockerfile
+    image: flame-game
+    container_name: flame-game-app
+    restart: unless-stopped
+    working_dir: '/var/www/'
+    environment:
+      APP_DEBUG: false
+      APP_ENV: 'production'
+      DB_PASSWORD: '${DB_PASSWORD}'
+      REDIS_PASSWORD: '${REDIS_PASSWORD}'
+    volumes:
+      - './:/var/www/'
+    networks:
+      - flame-game
+    depends_on:
+      - db
+      - redis
+
+  db:
+    container_name: flame-game-db
+    image: 'mysql/mysql-server:8.0'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 0
+    volumes:
+      - 'mysql-data:/var/lib/mysql'
+    networks:
+      - flame-game
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-p${DB_PASSWORD}'
+      retries: 3
+      timeout: 5s
+
+  nginx:
+    image: nginx:1.25.4-alpine
+    container_name: flame-game-nginx
+    restart: unless-stopped
+    volumes:
+      - './:/var/www'
+      - './docker/nginx:/etc/nginx/conf.d'
+    ports:
+      - '83:80'
+    networks:
+      - flame-game
+
+  redis:
+    container_name: flame-game-redis
+    image: 'redis:alpine'
+    volumes:
+      - 'redis-data:/data'
+    networks:
+      - flame-game
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      retries: 3
+      timeout: 5s
+
+networks:
+  flame-game:
+    driver: bridge
+volumes:
+  mysql-data:
+    driver: local
+  redis-data:
+    driver: local

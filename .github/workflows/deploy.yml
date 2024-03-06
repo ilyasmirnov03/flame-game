@@ -1,0 +1,75 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  setup:
+
+    runs-on: self-hosted
+
+    environment: deploy
+  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stop docker compose
+        run: docker compose -f docker-compose.prod.yml down
+
+      - name: Make .env file
+        run: cp .env.example .env
+
+      - name: Start docker compose
+        run: DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} docker compose -f docker-compose.prod.yml up -d --build
+
+  install-dependencies:
+
+    runs-on: self-hosted
+
+    needs: setup
+
+    environment: deploy
+
+    steps:
+
+      - name: Install composer dependencies
+        run: docker exec flame-game-app composer install --optimize-autoloader --no-dev
+
+      - name: Install npm dependencies
+        run: docker exec flame-game-app npm ci
+
+  build:
+
+    runs-on: self-hosted
+
+    needs: install-dependencies
+
+    environment: deploy
+
+    steps:
+
+      - name: Build assets
+        run: docker exec flame-game-app npm run build
+
+      - name: Run migrations
+        run:  docker exec flame-game-app php artisan migrate --force
+
+  cache:
+
+    runs-on: self-hosted
+
+    needs: build
+
+    environment: deploy
+
+    steps:
+      - name: Cache configuration
+        run: docker exec flame-game-app php artisan config:cache
+
+      - name: Cache views
+        run: docker exec flame-game-app php artisan view:cache
+
+      - name: Generate key
+        run: docker exec flame-game-app php artisan key:generate
