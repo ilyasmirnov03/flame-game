@@ -43,7 +43,7 @@ class GroupController extends Controller
 
         $query = $searchTerm ? Group::where('name', 'LIKE', '%' . $searchTerm . '%') : Group::query();
 
-        $groups = $query->where('private', 0)->take(25)->get();
+        $groups = $query->where('private', 0)->limit(25)->get();
 
         $groups->each(function ($group) use ($userId) {
             $group->is_member = $group->isMember($userId);

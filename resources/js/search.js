@@ -13,11 +13,6 @@ function searchGroups() {
                 container.querySelector("#groupContainer").innerHTML;
 
             document.getElementById("groupContainer").innerHTML = groupContent;
-
-            if (container.querySelector(".group") === null) {
-                document.getElementById("groupContainer").innerHTML =
-                    "<p>Aucun groupe trouvé.</p>";
-            }
         });
 }
 
