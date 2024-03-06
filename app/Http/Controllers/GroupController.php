@@ -39,6 +39,7 @@ class GroupController extends Controller
     public function showGroups()
     {
         $userId = Auth::id();
+        $searchTerm = "";
 
         $groups = Group::where('private', 0)->take(25)->get();
 
@@ -47,7 +48,7 @@ class GroupController extends Controller
             $group->total_score = $group->calculateTotalScore();
         });
 
-        return view('group.search', compact('groups'));
+        return view('group.search', compact('groups', 'searchTerm'));
     }
 
     public function joinGroup(Request $request)
