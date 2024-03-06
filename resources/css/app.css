@@ -38,3 +38,8 @@ body {
     margin: 0;
     background-color: var(--white);
 }
+
+a[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+}
