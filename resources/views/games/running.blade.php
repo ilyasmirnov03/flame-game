@@ -1,12 +1,17 @@
 @extends('@ui.layout')
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
 @section('assets')
     @vite(['resources/js/running.js'])
 @endsection
 
 @section('content')
+    @if(!is_null($group ?? null))
+        <input type="hidden" name="group" value="{{ $group->id }}">
+    @endif
     <section class="rungame" id="mainSection">
         <h1 class="rungame__title font dyslexie">Votre course quotidienne</h1>
         <h2 class="rungame__title--blue font dyslexie"> Course </h2>
