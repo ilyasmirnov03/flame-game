@@ -40,7 +40,7 @@ class GroupController extends Controller
     {
         $userId = Auth::id();
 
-        $groups = Group::where('private', 0)->get();
+        $groups = Group::where('private', 0)->take(25)->get();
 
         $groups->each(function ($group) use ($userId) {
             $group->is_member = $group->isMember($userId);
@@ -63,5 +63,26 @@ class GroupController extends Controller
         }
 
         return Redirect::back()->with('error', 'Vous êtes déjà membre de ce groupe');
+    }
+
+    public function searchGroups(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $results = Group::where('name', 'LIKE', '%' . $searchTerm . '%')
+            ->where('private', 0)
+            ->take(25)
+            ->get();
+
+        $userId = Auth::id();
+
+        $groups = $results->map(function ($group) use ($userId) {
+            $group->is_member = $group->isMember($userId);
+            $group->total_score = $group->calculateTotalScore();
+
+            return $group;
+        });
+
+        return view('group.search', compact('groups', 'searchTerm'));
     }
 }

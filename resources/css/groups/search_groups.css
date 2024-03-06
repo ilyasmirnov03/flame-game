@@ -20,6 +20,9 @@
         text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
             -1px 0 0 var(--black), 0 -1px 0 var(--black);
     }
+    form {
+        width: 50%;
+    }
     .group__header--search {
         background-color: transparent;
         border: none;
@@ -27,7 +30,7 @@
         font-size: calc(1rem + 1.390625vw);
         font-family: "Baloo", sans-serif;
         outline: none;
-        width: 60%;
+        width: 100%;
     }
     .group__header--search::placeholder {
         color: var(--black);
@@ -41,8 +44,8 @@
     margin: 2rem 0rem;
     .group__info {
         padding: 0rem 2rem;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 45% 20% 35%;
         align-items: center;
         h2 {
             text-transform: capitalize;
@@ -50,6 +53,9 @@
         h2,
         p {
             margin: 0px;
+            &:last-child {
+                justify-self: end;
+            }
         }
     }
     .group__btn {

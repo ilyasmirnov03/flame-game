@@ -8,7 +8,10 @@
 <section class="search_group">
     <div class="group__header">
         <a class="group__header--return"  href="{{route('flame.index')}}" > Retour </a>
-        <input id="searchInput" class="group__header--search" placeholder="Rechercher..." type="text" name="max_members" >
+        <form id="searchForm" action="{{ route('group.type') }}" method="get">
+            @csrf
+            <input id="searchInput" class="group__header--search" placeholder="Rechercher..." type="text" name="search" value="{{ $searchTerm }}">
+        </form>
     </div>
     <div class="container">
         @foreach($groups as $group)

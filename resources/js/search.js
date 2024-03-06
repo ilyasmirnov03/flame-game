@@ -1,21 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+    let timeoutId;
     const searchInput = document.getElementById("searchInput");
+    const searchForm = document.getElementById("searchForm");
 
     searchInput.addEventListener("input", function () {
-        const searchTerm = searchInput.value.toLowerCase();
+        clearTimeout(timeoutId);
 
-        const groupElements = document.querySelectorAll(".group");
-
-        groupElements.forEach(function (groupElement) {
-            const groupName = groupElement
-                .querySelector("h2")
-                .textContent.toLowerCase();
-
-            if (groupName.includes(searchTerm)) {
-                groupElement.style.display = "flex";
-            } else {
-                groupElement.style.display = "none";
-            }
-        });
+        timeoutId = setTimeout(function () {
+            searchForm.submit();
+        }, 500);
     });
 });
