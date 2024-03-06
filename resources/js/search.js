@@ -7,16 +7,17 @@ function searchGroups() {
     fetch(groupSearchRoute + "?search=" + searchTerm)
         .then((response) => response.text())
         .then((data) => {
-            document.open();
-            document.write(data);
-            document.close();
+            const container = document.createElement("div");
+            container.innerHTML = data;
+            const groupContent =
+                container.querySelector("#groupContainer").innerHTML;
 
-            document
-                .getElementById("searchInput")
-                .addEventListener("input", function () {
-                    clearTimeout(this.timer);
-                    this.timer = setTimeout(searchGroups, 500);
-                });
+            document.getElementById("groupContainer").innerHTML = groupContent;
+
+            if (container.querySelector(".group") === null) {
+                document.getElementById("groupContainer").innerHTML =
+                    "<p>Aucun groupe trouvé.</p>";
+            }
         });
 }
 

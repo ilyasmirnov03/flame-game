@@ -51,7 +51,7 @@ class GroupController extends Controller
         });
 
         if ($request->ajax()) {
-            return response()->json(['html' => view('group.search', compact('groups', 'searchTerm'))->render()]);
+            return view('group._group_content', compact('groups'))->render();
         }
 
         return view('group.search', compact('groups', 'searchTerm'));
