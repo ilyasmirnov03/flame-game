@@ -1,0 +1,37 @@
+.profileInfos {
+    padding: 1rem calc(1rem + 5vw);
+    max-height: 16dvh;
+    background-color: var(--blue-light);
+    border-radius: 2rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profileInfos__form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.profileInfos__input,
+.profileInfos__submit {
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.profileInfos__submit {
+    background-color: var(--green);
+    cursor: pointer;
+}
+
+.avatar__edit {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}

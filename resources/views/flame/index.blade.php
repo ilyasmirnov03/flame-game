@@ -1,11 +1,11 @@
 @extends('@ui.layout')
 
 @section('content')
-    <a href="{{ route('flame.solo')}}">
+    <a href="{{ route('flame.solo') }}">
         <div class="flamme__indiv">
-            <img src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flame">
+            <img src="{{ asset('images/flamme_logo.svg') }}" alt="Skin de votre flame">
             <h1 class="font dyslexie"> Ma <br> flamme </h1>
-            <h2 class="font dyslexie"> {{$score}} </h2>
+            <h2 class="font dyslexie"> {{ $score }} </h2>
         </div>
     </a>
     <section class="allgroups">
