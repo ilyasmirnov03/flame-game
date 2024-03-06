@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Models\Game;
 use App\Models\Group;
+use App\Models\User;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,8 +57,7 @@ Route::prefix('/profile')->name('profile.')->group(function () {
     // Request an edit
     Route::post('/edit', [ProfileController::class, 'changeInfos'])->name("edit")->middleware(['auth']);
 
-    Route::get('/{userId}', function (string $userId) {
-        $user = DB::table('users')->find($userId);
+    Route::get('/{user}', function (User $user) {
         return view('profile.profile', ['user' => $user]);
     })->name("consult");
 });
