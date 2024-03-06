@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LeaderboardController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
@@ -95,20 +96,36 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
 Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
     Route::prefix('/solo')->name('solo.')->group(function () {
         Route::get('/', function () {
-            return view('leaderboard');
+            $ranking = User::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->limit(10)->get();
+            // Adds their total rank as data (witchcraft)
+            $ranking->each(function ($user, $key) {
+                $user->rank = $key + 1;
+            });
+
+            return view('leaderboard', ['ranking' => $ranking, 'page' => 1]);
         })->name('index');
 
-        // Returns a page of leaderboard
-        Route::post('/fetch', [AuthController::class, 'fetchSolo'])->name('fetch');
+        Route::get('/{page}', function (int $page) {
+            $ranking = User::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->offset((10 * $page) - 10)->limit(10)->get();
+            // Witchcraft again
+            $ranking->each(function ($user, $key) use ($page) {
+                $user->rank = ($key + 1) + ($page * 10 - 10);
+            });
+
+            return view('leaderboard', ['ranking' => $ranking, 'page' => $page]);
+        })->name('page');
     });
 
     Route::prefix('/group')->name('group.')->group(function () {
-        Route::get('/group', function () {
-            return view('leaderboard');
+        Route::get('/', function (int $page) {
+            $ranking = [];
+            return view('leaderboard', ['ranking' => $ranking]);
         })->name('index');
 
-        // Returns a page of leaderboard
-        Route::post('/fetch', [AuthController::class, 'fetchGroup'])->name('fetch');
+        Route::get('/{page}', function (int $page) {
+            $ranking = [];
+            return view('leaderboard', ['ranking' => $ranking]);
+        })->name('page');
     });
 });
 
