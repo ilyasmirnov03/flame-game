@@ -75,7 +75,8 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     // Groups search page
     Route::get('/', [GroupController::class, 'showGroups'])->name('search');
 
-    Route::get('/search', [GroupController::class, 'showGroups'])->name('content');
+    // Search group
+    Route::get('/search', [GroupController::class, 'searchGroups'])->name('content');
 
     // Join group 
     Route::post('/join', [GroupController::class, 'joinGroup'])->name('join');
