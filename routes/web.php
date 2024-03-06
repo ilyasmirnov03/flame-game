@@ -95,7 +95,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
 Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
     Route::prefix('/solo')->name('solo.')->group(function () {
         Route::get('/', function () {
-            return view('leaderboard');
+            return view('index');
         })->name('index');
 
         // Returns a page of leaderboard
@@ -104,7 +104,7 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
 
     Route::prefix('/group')->name('group.')->group(function () {
         Route::get('/group', function () {
-            return view('leaderboard');
+            return view('index');
         })->name('index');
 
         // Returns a page of leaderboard
