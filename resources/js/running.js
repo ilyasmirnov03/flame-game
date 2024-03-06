@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const popupResult = document.getElementById("popupResult");
     const mainSection = document.getElementById("mainSection");
     const bonusPoint = document.getElementById("bonusPoint");
+    const group = document.querySelector('input[name="group"]');
 
     let timer;
     let totalTime = 0;
@@ -136,17 +137,21 @@ document.addEventListener("DOMContentLoaded", function () {
         finishedAt = new Date().toISOString();
 
         if (totalDistance >= 1000) {
+            const body = {
+                startedAt: startedAt,
+                finishedAt: finishedAt,
+                game: "running",
+            }
+            if (group?.value != null) {
+                body['group_id'] = group.value;
+            }
             fetch("/user_score", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": getCSRFToken(),
                 },
-                body: JSON.stringify({
-                    startedAt: startedAt,
-                    finishedAt: finishedAt,
-                    game: "running",
-                }),
+                body: JSON.stringify(body),
             })
                 .then((response) => {
                     if (!response.ok) {

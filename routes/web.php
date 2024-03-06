@@ -112,7 +112,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
 
     // Group games page
     Route::get('/flame/{group}/games/{game}', function (Group $group, Game $game) {
-        return view('games.' . $game->label, ['minigame' => $game]);
+        return view('games.' . $game->label, ['minigame' => $game, 'group' => $group]);
     })
         ->middleware('user.can.play.group')
         ->name('game');

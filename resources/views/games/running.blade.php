@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+    @if(!is_null($group ?? null))
+        <input type="hidden" name="group" value="{{ $group->id }}">
+    @endif
     <section class="rungame" id="mainSection">
         <h1 class="rungame__title font dyslexie">Votre course quotidienne</h1>
         <h2 class="rungame__title--blue font dyslexie"> Course </h2>
