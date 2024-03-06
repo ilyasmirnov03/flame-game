@@ -1,13 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let timeoutId;
-    const searchInput = document.getElementById("searchInput");
-    const searchForm = document.getElementById("searchForm");
+function searchGroups() {
+    const searchTerm = document.getElementById("searchInput").value;
+    const groupSearchRoute = document.head.querySelector(
+        'meta[name="groupSearchRoute"]'
+    ).content;
 
-    searchInput.addEventListener("input", function () {
-        clearTimeout(timeoutId);
+    fetch(groupSearchRoute + "?search=" + searchTerm)
+        .then((response) => response.text())
+        .then((data) => {
+            document.open();
+            document.write(data);
+            document.close();
 
-        timeoutId = setTimeout(function () {
-            searchForm.submit();
-        }, 500);
-    });
+            document
+                .getElementById("searchInput")
+                .addEventListener("input", function () {
+                    clearTimeout(this.timer);
+                    this.timer = setTimeout(searchGroups, 500);
+                });
+        });
+}
+
+document.getElementById("searchInput").addEventListener("input", function () {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(searchGroups, 500);
 });

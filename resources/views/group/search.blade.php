@@ -1,5 +1,5 @@
 @extends('@ui.layout')
-
+<meta name="groupSearchRoute" content="{{ route('group.search') }}">
 @section('assets')
     @vite(['resources/js/search.js'])
 @endsection
@@ -7,13 +7,10 @@
 @section('content')
 <section class="search_group">
     <div class="group__header">
-        <a class="group__header--return"  href="{{route('flame.index')}}" > Retour </a>
-        <form id="searchForm" action="{{ route('group.type') }}" method="get">
-            @csrf
-            <input id="searchInput" class="group__header--search" placeholder="Rechercher..." type="text" name="search" value="{{ $searchTerm }}">
-        </form>
+        <a class="group__header--return" href="{{ route('flame.index') }}"> Retour </a>
+        <input id="searchInput" class="group__header--search" placeholder="Rechercher..." type="text" name="search" value="{{ $searchTerm }}">
     </div>
-    <div class="container">
+    <div class="container" id="groupContainer">
         @foreach($groups as $group)
             <div class="group">
                 <div class="group__info @if($group->is_member) member @endif">

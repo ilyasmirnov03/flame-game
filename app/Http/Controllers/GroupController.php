@@ -36,20 +36,27 @@ class GroupController extends Controller
         return redirect()->route('group.flame', ['group' => $group->id]);
     }
 
-    public function showGroups()
+    public function showGroups(Request $request)
     {
         $userId = Auth::id();
-        $searchTerm = "";
+        $searchTerm = $request->input('search');
 
-        $groups = Group::where('private', 0)->take(25)->get();
+        $query = $searchTerm ? Group::where('name', 'LIKE', '%' . $searchTerm . '%') : Group::query();
+
+        $groups = $query->where('private', 0)->take(25)->get();
 
         $groups->each(function ($group) use ($userId) {
             $group->is_member = $group->isMember($userId);
             $group->total_score = $group->calculateTotalScore();
         });
 
+        if ($request->ajax()) {
+            return response()->json(['html' => view('group.search', compact('groups', 'searchTerm'))->render()]);
+        }
+
         return view('group.search', compact('groups', 'searchTerm'));
     }
+
 
     public function joinGroup(Request $request)
     {
@@ -64,26 +71,5 @@ class GroupController extends Controller
         }
 
         return Redirect::back()->with('error', 'Vous êtes déjà membre de ce groupe');
-    }
-
-    public function searchGroups(Request $request)
-    {
-        $searchTerm = $request->input('search');
-
-        $results = Group::where('name', 'LIKE', '%' . $searchTerm . '%')
-            ->where('private', 0)
-            ->take(25)
-            ->get();
-
-        $userId = Auth::id();
-
-        $groups = $results->map(function ($group) use ($userId) {
-            $group->is_member = $group->isMember($userId);
-            $group->total_score = $group->calculateTotalScore();
-
-            return $group;
-        });
-
-        return view('group.search', compact('groups', 'searchTerm'));
     }
 }

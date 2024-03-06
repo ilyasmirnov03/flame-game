@@ -20,9 +20,6 @@
         text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
             -1px 0 0 var(--black), 0 -1px 0 var(--black);
     }
-    form {
-        width: 50%;
-    }
     .group__header--search {
         background-color: transparent;
         border: none;
@@ -30,7 +27,7 @@
         font-size: calc(1rem + 1.390625vw);
         font-family: "Baloo", sans-serif;
         outline: none;
-        width: 100%;
+        width: 60%;
     }
     .group__header--search::placeholder {
         color: var(--black);
