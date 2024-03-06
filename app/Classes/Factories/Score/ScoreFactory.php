@@ -4,7 +4,7 @@ namespace App\Classes\Factories\Score;
 
 abstract class ScoreFactory {
 
-    public static function getScoreCalculator(string $game): self | null
+    public static function getScoreCalculator(string $game): self|null
     {
         $classes = [
             'quiz' => QuizScore::class,
@@ -14,7 +14,7 @@ abstract class ScoreFactory {
         return new $classes[$game] ?? null;
     }
 
-    public abstract function calculateScore(string $userId, string $gameId, int $elapsedTime): array;
+    abstract public function calculateScore(string $userId, string $gameId, int $elapsedTime): array;
 
-    public abstract function calculateScoreBonus(string $userId, string $gameId, int $elapsedTime): int;
+    abstract public function calculateScoreBonus(string $userId, string $gameId, int $elapsedTime): int;
 }
