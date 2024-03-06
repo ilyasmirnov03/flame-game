@@ -1,0 +1,76 @@
+.member h2 {
+    color: var(--red);
+}
+.search_group {
+    margin-bottom: 9rem;
+}
+.group__header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0rem 2rem;
+    .group__header--return {
+        border: none;
+        text-decoration: none;
+        border-radius: 1.5rem;
+        padding: 0.2rem 1rem;
+        background-color: var(--red);
+        color: var(--white);
+        font-family: "Baloo", sans-serif;
+        font-size: calc(1rem + 1.390625vw);
+        text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+            -1px 0 0 var(--black), 0 -1px 0 var(--black);
+    }
+    .group__header--search {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid var(--black);
+        font-size: calc(1rem + 1.390625vw);
+        font-family: "Baloo", sans-serif;
+        outline: none;
+        width: 60%;
+    }
+    .group__header--search::placeholder {
+        color: var(--black);
+        font-family: "Baloo", sans-serif;
+        font-size: calc(1rem + 1.390625vw);
+    }
+}
+.group {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0rem;
+    .group__info {
+        padding: 0rem 2rem;
+        display: grid;
+        grid-template-columns: 45% 20% 35%;
+        align-items: center;
+        h2 {
+            text-transform: capitalize;
+        }
+        h2,
+        p {
+            margin: 0px;
+            &:last-child {
+                justify-self: end;
+            }
+        }
+    }
+    .group__btn {
+        margin: auto;
+        .group__btn--join {
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0rem 3rem;
+            background-color: var(--blue);
+            color: var(--white);
+            font-family: "Baloo", sans-serif;
+            font-size: calc(1rem + 1.390625vw);
+            text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+                -1px 0 0 var(--black), 0 -1px 0 var(--black);
+        }
+        .group__btn--join[disabled] {
+            background-color: var(--inactiv);
+            cursor: not-allowed;
+        }
+    }
+}

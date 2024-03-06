@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/js/running.js",
                 "resources/js/groups.js",
+                "resources/js/libs/htmx.js"
             ],
             refresh: true,
         }),

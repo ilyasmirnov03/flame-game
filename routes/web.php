@@ -115,7 +115,13 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
  */
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
     // Groups search page
-    Route::view('/', 'group.search')->name('search');
+    Route::get('/', [GroupController::class, 'showGroups'])->name('search');
+
+    // Search group
+    Route::get('/search', [GroupController::class, 'searchGroups'])->name('content');
+
+    // Join group 
+    Route::post('/join', [GroupController::class, 'joinGroup'])->name('join');
 
     // Create group
     Route::post('/', [GroupController::class, 'store'])->name('store');
