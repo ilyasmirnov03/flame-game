@@ -2,7 +2,9 @@
 @import "./globals/btn.css";
 @import "./globals/header.css";
 @import "./globals/nav.css";
-@import "./profil.css";
+@import "./profile/profile.css";
+@import "./profile/edit.css";
+@import "./auth.css";
 @import "./params.css";
 @import "./flamme/flamme.css";
 @import "./flamme/flamme_indiv.css";
@@ -27,9 +29,11 @@
 .hidden {
     display: none;
 }
+
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     background-color: var(--white);

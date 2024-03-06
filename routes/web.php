@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Models\Game;
 use App\Models\Group;
+use App\Models\User;
 use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +38,28 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::view('/profile', 'profile')
-    ->name('profile')
-    ->middleware(['auth']);
+/**
+ * Profile pages
+ */
+Route::prefix('/profile')->name('profile.')->group(function () {
+
+    Route::get('/', function () {
+        return view('profile.index', ['user' => Auth::user()]);
+    })->name("profile")->middleware(['auth']);
+
+    // Access edit page
+    Route::get('/edit', function () {
+        $user = Auth::user();
+        return view('profile.edit', ['user' => $user]);
+    })->name("edit")->middleware(['auth']);
+
+    // Request an edit
+    Route::post('/edit', [ProfileController::class, 'changeInfos'])->name("edit")->middleware(['auth']);
+
+    Route::get('/{user}', function (User $user) {
+        return view('profile.index', ['user' => $user]);
+    })->name("consult");
+});
 
 /**
  * Flame pages
@@ -47,7 +68,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     Route::get('/', function () {
         $user = Auth::user()->load('userGroups');
         $score = $user->scores->sum('score');
-        return view('flame.flame', [
+        return view('flame.index', [
             'user' => $user,
             'score' => $score,
         ]);
@@ -68,6 +89,16 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('game');
 });
 
+Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
+    Route::get('/solo', function () {
+        return view('leaderboard');
+    })->name('leaderboard.solo');
+
+    Route::get('/group', function () {
+        return view('leaderboard');
+    })->name('leaderboard.group');
+});
+
 /**
  * Group pages
  */
@@ -79,7 +110,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     Route::post('/', [GroupController::class, 'store'])->name('store');
 
     // Create group view
-    Route::view('/create','group.create')->name("create");
+    Route::view('/create', 'group.create')->name("create");
 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {
