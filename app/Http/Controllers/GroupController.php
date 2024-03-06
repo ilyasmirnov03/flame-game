@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Enums\GroupMemberRole;
 use App\Models\Group;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\GroupMember;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
-class GroupController extends Controller
-{
+class GroupController extends Controller {
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required|string|max:16',
@@ -26,9 +27,8 @@ class GroupController extends Controller
             'private' => $request->has('private'),
         ]);
 
-        $user = Auth::user();
         GroupMember::create([
-            'user_id' => $user->id,
+            'user_id' => Auth::id(),
             'group_id' => $group->id,
             'role' => GroupMemberRole::OWNER->value
         ]);
@@ -36,29 +36,35 @@ class GroupController extends Controller
         return redirect()->route('group.flame', ['group' => $group->id]);
     }
 
-    public function showGroups(Request $request)
+    /**
+     * Show groups unfiltered groups
+     */
+    public function showGroups(): View
     {
-        $userId = Auth::id();
-        $searchTerm = $request->input('search');
-
-        $query = $searchTerm ? Group::where('name', 'LIKE', '%' . $searchTerm . '%') : Group::query();
-
-        $groups = $query->where('private', 0)->limit(25)->get();
-
-        $groups->each(function ($group) use ($userId) {
-            $group->is_member = $group->isMember($userId);
-            $group->total_score = $group->calculateTotalScore();
-        });
-
-        if ($request->ajax()) {
-            return view('group._group_content', compact('groups'))->render();
-        }
-
-        return view('group.search', compact('groups', 'searchTerm'));
+        $group = new Group();
+        $groups = $group->getForSearch(25)->get();
+        return view('group.search', compact('groups'));
     }
 
+    /**
+     * Search groups by name
+     */
+    public function searchGroups(Request $request): View
+    {
+        $search = $request->get('search');
 
-    public function joinGroup(Request $request)
+        $group = new Group();
+        $groups = $group->getForSearch(25)
+            ->where('name', 'LIKE', '%' . $search . '%')
+            ->get();
+
+        return view('group.search_content', compact('groups'));
+    }
+
+    /**
+     * Join a group if not already part of it
+     */
+    public function joinGroup(Request $request): RedirectResponse
     {
         $groupId = $request->input('group_id');
         $userId = Auth::id();
