@@ -126,8 +126,10 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     // Create group
     Route::post('/', [GroupController::class, 'store'])->name('store');
 
-    // Create group view
-    Route::view('/create', 'group.create')->name("create");
+    Route::get('/create', [GroupController::class, 'create'])->name("create");
+
+    // Create group
+    Route::post('/create', [GroupController::class, 'store'])->name('store');
 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {
