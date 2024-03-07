@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-class GroupController extends Controller {
+class GroupController extends Controller
+{
 
     public function store(Request $request): RedirectResponse
     {
@@ -64,8 +65,6 @@ class GroupController extends Controller {
 
         return view('group.create', ['groupIcons' => $groupIcons]);
     }
-}
-=======
     /**
      * Show groups unfiltered groups
      */
