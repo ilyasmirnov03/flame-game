@@ -5,7 +5,7 @@
                 <img src="{{ asset('images/anecdote.svg')}}" alt="L'anecdote quotidienne">
             </a>
         </li>
-        <li class="{{ Request::is('flame*') ? 'active' : '' }}">
+        <li class="{{ Request::is('flame*') || Request::is('group*') ? 'active' : '' }}">
             <a href="{{ route('flame.index') }}">
                 <img src="{{ asset('images/flamme.svg')}}" alt="Ma flamme virtuel">
             </a>
