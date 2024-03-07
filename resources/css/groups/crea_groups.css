@@ -181,7 +181,9 @@
         .group__form--icon-option {
             width: 5rem;
             height: 5rem;
-            background-size: cover;
+            background-repeat: no-repeat;
+            background-size: 90%;
+            background-position: center;
             cursor: pointer;
         }
 
