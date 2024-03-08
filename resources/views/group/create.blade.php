@@ -35,7 +35,13 @@
 
     <div class="group__form--icon">
         <label class="group__form--icon-label" for="groupIcon">Sélectionnez une icône :</label>
-        <div id="groupIcon" class="group__form--icon-selection"></div>
+        <div id="group-choice" class="group__icon--choice">
+            <img class="group__edit--img" src="{{ asset('images/edit.svg')}}" alt="Selectionner une icone">
+        </div>
+        <div id="group-popup" class="hidden group__icon--popup">
+            <div id="groupIcon" class="group__form--icon-selection"></div>
+        </div>
+
         <input type="hidden" id="icon" name="icon" required>
     </div>
     

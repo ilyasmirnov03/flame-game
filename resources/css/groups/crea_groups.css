@@ -179,14 +179,40 @@
         }
 
         .group__form--icon-option {
-            width: 5rem;
-            height: 5rem;
-            background-size: cover;
+            width: 6rem;
+            height: 6rem;
+            background-repeat: no-repeat;
+            background-size: 90%;
+            background-position: center;
             cursor: pointer;
         }
-
-        .group__form--icon-option:hover {
-            border: 2px solid var(--black);
-        }
+    }
+    .group__icon--choice {
+        position: relative;
+        margin: auto;
+        width: 10rem;
+        height: 7rem;
+        border-radius: 1rem;
+        border: 2px solid var(--black);
+        margin-bottom: 3rem;
+        background-repeat: no-repeat;
+        background-size: 50%;
+        background-position: center;
+    }
+    .group__icon--popup {
+        width: 20rem;
+        height: 30rem;
+        border-radius: 2rem;
+        padding: 2rem;
+        background-color: #020d19c4;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .group__edit--img {
+        position: absolute;
+        right: 0.2rem;
+        bottom: 0.2rem;
     }
 }

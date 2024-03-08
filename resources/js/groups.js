@@ -1,5 +1,7 @@
 const rangeInput = document.getElementById("rangeInput");
 const rangeValue = document.getElementById("rangeValue");
+const choice = document.getElementById("group-choice");
+const popup = document.getElementById("group-popup");
 
 if (rangeInput) {
     rangeInput.addEventListener("input", (e) => {
@@ -22,8 +24,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         iconElement.addEventListener("click", function () {
             selectedIconInput.value = icon;
+            popup.classList.toggle("hidden");
+            choice.style.backgroundImage = `url('/images/group_icons/${icon}')`;
         });
 
         groupIconContainer.appendChild(iconElement);
+    });
+
+    choice.addEventListener("click", function () {
+        popup.classList.toggle("hidden");
     });
 });
