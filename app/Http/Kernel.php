@@ -7,8 +7,7 @@ use App\Http\Middleware\UserCanPlayGroupGame;
 use App\Http\Middleware\UserCanPlaySoloGame;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class Kernel extends HttpKernel
-{
+class Kernel extends HttpKernel {
     /**
      * The application's global HTTP middleware stack.
      *
@@ -71,3 +70,4 @@ class Kernel extends HttpKernel
         'user.can.play.solo' => UserCanPlaySoloGame::class,
         'user.can.play.group' => UserCanPlayGroupGame::class,
     ];
+}
