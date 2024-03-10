@@ -4,20 +4,20 @@
 <section class="home">
     <div class="home__today">
         <h2 class="home__today--title">Aujourd'hui :</h2>
-        @if ($etapeActuelle['data'])
+        @if ($currentStep['data'])
         <div class="home__today--div">
-            <p>{{ $etapeActuelle['data']['ville'] }} - {{ $etapeActuelle['data']['departement'] }}</p>
-            <p>{{ $etapeActuelle['data']['date'] }} - {{ $etapeActuelle['data']['territoire'] }}</p>
+            <p>{{ $currentStep['data']['ville'] }} - {{ $currentStep['data']['departement'] }}</p>
+            <p>{{ $currentStep['data']['date'] }} - {{ $currentStep['data']['territoire'] }}</p>
         </div>
         @else
-            <p class="home__today--error">{{ $etapeActuelle['erreur'] }}.</p>
+            <p class="home__today--error">{{ $currentStep['erreur'] }}.</p>
         @endif
     </div>
 
     <div class="home__tocome">
         <h2 class="home__tocome--title">Étapes à venir :</h2>
-        @if (!empty($etapesAVenir))
-            @foreach ($etapesAVenir as $etape)
+        @if (!empty($upcomingSteps))
+            @foreach ($upcomingSteps as $etape)
                 <div class="home__tocome--div">
                     <div class="home__tocome--div-txt">
                         <p><span class="home__ville"> {{ $etape['ville'] }}  </span> - {{ $etape['departement'] }}</p>
@@ -35,8 +35,8 @@
 
     <div class="home__done">
         <h2 class="home__done--title">Étapes passées :</h2>
-        @if (!empty($etapesPassees))
-            @foreach ($etapesPassees as $etape)
+        @if (!empty($pastSteps))
+            @foreach ($pastSteps as $etape)
                 <div class="home__done--div">
                     <div class="home__done--div-txt">
                         <p> <span class="home__ville"> {{ $etape['ville'] }}  </span> - {{ $etape['departement'] }}</p>
