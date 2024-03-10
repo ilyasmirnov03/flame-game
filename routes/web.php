@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\EtapesController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
@@ -167,7 +168,8 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::view('/', 'home')->name('home');
+
+Route::get('/', [EtapesController::class, 'show'])->name('home');
 
 Route::view('/params', 'params')->name('params');
 
