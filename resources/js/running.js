@@ -1,3 +1,5 @@
+import {getCSRFToken} from "./app.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const timeDisplay = document.getElementById("timeDisplay");
@@ -17,11 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let startedAt;
     let finishedAt;
     let popupVisible = false;
-
-    function getCSRFToken() {
-        const metaTag = document.querySelector('meta[name="csrf-token"]');
-        return metaTag ? metaTag.getAttribute("content") : null;
-    }
 
     startButton.addEventListener("click", function () {
         if (!isRaceStarted) {
