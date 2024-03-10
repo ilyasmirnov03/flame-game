@@ -21,7 +21,7 @@ if (
 
     localStorage.setItem("funfact_last_seen_date", currentDate.toISOString());
 } else {
-    localStorage.setItem("funfact_seen_today", "yes");
+    localStorage.setItem("funfact_seen_today", "true");
 }
 
 funfactBtn.addEventListener("click", function () {
