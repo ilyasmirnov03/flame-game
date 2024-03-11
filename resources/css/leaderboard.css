@@ -31,7 +31,6 @@
 
 .podium {
     font-family: Baloo, sans-serif;
-    margin: 1rem 0;
     background: no-repeat bottom url('/images/podium_background.png');
     background-size: cover;
     width: 100%;
