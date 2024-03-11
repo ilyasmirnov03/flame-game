@@ -35,9 +35,12 @@
             <tbody class="ranking">
                 @foreach ($ranking as $user)
                     @if ($user->rank > 3)
-                        <tr class="ranking">
+                        <tr class="ranking @if ($user->id == Auth::id()) ranking--user @endif">
                             <td class="ranking__rating ranking__cell">#{{ $user->rank }}</td>
-                            <td class="ranking__name ranking__cell">{{ $user->name }}</td>
+                            <td class="ranking__name ranking__cell">{{ $user->name }} @if ($user->id == Auth::id())
+                                    (vous)
+                                @endif
+                            </td>
                             <td class="ranking__score ranking__cell">{{ $user->scores->sum('score') }}</td>
                         </tr>
                     @endif

@@ -85,6 +85,10 @@
     border-top: 1px solid grey;
 }
 
+.ranking--user {
+    color: var(--blue);
+}
+
 .ranking:first-child {
     border-top: none;
 }
