@@ -33,15 +33,15 @@
         @endif
         <table class="leaderboard__ranking">
             <tbody class="ranking">
-                @foreach ($ranking as $user)
-                    @if ($user->rank > 3)
-                        <tr class="ranking @if ($user->id == Auth::id()) ranking--user @endif">
-                            <td class="ranking__rating ranking__cell">#{{ $user->rank }}</td>
-                            <td class="ranking__name ranking__cell">{{ $user->name }} @if ($user->id == Auth::id())
+                @foreach ($ranking as $rankable)
+                    @if ($rankable->rank > 3)
+                        <tr class="ranking @if ($rankable->id == Auth::id()) ranking--user @endif">
+                            <td class="ranking__rating ranking__cell">#{{ $rankable->rank }}</td>
+                            <td class="ranking__name ranking__cell">{{ $rankable->name }} @if ($rankable->id == Auth::id())
                                     (vous)
                                 @endif
                             </td>
-                            <td class="ranking__score ranking__cell">{{ $user->scores->sum('score') }}</td>
+                            <td class="ranking__score ranking__cell">{{ $rankable->scores->sum('score') }}</td>
                         </tr>
                     @endif
                 @endforeach
