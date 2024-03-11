@@ -111,6 +111,7 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
             // Adds their total rank as data (witchcraft)
             $ranking->each(function ($user, $key) {
                 $user->rank = $key + 1;
+                $user->image = 'images/avatar.png';
             });
 
             return view('leaderboard', ['ranking' => $ranking, 'page' => 1]);
@@ -128,6 +129,7 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
             // Witchcraft again
             $ranking->each(function ($user, $key) use ($page) {
                 $user->rank = ($key + 1) + ($page * 10 - 10);
+                $user->image = 'images/avatar.png';
             });
 
             return view('leaderboard', ['ranking' => $ranking, 'page' => $page]);
@@ -135,14 +137,24 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
     });
 
     Route::prefix('/group')->name('group.')->group(function () {
-        Route::get('/', function (int $page) {
-            $ranking = [];
-            return view('leaderboard', ['ranking' => $ranking]);
+        Route::get('/', function () {
+            $ranking = Group::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->limit(10)->get();
+            $ranking->each(function ($group, $key) {
+                $group->rank = ($key + 1);
+                $group->image = 'images/group_icons/' . $group->image;
+            });
+
+            return view('leaderboard', ['ranking' => $ranking, 'page' => 1]);
         })->name('index');
 
         Route::get('/{page}', function (int $page) {
-            $ranking = [];
-            return view('leaderboard', ['ranking' => $ranking]);
+            $ranking = Group::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->offset((10 * $page) - 10)->limit(10)->get();
+            $ranking->each(function ($group, $key) use ($page) {
+                $group->rank = ($key + 1) + ($page * 10 - 10);
+                $group->image = 'images/group_icons/' . $group->image;
+            });
+
+            return view('leaderboard', ['ranking' => $ranking,  'page' => $page]);
         })->name('page');
     });
 });
