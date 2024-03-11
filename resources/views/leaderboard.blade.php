@@ -37,7 +37,7 @@
                 @endif
             </div>
         @endif
-        <table class="leaderboard__ranking">
+        <table class="leaderboard__ranking" aria-label="classement des joueurs">
             <tbody class="ranking">
                 @foreach ($ranking as $rankable)
                     @if ($rankable->rank > 3)
