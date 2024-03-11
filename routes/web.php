@@ -126,10 +126,8 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     // Create group
     Route::post('/', [GroupController::class, 'store'])->name('store');
 
+    // Create group view
     Route::get('/create', [GroupController::class, 'create'])->name("create");
-
-    // Create group
-    Route::post('/create', [GroupController::class, 'store'])->name('store');
 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {
@@ -139,6 +137,9 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
             'score' => $score,
         ]);
     })->name('flame')->middleware('user.in.group');
+
+    // Leave group
+    Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
 
     // Group games selection
     Route::get('/flame/{group}/games', function (Group $group) {
