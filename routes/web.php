@@ -118,12 +118,19 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
 
         Route::get('/{page}', function (int $page) {
             $ranking = User::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->offset((10 * $page) - 10)->limit(10)->get();
+            $max_pages = ceil((User::all()->count() / 10));
+
+            // If trying to access OOB page, redirect to last page
+            if ($page > $max_pages) {
+                return redirect()->intended(route('leaderboard.solo.page', ['page' => $max_pages]));
+            }
+
             // Witchcraft again
             $ranking->each(function ($user, $key) use ($page) {
                 $user->rank = ($key + 1) + ($page * 10 - 10);
             });
 
-            return view('leaderboard', ['ranking' => $ranking, 'page' => $page]);
+            return view('leaderboard', ['ranking' => $ranking, 'page' => $page, 'maxpage' => $max_pages]);
         })->name('page');
     });
 
