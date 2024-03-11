@@ -8,7 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\GroupMember;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
@@ -16,6 +15,9 @@ use Illuminate\View\View;
 class GroupController extends Controller
 {
 
+    /**
+     * Create a group
+     */
     public function store(Request $request): RedirectResponse
     {
         $validator = Validator::make($request->all(), [
@@ -29,7 +31,6 @@ class GroupController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
 
         $group = Group::create([
             'name' => $request->input('name'),
@@ -47,8 +48,10 @@ class GroupController extends Controller
         return redirect()->route('group.flame', ['group' => $group->id]);
     }
 
-
-    public function create()
+    /**
+     * Return the create view
+     */
+    public function create(): View
     {
         $groupIcons = [];
         $iconDirectory = public_path('images/group_icons');
@@ -65,6 +68,7 @@ class GroupController extends Controller
 
         return view('group.create', ['groupIcons' => $groupIcons]);
     }
+
     /**
      * Show groups unfiltered groups
      */
@@ -108,12 +112,10 @@ class GroupController extends Controller
         return Redirect::back()->with('error', 'Vous êtes déjà membre de ce groupe');
     }
 
-    public function leaveGroup(Group $group)
+    public function leaveGroup(Group $group): RedirectResponse
     {
-        $user = Auth::user();
+        $group->members()->detach(Auth::id());
 
-        $group->members()->detach($user->id);
-
-        return redirect()->route('home')->with('success');
+        return redirect()->route('home')->with('success', true);
     }
 }
