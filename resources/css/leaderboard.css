@@ -1,8 +1,52 @@
-.leaderboard__podium {
-    padding: 1rem;
-    background-color: var(--blue-light);
+.leaderboard {
+    margin-bottom: 8rem;
+}
+
+.podium {
+    font-family: Baloo;
+    margin: 1rem 0;
+    background: no-repeat bottom url('/images/podium_background.png');
+    background-size: cover;
     width: 100%;
-    border-radius: 3rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.podium__first,
+.podium__second,
+.podium__third {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* TEMPORARY CSS UNTIL WE GET THE PODIUMS ASSETS */
+.podium__avatar {
+    height: min-content;
+    width: 30%;
+}
+
+.podium__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+}
+
+.podium__first .podium__image {
+    height: 70px;
+    background-color: var(--yellow);
+}
+
+.podium__second .podium__image {
+    height: 50px;
+    background-color: var(--grey);
+}
+
+.podium__third .podium__image {
+    height: 30px;
+    background-color: #663700;
 }
 
 .leaderboard__ranking {
