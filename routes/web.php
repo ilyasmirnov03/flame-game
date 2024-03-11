@@ -130,7 +130,7 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
                 $user->rank = ($key + 1) + ($page * 10 - 10);
             });
 
-            return view('leaderboard', ['ranking' => $ranking, 'page' => $page, 'maxpage' => $max_pages]);
+            return view('leaderboard', ['ranking' => $ranking, 'page' => $page]);
         })->name('page');
     });
 
