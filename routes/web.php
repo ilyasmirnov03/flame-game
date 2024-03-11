@@ -167,6 +167,12 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
                 $group->rank = ($key + 1) + ($page * 10 - 10);
                 $group->image = 'images/group_icons/' . $group->image;
             });
+            $max_pages = ceil((User::all()->count() / 10));
+
+            // If trying to access OOB page, redirect to last page
+            if ($page > $max_pages) {
+                return redirect()->intended(route('leaderboard.solo.page', ['page' => $max_pages]));
+            }
 
             return view('leaderboard', ['ranking' => $ranking,  'page' => $page]);
         })->name('page');
