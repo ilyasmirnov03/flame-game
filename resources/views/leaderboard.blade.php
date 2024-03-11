@@ -1,9 +1,9 @@
 @extends('@ui.layout')
 
 @section('content')
-    <div class="">
-        <a href="{{ route('leaderboard.solo.index') }}">Solo</a>
-        <a href="{{ route('leaderboard.group.index') }}">Group</a>
+    <div class="leaderboardLinks">
+        <a class="leaderboardLinks__link" href="{{ route('leaderboard.solo.index') }}">Solo</a>
+        <a class="leaderboardLinks__link" href="{{ route('leaderboard.group.index') }}">Group</a>
     </div>
     <div class="leaderboard">
         @if ($page == 1)
@@ -45,8 +45,8 @@
             </tbody>
         </table>
         <div class="leaderboard__controls">
-            <a href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}">Précédent</a>
-            <a href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}">Suivant</a>
+            <a class="leaderboard__controlLink" href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}">Précédent</a>
+            <a class="leaderboard__controlLink" href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}">Suivant</a>
         </div>
     </div>
 @endsection
