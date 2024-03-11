@@ -123,7 +123,7 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
         Route::get('/{page}', function (int $page) {
             $ranking = User::withSum('scores', 'score')
                 ->orderBy('scores_sum_score', 'desc')
-                > offset((10 * $page) - 10)
+                ->offset((10 * $page) - 10)
                 ->limit(10)
                 ->get();
             $max_pages = ceil((User::all()->count() / 10));
