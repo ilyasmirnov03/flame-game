@@ -51,8 +51,10 @@
             </tbody>
         </table>
         <div class="leaderboard__controls">
-            <a class="leaderboard__controlLink" href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}">Précédent</a>
-            <a class="leaderboard__controlLink" href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}">Suivant</a>
+            <a class="leaderboard__controlLink"
+                href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}">Précédent</a>
+            <a class="leaderboard__controlLink"
+                href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}">Suivant</a>
         </div>
     </div>
 @endsection

@@ -107,7 +107,10 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
 Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
     Route::prefix('/solo')->name('solo.')->group(function () {
         Route::get('/', function () {
-            $ranking = User::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->limit(10)->get();
+            $ranking = User::withSum('scores', 'score')
+                ->orderBy('scores_sum_score', 'desc')
+                ->limit(10)
+                ->get();
             // Adds their total rank as data (witchcraft)
             $ranking->each(function ($user, $key) {
                 $user->rank = $key + 1;
@@ -118,7 +121,11 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
         })->name('index');
 
         Route::get('/{page}', function (int $page) {
-            $ranking = User::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->offset((10 * $page) - 10)->limit(10)->get();
+            $ranking = User::withSum('scores', 'score')
+                ->orderBy('scores_sum_score', 'desc')
+                > offset((10 * $page) - 10)
+                ->limit(10)
+                ->get();
             $max_pages = ceil((User::all()->count() / 10));
 
             // If trying to access OOB page, redirect to last page
@@ -138,7 +145,10 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
 
     Route::prefix('/group')->name('group.')->group(function () {
         Route::get('/', function () {
-            $ranking = Group::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->limit(10)->get();
+            $ranking = Group::withSum('scores', 'score')
+                ->orderBy('scores_sum_score', 'desc')
+                ->limit(10)
+                ->get();
             $ranking->each(function ($group, $key) {
                 $group->rank = ($key + 1);
                 $group->image = 'images/group_icons/' . $group->image;
@@ -148,7 +158,11 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
         })->name('index');
 
         Route::get('/{page}', function (int $page) {
-            $ranking = Group::withSum('scores', 'score')->orderBy('scores_sum_score', 'desc')->offset((10 * $page) - 10)->limit(10)->get();
+            $ranking = Group::withSum('scores', 'score')
+                ->orderBy('scores_sum_score', 'desc')
+                ->offset((10 * $page) - 10)
+                ->limit(10)
+                ->get();
             $ranking->each(function ($group, $key) use ($page) {
                 $group->rank = ($key + 1) + ($page * 10 - 10);
                 $group->image = 'images/group_icons/' . $group->image;
