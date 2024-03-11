@@ -107,4 +107,13 @@ class GroupController extends Controller
 
         return Redirect::back()->with('error', 'Vous êtes déjà membre de ce groupe');
     }
+
+    public function leaveGroup(Group $group)
+    {
+        $user = Auth::user();
+
+        $group->members()->detach($user->id);
+
+        return redirect()->route('home')->with('success');
+    }
 }

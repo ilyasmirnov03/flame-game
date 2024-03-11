@@ -141,6 +141,9 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
         ]);
     })->name('flame')->middleware('user.in.group');
 
+    // Leave group
+    Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
+
     // Group games selection
     Route::get('/flame/{group}/games', function (Group $group) {
         $games = Game::get()->toArray();
