@@ -98,7 +98,7 @@
     vertical-align: middle;
     padding: calc(0.5rem + 1vh);
     white-space: nowrap;
-    font-family: Baloo;
+    font-family: Baloo, sans-serif;
 }
 
 .ranking__rating {
