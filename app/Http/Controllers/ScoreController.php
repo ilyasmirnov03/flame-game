@@ -26,7 +26,7 @@ class ScoreController extends Controller {
         $startedAt = Carbon::parse($request->post('startedAt'));
         $finishedAt = Carbon::parse($request->post('finishedAt'));
         $game = Game::where('label', $request->post('game'))->first();
-        $groupId = $request->post('group');
+        $groupId = $request->post('group_id');
 
         $elapsedTime = $finishedAt->diffInSeconds($startedAt);
 
@@ -42,7 +42,7 @@ class ScoreController extends Controller {
         ];
 
         if ($groupId !== null) {
-            $userScore['group_id'] = $groupId;
+            $userScoreArray['group_id'] = $groupId;
         }
 
         $userScore = UserScore::create($userScoreArray);

@@ -1,0 +1,54 @@
+.quiz__answers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+}
+
+.answer__0 {
+    background-color: var(--green);
+}
+
+.answer__1 {
+    background-color: var(--yellow);
+}
+
+.answer__2 {
+    background-color: var(--red);
+}
+
+.answer__3 {
+    background-color: var(--blue);
+}
+
+.answer {
+    transition: .15s;
+}
+
+.quiz__container {
+    .confirm {
+        background-color: var(--green);
+    }
+}
+
+.quiz__answers label {
+    position: relative;
+    display: block;
+}
+
+.quiz__answers input {
+    top: 0;
+    left: 0;
+}
+
+.quiz__answers input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+}
+
+input[type="radio"]:checked + label {
+    transform: scale(1.25);
+}
+

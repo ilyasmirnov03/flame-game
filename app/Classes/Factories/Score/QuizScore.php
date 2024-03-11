@@ -4,7 +4,7 @@ namespace App\Classes\Factories\Score;
 
 class QuizScore extends ScoreFactory {
 
-    public function calculateScore(string $userId, string $gameId, int $elapsedTime): array
+    public function calculateScore(string $userId, array $game, int $elapsedTime): array
     {
         // TODO: Implement calculateScore() method.
         return [
@@ -14,7 +14,7 @@ class QuizScore extends ScoreFactory {
         ];
     }
 
-    public function calculateScoreBonus(string $userId, string $gameId, int $elapsedTime): int
+    public function calculateScoreBonus(string $userId, array $game, int $elapsedTime): int
     {
         // TODO: Implement calculateScoreBonus() method.
         return 0;
