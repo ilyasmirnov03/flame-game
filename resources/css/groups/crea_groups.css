@@ -179,10 +179,12 @@
         }
 
         .group__form--icon-option {
-            width: 6rem;
-            height: 6rem;
+            border-radius: 1rem;
+            border: 1px solid var(--white);
+            width: 4rem;
+            height: 4rem;
             background-repeat: no-repeat;
-            background-size: 90%;
+            background-size: 65%;
             background-position: center;
             cursor: pointer;
         }
@@ -195,16 +197,18 @@
         border-radius: 1rem;
         border: 2px solid var(--black);
         margin-bottom: 3rem;
+        background-color: #1715150f;
         background-repeat: no-repeat;
         background-size: 50%;
         background-position: center;
     }
     .group__icon--popup {
+        overflow: auto;
         width: 20rem;
         height: 30rem;
         border-radius: 2rem;
         padding: 2rem;
-        background-color: #020d19c4;
+        background-color: var(--black);
         position: fixed;
         left: 50%;
         top: 50%;
