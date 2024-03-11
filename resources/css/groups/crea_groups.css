@@ -1,5 +1,5 @@
 .popup__content {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     width: 90%;
@@ -160,5 +160,63 @@
     button {
         width: 60%;
         margin: auto;
+    }
+    .group__form--icon {
+        display: flex;
+        flex-direction: column;
+        .group__form--icon-label {
+            font-family: "K2D", sans-serif;
+            color: var(--black);
+            font-size: calc(1rem + 1.390625vw);
+            margin-bottom: 1rem;
+        }
+
+        .group__form--icon-selection {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .group__form--icon-option {
+            border-radius: 1rem;
+            border: 1px solid var(--white);
+            width: 4rem;
+            height: 4rem;
+            background-repeat: no-repeat;
+            background-size: 65%;
+            background-position: center;
+            cursor: pointer;
+        }
+    }
+    .group__icon--choice {
+        position: relative;
+        margin: auto;
+        width: 10rem;
+        height: 7rem;
+        border-radius: 1rem;
+        border: 2px solid var(--black);
+        margin-bottom: 3rem;
+        background-color: #1715150f;
+        background-repeat: no-repeat;
+        background-size: 50%;
+        background-position: center;
+    }
+    .group__icon--popup {
+        overflow: auto;
+        width: 20rem;
+        height: 30rem;
+        border-radius: 2rem;
+        padding: 2rem;
+        background-color: var(--black);
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .group__edit--img {
+        position: absolute;
+        right: 0.2rem;
+        bottom: 0.2rem;
     }
 }

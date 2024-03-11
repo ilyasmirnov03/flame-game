@@ -1,5 +1,7 @@
 const rangeInput = document.getElementById("rangeInput");
 const rangeValue = document.getElementById("rangeValue");
+const choice = document.getElementById("group-choice");
+const popup = document.getElementById("group-popup");
 
 if (rangeInput) {
     rangeInput.addEventListener("input", (e) => {
@@ -11,3 +13,25 @@ if (rangeInput) {
         rangeValue.style.left = `${newPosition}px`;
     });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const groupIconContainer = document.getElementById("groupIcon");
+    const selectedIconInput = document.getElementById("icon");
+    groupIcons.forEach((icon) => {
+        const iconElement = document.createElement("div");
+        iconElement.classList.add("group__form--icon-option");
+        iconElement.style.backgroundImage = `url('/images/group_icons/${icon}')`;
+
+        iconElement.addEventListener("click", function () {
+            selectedIconInput.value = icon;
+            popup.classList.toggle("hidden");
+            choice.style.backgroundImage = `url('/images/group_icons/${icon}')`;
+        });
+
+        groupIconContainer.appendChild(iconElement);
+    });
+
+    choice.addEventListener("click", function () {
+        popup.classList.toggle("hidden");
+    });
+});

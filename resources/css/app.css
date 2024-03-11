@@ -5,13 +5,16 @@
 @import "./profile/profile.css";
 @import "./profile/edit.css";
 @import "./auth.css";
+@import "./fun_fact.css";
 @import "./params.css";
+@import "./home.css";
 @import "./flamme/flamme.css";
 @import "./flamme/flamme_indiv.css";
 @import "./game/minigame.css";
 @import "./game/running_game.css";
 @import "./game/select_games.css";
 @import "./groups/crea_groups.css";
+@import "./groups/search_groups.css";
 @import "./leaderboard.css";
 
 :root {

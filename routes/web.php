@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\StepsController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
@@ -144,13 +145,19 @@ Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
  */
 Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () {
     // Groups search page
-    Route::view('/', 'group.search')->name('search');
+    Route::get('/', [GroupController::class, 'showGroups'])->name('search');
+
+    // Search group
+    Route::get('/search', [GroupController::class, 'searchGroups'])->name('content');
+
+    // Join group 
+    Route::post('/join', [GroupController::class, 'joinGroup'])->name('join');
 
     // Create group
     Route::post('/', [GroupController::class, 'store'])->name('store');
 
     // Create group view
-    Route::view('/create', 'group.create')->name("create");
+    Route::get('/create', [GroupController::class, 'create'])->name("create");
 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {
@@ -160,6 +167,9 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
             'score' => $score,
         ]);
     })->name('flame')->middleware('user.in.group');
+
+    // Leave group
+    Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
 
     // Group games selection
     Route::get('/flame/{group}/games', function (Group $group) {
@@ -188,6 +198,7 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::view('/', 'home')->name('home');
+
+Route::get('/', [StepsController::class, 'show'])->name('home');
 
 Route::view('/params', 'params')->name('params');

@@ -1,6 +1,7 @@
+@include('./fun_fact')
 <nav class="navbar">
     <ul>
-        <li class="{{ Request::is('anecdote') ? 'active' : '' }}">
+        <li class="{{ Request::is('anecdote') ? 'active' : '' }}  open-fun-fact-popup">
             <a>
                 <img src="{{ asset('images/anecdote.svg') }}" alt="L'anecdote quotidienne">
             </a>
