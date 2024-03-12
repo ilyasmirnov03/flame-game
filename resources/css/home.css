@@ -1,0 +1,85 @@
+.home {
+    padding: 0rem 2rem;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    margin-bottom: 8rem;
+    .home__today {
+        height: 15vh;
+        .home__today--title {
+            font-size: calc(1.5rem + 1.390625vw);
+        }
+        .home__today--div {
+            background-color: var(--green);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            .home__tocome--div-txt p {
+                color: var(--white);
+                margin: 0.2rem;
+                .home__ville {
+                    font-family: "Baloo", sans-serif;
+                    font-size: calc(1rem + 1.390625vw);
+                    text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+                        -1px 0 0 var(--black), 0 -1px 0 var(--black);
+                }
+            }
+        }
+    }
+    .home__tocome,
+    .home__done {
+        height: 32vh;
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+        .home__tocome--title,
+        .home__done--title {
+            font-size: calc(1.5rem + 1.390625vw);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background-color: var(--white);
+        }
+        .home__tocome--div {
+            background-color: var(--blue);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            .home__tocome--div-txt p {
+                color: var(--white);
+                margin: 0.2rem;
+                .home__ville {
+                    font-family: "Baloo", sans-serif;
+                    font-size: calc(1rem + 1.390625vw);
+                    text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+                        -1px 0 0 var(--black), 0 -1px 0 var(--black);
+                }
+            }
+        }
+        .home__done--div {
+            background-color: var(--inactiv);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            .home__tocome--div-txt p {
+                color: var(--white);
+                margin: 0.2rem;
+                .home__ville {
+                    font-family: "Baloo", sans-serif;
+                    font-size: calc(1rem + 1.390625vw);
+                    text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
+                        -1px 0 0 var(--black), 0 -1px 0 var(--black);
+                }
+            }
+        }
+    }
+}

@@ -4,7 +4,9 @@ use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\StepsController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
@@ -100,14 +102,21 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
         ->name('game');
 });
 
+/**
+ * Leaderboard routes
+ */
 Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
-    Route::get('/solo', function () {
-        return view('leaderboard');
-    })->name('leaderboard.solo');
+    Route::prefix('/solo')->name('solo.')->group(function () {
+        Route::get('/', [LeaderboardController::class, 'leaderboardUser'])->name('index');
 
-    Route::get('/group', function () {
-        return view('leaderboard');
-    })->name('leaderboard.group');
+        Route::get('/{page}', [LeaderboardController::class, 'leaderboardUser'])->name('page');
+    });
+
+    Route::prefix('/group')->name('group.')->group(function () {
+        Route::get('/', [LeaderboardController::class, 'leaderboardGroup'])->name('index');
+
+        Route::get('/{page}', [LeaderboardController::class, 'leaderboardGroup'])->name('page');
+    });
 });
 
 /**
@@ -126,10 +135,8 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     // Create group
     Route::post('/', [GroupController::class, 'store'])->name('store');
 
+    // Create group view
     Route::get('/create', [GroupController::class, 'create'])->name("create");
-
-    // Create group
-    Route::post('/create', [GroupController::class, 'store'])->name('store');
 
     // Group space
     Route::get('/flame/{group}', function (Group $group) {
@@ -139,6 +146,9 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
             'score' => $score,
         ]);
     })->name('flame')->middleware('user.in.group');
+
+    // Leave group
+    Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
 
     // Group games selection
     Route::get('/flame/{group}/games', function (Group $group) {
@@ -167,10 +177,7 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::view('/', 'home')->name('home');
+
+Route::get('/', [StepsController::class, 'show'])->name('home');
 
 Route::view('/params', 'params')->name('params');
-
-Route::view('/score', 'score')
-    ->name('score')
-    ->middleware(['auth']);
