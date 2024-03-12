@@ -5,6 +5,7 @@
     padding: 1.5rem 1rem;
     width: 100%;
     z-index: 999;
+
     ul {
         display: flex;
         justify-content: space-around;
@@ -12,11 +13,14 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
+
         li {
             background-color: transparent;
+
             a {
                 background-color: transparent;
                 text-decoration: none;
+
                 img {
                     background-color: transparent;
                     filter: brightness(0%);
@@ -25,6 +29,14 @@
         }
     }
 }
+
+#pwa_install_button {
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
 .active img {
     filter: none !important;
 }
