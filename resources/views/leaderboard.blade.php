@@ -13,7 +13,7 @@
                         <span>{{ $ranking[1]->name }}</span>
                         <img class="podium__avatar" src="{{ asset($ranking[1]->image) }}" alt="">
                         <div class="podium__image">
-                            <span>{{ $ranking[1]->scores->sum('score') }}</span>
+                            <span>{{ $ranking[1]->scores_sum_score }}</span>
                         </div>
                     </div>
                 @endif
@@ -22,7 +22,7 @@
                         <span>{{ $ranking[0]->name }}</span>
                         <img class="podium__avatar" src="{{ asset($ranking[0]->image) }}" alt="">
                         <div class="podium__image">
-                            <span>{{ $ranking[0]->scores->sum('score') }}</span>
+                            <span>{{ $ranking[0]->scores_sum_score }}</span>
                         </div>
                     </div>
                 @endif
@@ -31,7 +31,7 @@
                         <span>{{ $ranking[2]->name }}</span>
                         <img class="podium__avatar" src="{{ asset($ranking[2]->image) }}" alt="">
                         <div class="podium__image">
-                            <span>{{ $ranking[2]->scores->sum('score') }}</span>
+                            <span>{{ $ranking[2]->scores_sum_score }}</span>
                         </div>
                     </div>
                 @endif
@@ -46,7 +46,7 @@
                             <td class="ranking__name ranking__cell">
                                 {{ $rankable->name }} @if ($rankable->id == Auth::id()) (vous) @endif
                             </td>
-                            <td class="ranking__score ranking__cell">{{ $rankable->scores->sum('score') }}</td>
+                            <td class="ranking__score ranking__cell">{{ $rankable->scores_sum_score }}</td>
                         </tr>
                     @endif
                 @endforeach
