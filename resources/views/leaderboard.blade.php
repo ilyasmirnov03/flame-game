@@ -43,7 +43,9 @@
                     @if ($rankable->rank > 3)
                         <tr class="ranking @if ($rankable->id == Auth::id()) ranking--user @endif">
                             <td class="ranking__rating ranking__cell">#{{ $rankable->rank }}</td>
-                            <td class="ranking__name ranking__cell">{{ $rankable->name }} @if ($rankable->id == Auth::id()) (vous) @endif</td>
+                            <td class="ranking__name ranking__cell">
+                                {{ $rankable->name }} @if ($rankable->id == Auth::id()) (vous) @endif
+                            </td>
                             <td class="ranking__score ranking__cell">{{ $rankable->scores->sum('score') }}</td>
                         </tr>
                     @endif
