@@ -4,6 +4,7 @@ use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StepsController;
 use App\Models\Game;
@@ -106,76 +107,15 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
  */
 Route::prefix('/leaderboard')->name('leaderboard.')->group(function () {
     Route::prefix('/solo')->name('solo.')->group(function () {
-        Route::get('/', function () {
-            $ranking = User::withSum('scores', 'score')
-                ->orderBy('scores_sum_score', 'desc')
-                ->limit(10)
-                ->get();
-            // Adds their total rank as data (witchcraft)
-            $ranking->each(function ($user, $key) {
-                $user->rank = $key + 1;
-                $user->image = 'images/avatar.png';
-            });
+        Route::get('/', [LeaderboardController::class, 'leaderboardUser'])->name('index');
 
-            return view('leaderboard', ['ranking' => $ranking, 'page' => 1]);
-        })->name('index');
-
-        Route::get('/{page}', function (int $page) {
-            $ranking = User::withSum('scores', 'score')
-                ->orderBy('scores_sum_score', 'desc')
-                ->offset((10 * $page) - 10)
-                ->limit(10)
-                ->get();
-            $max_pages = ceil((User::all()->count() / 10));
-
-            // If trying to access OOB page, redirect to last page
-            if ($page > $max_pages) {
-                return redirect()->intended(route('leaderboard.solo.page', ['page' => $max_pages]));
-            }
-
-            // Witchcraft again
-            $ranking->each(function ($user, $key) use ($page) {
-                $user->rank = ($key + 1) + ($page * 10 - 10);
-                $user->image = 'images/avatar.png';
-            });
-
-            return view('leaderboard', ['ranking' => $ranking, 'page' => $page]);
-        })->name('page');
+        Route::get('/{page}', [LeaderboardController::class, 'leaderboardUser'])->name('page');
     });
 
     Route::prefix('/group')->name('group.')->group(function () {
-        Route::get('/', function () {
-            $ranking = Group::withSum('scores', 'score')
-                ->orderBy('scores_sum_score', 'desc')
-                ->limit(10)
-                ->get();
-            $ranking->each(function ($group, $key) {
-                $group->rank = ($key + 1);
-                $group->image = 'images/group_icons/' . $group->image;
-            });
+        Route::get('/', [LeaderboardController::class, 'leaderboardGroup'])->name('index');
 
-            return view('leaderboard', ['ranking' => $ranking, 'page' => 1]);
-        })->name('index');
-
-        Route::get('/{page}', function (int $page) {
-            $ranking = Group::withSum('scores', 'score')
-                ->orderBy('scores_sum_score', 'desc')
-                ->offset((10 * $page) - 10)
-                ->limit(10)
-                ->get();
-            $ranking->each(function ($group, $key) use ($page) {
-                $group->rank = ($key + 1) + ($page * 10 - 10);
-                $group->image = 'images/group_icons/' . $group->image;
-            });
-            $max_pages = ceil((User::all()->count() / 10));
-
-            // If trying to access OOB page, redirect to last page
-            if ($page > $max_pages) {
-                return redirect()->intended(route('leaderboard.solo.page', ['page' => $max_pages]));
-            }
-
-            return view('leaderboard', ['ranking' => $ranking,  'page' => $page]);
-        })->name('page');
+        Route::get('/{page}', [LeaderboardController::class, 'leaderboardGroup'])->name('page');
     });
 });
 
