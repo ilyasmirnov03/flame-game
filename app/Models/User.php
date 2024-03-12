@@ -53,7 +53,8 @@ class User extends Authenticatable
      * Get groups of user
      * @return BelongsToMany
      */
-    public function userGroups(): BelongsToMany {
+    public function userGroups(): BelongsToMany
+    {
         return $this->belongsToMany(Group::class, 'group_members');
     }
 
@@ -61,7 +62,8 @@ class User extends Authenticatable
      * Get scores of user
      * @return HasMany
      */
-    public function scores(): HasMany {
+    public function scores(): HasMany
+    {
         return $this->hasMany(UserScore::class);
     }
 
@@ -69,7 +71,8 @@ class User extends Authenticatable
      * Get rewards of user
      * @return BelongsToMany
      */
-    public function rewards(): BelongsToMany {
+    public function rewards(): BelongsToMany
+    {
         return $this->belongsToMany(Reward::class, 'user_rewards');
     }
 }

@@ -7,7 +7,11 @@
 @section('content')
     <section class="univ">
         <div class="univ__params">
-            <img src="{{ asset('images/group_icons/' . $group['image']) }}" alt="Logo">
+            @if(isset($group['image']) && $group['image'])
+                <img src="{{ asset('images/group_icons/' . $group['image']) }}" alt="Logo">
+            @else
+                <img src="{{ asset('images/group_icons/Drapeau_France_VF.svg') }}" alt="Logo par défaut">
+            @endif
             <h2> {{ $group['name'] }} </h2>
             <img id="params" class="univ__params--group" src="{{ asset('images/params.svg')}}" alt="Ouvrir les paramètres de groupe">
         </div>

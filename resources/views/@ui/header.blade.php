@@ -3,7 +3,7 @@
     <a class="header__link">
         <img class="pwa__img" src="{{ asset('images/pwa.svg') }}" alt="Télécharger la PWA">
     </a>
-    <a class="header__link">
+    <a href="{{ route('rewards') }}" class="header__link">
         <img src="{{ asset('images/recompenses.svg') }}" alt="Voir ses récompenses">
     </a>
     <a href="{{ route('profile.profile') }}" class="header__link">
