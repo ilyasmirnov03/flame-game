@@ -1,8 +1,5 @@
 <header class="header">
     <a href="{{ route('home') }}" class="header__logo"> LOGO </a>
-    <button class="header__link" id="pwa_install_button">
-        <img class="pwa__img" src="{{ asset('images/pwa.svg') }}" alt="Télécharger la PWA">
-    </button>
     <a class="header__link">
         <img src="{{ asset('images/recompenses.svg') }}" alt="Voir ses récompenses">
     </a>

@@ -1,37 +1,43 @@
 let installPrompt;
 
-const installButton = document.querySelector('#pwa_install_button');
+let installButton = document.createElement('button');
+installButton.classList.add('header__link');
+installButton.id = 'pwa_install_button';
+
+let installButtonIcon = document.createElement('img');
+installButtonIcon.classList.add('pwa__img');
+installButtonIcon.src = "/images/pwa.svg";
+installButtonIcon.alt = "Télécharger la PWA";
+installButton.appendChild(installButtonIcon);
+
+const header = document.querySelector('.header');
+const logo = document.querySelector('.header__logo');
 
 window.addEventListener('DOMContentLoaded', async () => {
-    const relatedApps = await navigator.getInstalledRelatedApps();
-    console.log(relatedApps);
-    if (relatedApps.length > 0) {
-        installButton.remove();
-    } else {
-        // Defer install prompt
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            installPrompt = e;
-        });
+    // Defer install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        logo.insertAdjacentElement('afterend', installButton);
+        installPrompt = e;
+    });
 
-        // Upon clicking, prompt the install
-        installButton.addEventListener('click', async () => {
-            if (!installPrompt) {
-                return;
+    // Upon clicking, prompt the install
+    installButton.addEventListener('click', async () => {
+        if (!installPrompt) {
+            return;
+        }
+        const result = await installPrompt.prompt();
+        installPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                installButton.remove();
+            } else {
+                // maybe do something when dismissed ?
             }
-            const result = await installPrompt.prompt();
-            installPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    installButton.remove();
-                } else {
-                    // maybe do something when dismissed ?
-                }
-            });
         });
+    });
 
-        // Upon install
-        window.addEventListener('appinstalled', () => {
-            installButton.remove();
-        });
-    }
+    // Upon install
+    window.addEventListener('appinstalled', () => {
+        installButton.remove();
+    });
 })
