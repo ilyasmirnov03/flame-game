@@ -8,13 +8,14 @@ class QuizScore extends ScoreFactory {
 
     public function calculateScore(string $userId, array $game, int $elapsedTime): array
     {
+        $answers = json_decode($game['answers'], true);
         $maxScore = 1000;
         $quizAnswer = new QuizAnswer();
         $rightAnswersAmount = $quizAnswer
-            ->whereIn('id', array_values($game['answers']))
+            ->whereIn('id', array_values($answers))
             ->where('is_right', 1)
             ->count();
-        $score = ($maxScore / count($game['answers'])) * $rightAnswersAmount;
+        $score = ($maxScore / count($answers)) * $rightAnswersAmount;
         return [
             'score' => min($score, $maxScore),
             'bonus' => 0,

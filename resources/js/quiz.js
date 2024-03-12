@@ -1,4 +1,5 @@
 import {getCSRFToken} from "./app.js";
+import htmx from 'htmx.org';
 
 /**
  * Started at ISO string date.
@@ -93,7 +94,7 @@ function selectQuizByIndex(index) {
 function nextQuestion(e) {
     const answer = answers.get(currentAnswer.quizId);
     if (typeof answer !== 'undefined') {
-        answers[answer] = currentAnswer;
+        answers.set(currentAnswer.quizId, currentAnswer.answerId);
         return;
     }
     answers.set(currentAnswer.quizId, currentAnswer.answerId);
@@ -122,18 +123,14 @@ function finishGame(answers) {
         body['group_id'] = group.value;
     }
 
-    fetch('/user_score', {
-        method: 'post',
+    htmx.ajax('POST', '/user_score', {
         headers: {
-            'Content-Type': 'application/json',
             'X-CSRF-TOKEN': getCSRFToken(),
         },
-        body: JSON.stringify(body),
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        });
+        swap: 'innerHTML',
+        target: '#scoreResult',
+        values: body,
+    });
 }
 
 window.addEventListener('DOMContentLoaded', init);

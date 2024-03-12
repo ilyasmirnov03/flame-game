@@ -33,4 +33,6 @@
         @endforeach
         <button class="btn confirm hidden" disabled>Confirmer</button>
     </div>
+
+    <article id="scoreResult"></article>
 @endsection
