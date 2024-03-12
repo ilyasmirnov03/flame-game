@@ -20,9 +20,6 @@
         <button class="rungame__btn btn__blue font dyslexie" id="startButton">Commencer</button>
         <p class="rungame__distance font dyslexie" id="distanceDisplay"></p>
     </section>
-    <div id="popup" class="hidden">
-        <p id="popupMessage" class="font dyslexie"></p>
-        <p id="popupResult" class="font dyslexie">Résultat : <span id="resultValue">-</span> points</p>
-        <p id="bonusPoint" class="font dyslexie"></p>
-    </div>
+
+    <article id="scoreResult"></article>
 @endsection

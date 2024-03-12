@@ -4,4 +4,5 @@
     @if($bonus > 0)
         <p id="bonusPoint" class="font dyslexie">{{$bonus}}</p>
     @endif
+    <a href="{{route('flame.index')}}" class="btn__green">Terminer</a>
 </div>
