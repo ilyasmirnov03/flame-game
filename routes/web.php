@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StepsController;
+use App\Http\Controllers\UserRewardsController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
@@ -169,6 +170,9 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
+
+Route::get('/rewards', [UserRewardsController::class, 'index'])->name('rewards');
+Route::post('/rewards/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('rewards.obtain');
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
