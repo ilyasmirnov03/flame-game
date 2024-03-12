@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         if (!installPrompt) {
             return;
         }
-        const result = await installPrompt.prompt();
+
         installPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
                 installButton.remove();
