@@ -53,13 +53,17 @@
         <div class="leaderboard__controls">
 
             <a class="leaderboard__controlLink"
-                @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo')) href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}"
-            @else
-                        href="{{ route('leaderboard.group.page', ['page' => $page > 1 ? $page - 1 : 1]) }}" @endif>Précédent</a>
+                @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo'))
+                    href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}"
+                @else
+                    href="{{ route('leaderboard.group.page', ['page' => $page > 1 ? $page - 1 : 1]) }}" 
+                @endif>Précédent</a>
             <a class="leaderboard__controlLink"
-                @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo')) href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}"
-            @else
-                        href="{{ route('leaderboard.group.page', ['page' => $page + 1]) }}" @endif>Suivant</a>
+                @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo')) 
+                    href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}"
+                @else
+                    href="{{ route('leaderboard.group.page', ['page' => $page + 1]) }}"
+                @endif>Suivant</a>
         </div>
     </div>
 @endsection
