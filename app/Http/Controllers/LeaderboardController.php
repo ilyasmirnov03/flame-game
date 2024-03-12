@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class LeaderboardController extends Controller {
-    function leaderboardUser(int $page = 1) {
+    public function leaderboardUser(int $page = 1) {
         $ranking = User::withSum('scores', 'score')
             ->orderBy('scores_sum_score', 'desc')
             ->limit(10)
@@ -29,7 +29,7 @@ class LeaderboardController extends Controller {
         return view('leaderboard', ['ranking' => $ranking, 'page' => $page]);
     }
 
-    function leaderboardGroup(int $page = 1) {
+    public function leaderboardGroup(int $page = 1) {
         $ranking = Group::withSum('scores', 'score')
             ->orderBy('scores_sum_score', 'desc')
             ->offset((10 * $page) - 10)
