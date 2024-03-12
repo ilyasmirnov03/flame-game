@@ -15,6 +15,7 @@
 @import "./game/select_games.css";
 @import "./groups/crea_groups.css";
 @import "./groups/search_groups.css";
+@import "./leaderboard.css";
 
 :root {
     --white: #f1f1f1;

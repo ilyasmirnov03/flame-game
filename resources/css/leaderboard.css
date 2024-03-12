@@ -1,0 +1,115 @@
+.leaderboardLinks,
+.leaderboard__controls {
+    width: 100%;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.leaderboardLinks__link,
+.leaderboard__controlLink {
+    color: var(--black);
+    font-family: Baloo, sans-serif;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.leaderboardLinks__link {
+    background-color: var(--yellow);
+}
+
+.leaderboard__controlLink {
+    background-color: var(--blue);
+}
+
+.leaderboard {
+    margin-bottom: 8rem;
+}
+
+.podium {
+    font-family: Baloo, sans-serif;
+    background: no-repeat bottom url('/images/podium_background.png');
+    background-size: cover;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.podium__first,
+.podium__second,
+.podium__third {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* TEMPORARY CSS UNTIL WE GET THE PODIUMS ASSETS */
+.podium__avatar {
+    height: min-content;
+    width: 30%;
+}
+
+.podium__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+}
+
+.podium__first .podium__image {
+    height: 70px;
+    background-color: var(--yellow);
+}
+
+.podium__second .podium__image {
+    height: 50px;
+    background-color: var(--grey);
+}
+
+.podium__third .podium__image {
+    height: 30px;
+    background-color: #663700;
+}
+
+.leaderboard__ranking {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.ranking {
+    border-top: 1px solid grey;
+}
+
+.ranking--user {
+    color: var(--blue);
+}
+
+.ranking:first-child {
+    border-top: none;
+}
+
+.ranking__cell {
+    text-align: center;
+    vertical-align: middle;
+    padding: calc(0.5rem + 1vh);
+    white-space: nowrap;
+    font-family: Baloo, sans-serif;
+}
+
+.ranking__rating {
+    width: 20%;
+}
+
+.ranking__name {
+    text-align: left;
+}
+
+.ranking__score {
+    text-align: right;
+    width: 30%;
+}
