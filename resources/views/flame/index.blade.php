@@ -25,8 +25,8 @@
                 <img src="{{ asset('images/add.svg')}}" alt="Ajouter ou créer un groupe">
             </div>
                 <div class="popup__content hidden" id="popupGroup">
-                    <a href="{{ route('group.create')}}">Créer un groupe</a>
-                    <a href="{{ route('group.search')}}">Rejoindre un groupe</a>
+                    <a class="font dyslexie" href="{{ route('group.create')}}">Créer un groupe</a>
+                    <a class="font dyslexie" href="{{ route('group.search')}}">Rejoindre un groupe</a>
                     <span class="popup-close" id="closePopup"><img src="{{ asset('images/close.svg')}}" alt="Fermer la popup"></span>
                 </div>
         </div>
