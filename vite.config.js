@@ -8,8 +8,9 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/js/running.js",
+                "resources/js/flame_map.js",
                 "resources/js/groups.js",
-                "resources/js/libs/htmx.js"
+                "resources/js/libs/htmx.js",
             ],
             refresh: true,
         }),
