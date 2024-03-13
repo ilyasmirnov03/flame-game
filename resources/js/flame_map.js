@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".univ__bg");
     const score = parseInt(container.getAttribute("data-score"));
-    positionnerElements(score);
+    positionElements(score);
 });
 
-function positionnerElements(score) {
+function positionElements(score) {
     const logo = document.querySelector(".univ__bg--logo");
     const scoreElement = document.getElementById("score");
 
