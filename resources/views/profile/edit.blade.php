@@ -5,8 +5,8 @@
         <div class="profileInfos">
             <form method="POST" class="profileInfos__form">
                 @csrf
-                <input class="profileInfos__input" type="text" name="name" value="{{ $user->name }}">
-                <input class="profileInfos__input" type="mail" name="email" value="{{ $user->email }}">
+                <input class="profileInfos__input font dyslexie" type="text" name="name" value="{{ $user->name }}">
+                <input class="profileInfos__input font dyslexie" type="mail" name="email" value="{{ $user->email }}">
                 @if ($message = Session::get('success'))
                     <span>{{ Session::get('success') }}</span>
                 @endif
@@ -16,7 +16,7 @@
             </form>
         </div>
         <div class="avatar">
-            <h2 class="avatar__name dyslexie">{{ $user->name }}</h2>
+            <h2 class="avatar__name font dyslexie">{{ $user->name }}</h2>
             <div class="avatar__displaywrapper">
                 <img class="avatar__display" src="{{ asset('images/avatar.png') }}" alt="votre avatar">
             </div>

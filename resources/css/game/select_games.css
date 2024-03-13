@@ -39,3 +39,28 @@
         width: 2rem;
     }
 }
+.game__popup {
+    position: fixed;
+    top: 5rem;
+    height: 100%;
+    z-index: 1;
+    background-color: var(--white);
+    padding: 0rem 2rem;
+    .game__popup--content {
+        display: flex;
+        flex-direction: column;
+        .close {
+            text-align: end;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+        h2 {
+            font-size: calc(2rem + 1.390625vw);
+            text-align: center;
+            margin: 0;
+        }
+        p {
+            text-align: justify;
+        }
+    }
+}

@@ -1,13 +1,11 @@
+import {getCSRFToken} from "./app.js";
+import htmx from "htmx.org";
+
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const timeDisplay = document.getElementById("timeDisplay");
     const distanceDisplay = document.getElementById("distanceDisplay");
-    const resultValue = document.getElementById("resultValue");
-    const popup = document.getElementById("popup");
-    const popupMessage = document.getElementById("popupMessage");
-    const popupResult = document.getElementById("popupResult");
     const mainSection = document.getElementById("mainSection");
-    const bonusPoint = document.getElementById("bonusPoint");
     const group = document.querySelector('input[name="group"]');
 
     let timer;
@@ -16,12 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let isRaceStarted = false;
     let startedAt;
     let finishedAt;
-    let popupVisible = false;
-
-    function getCSRFToken() {
-        const metaTag = document.querySelector('meta[name="csrf-token"]');
-        return metaTag ? metaTag.getAttribute("content") : null;
-    }
 
     startButton.addEventListener("click", function () {
         if (!isRaceStarted) {
@@ -34,16 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function startRace() {
-        if (!popup.classList.contains("hidden")) {
-            popup.classList.add("hidden");
-        }
         if (!mainSection.classList.contains("section-filtered ")) {
             mainSection.classList.remove("section-filtered");
         }
         totalTime = 0;
         totalDistance = 0;
         startedAt = new Date().toISOString();
-        resultValue.textContent = "-";
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function () {
@@ -145,81 +133,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (group?.value != null) {
                 body['group_id'] = group.value;
             }
-            fetch("/user_score", {
-                method: "POST",
+
+            htmx.ajax('POST', '/user_score', {
                 headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": getCSRFToken(),
+                    'X-CSRF-TOKEN': getCSRFToken(),
                 },
-                body: JSON.stringify(body),
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(
-                            `HTTP error! Status: ${response.status}`
-                        );
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    console.log(data);
-
-                    popup.style.borderColor = "green";
-                    popupMessage.textContent = "Course réussie!";
-                    popupResult.classList.remove("hidden");
-                    resultValue.textContent =
-                        data.score + " points";
-
-                    if (data.bonus !== 0) {
-                        bonusPoint.textContent = ` + ${data.bonus}`;
-                        bonusPoint.classList.add("bonus__point");
-                    } else {
-                        bonusPoint.classList.add("withoutbonus__point");
-                    }
-                    popup.classList.remove("hidden");
-
-                    mainSection.classList.add("section-filtered");
-
-                    popupVisible = true;
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-
-                    popup.style.borderColor = "red";
-                    popupMessage.textContent =
-                        "Une erreur est survenue! Nous sommes désolé...";
-                    popupResult.classList.add("hidden");
-                    popup.classList.remove("hidden");
-
-                    mainSection.classList.add("section-filtered");
-
-                    popupVisible = true;
-                });
-        } else {
-            popup.style.borderColor = "red";
-            popupMessage.textContent = "Aucun point (distance insuffisante)";
-            popupResult.classList.add("hidden");
-            popup.classList.remove("hidden");
-
-            mainSection.classList.add("section-filtered");
-
-            popupVisible = true;
-        }
-
-        setTimeout(function () {
-            mainSection.addEventListener("click", function (event) {
-                if (popupVisible && !popup.contains(event.target)) {
-                    closePopup();
-                }
+                swap: 'innerHTML',
+                target: '#scoreResult',
+                values: body,
             });
-        }, 2000);
-    }
-
-    function closePopup() {
-        popup.classList.add("hidden");
-
-        mainSection.classList.remove("section-filtered");
-
-        popupVisible = false;
+        }
     }
 });
