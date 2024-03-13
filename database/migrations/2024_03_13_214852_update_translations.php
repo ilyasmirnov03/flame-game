@@ -12,21 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('og_fun_fact_translations', function(Blueprint $table) {
-            $table->string('fact')->nullable()->change();
+            $table->text('fact')->nullable()->change();
         });
         Schema::table('og_quiz_answers_translations', function(Blueprint $table) {
-            $table->string('answer')->nullable()->change();
+            $table->text('answer')->nullable()->change();
         });
         Schema::table('og_quiz_translations', function(Blueprint $table) {
-            $table->string('question')->nullable()->change();
+            $table->text('question')->nullable()->change();
         });
         Schema::table('game_translations', function(Blueprint $table) {
-            $table->string('title')->nullable()->change();
-            $table->string('description')->nullable()->change();
+            $table->text('title')->nullable()->change();
+            $table->text('description')->nullable()->change();
         });
         Schema::table('reward_translations', function(Blueprint $table) {
-            $table->string('title')->nullable()->change();
-            $table->string('description')->nullable()->change();
+            $table->text('title')->nullable()->change();
+            $table->text('description')->nullable()->change();
         });
     }
 
@@ -36,21 +36,21 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('og_fun_fact_translations', function(Blueprint $table) {
-            $table->string('fact')->nullable(false)->change();
+            $table->text('fact')->nullable(false)->change();
         });
         Schema::table('og_quiz_answers_translations', function(Blueprint $table) {
-            $table->string('answer')->nullable(false)->change();
+            $table->text('answer')->nullable(false)->change();
         });
         Schema::table('og_quiz_translations', function(Blueprint $table) {
-            $table->string('question')->nullable(false)->change();
+            $table->text('question')->nullable(false)->change();
         });
         Schema::table('game_translations', function(Blueprint $table) {
-            $table->string('title')->nullable(false)->change();
-            $table->string('description')->nullable(false)->change();
+            $table->text('title')->nullable(false)->change();
+            $table->text('description')->nullable(false)->change();
         });
         Schema::table('reward_translations', function(Blueprint $table) {
-            $table->string('title')->nullable(false)->change();
-            $table->string('description')->nullable(false)->change();
+            $table->text('title')->nullable(false)->change();
+            $table->text('description')->nullable(false)->change();
         });
     }
 };
