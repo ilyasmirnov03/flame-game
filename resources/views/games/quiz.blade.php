@@ -18,7 +18,8 @@
     <div class="quiz__container">
         @foreach($quiz as $question)
             <article data-quiz-id="{{$question['id']}}" class="hidden">
-                <h2>{{$question['question']}}</h2>
+                <h2 class="quiz__title-style">Question</h2>
+                <h2 class="quiz__title">{{$question['question']}}</h2>
                 <ul class="quiz__answers">
                     @foreach($question['answers'] as $i => $answer)
                         <li>

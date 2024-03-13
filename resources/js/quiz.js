@@ -130,6 +130,8 @@ function finishGame(answers) {
         swap: 'innerHTML',
         target: '#scoreResult',
         values: body,
+    }).then(() => {
+        $confirmButton.remove();
     });
 }
 
