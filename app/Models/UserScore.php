@@ -18,7 +18,8 @@ class UserScore extends Model
         'score',
         'user_id',
         'started_at',
-        'game',
+        'game_id',
+        'group_id',
     ];
 
     /**

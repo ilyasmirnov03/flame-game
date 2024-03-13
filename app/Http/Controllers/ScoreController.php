@@ -2,78 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use App\Classes\CacheKeysManager;
+use App\Classes\Factories\Score\ScoreFactory;
+use App\Models\Game;
+use DateTime;
+use DateTimeZone;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\UserScore;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 
-class ScoreController extends Controller
-{
-    public function saveResult(Request $request): JsonResponse
+class ScoreController extends Controller {
+
+    /**
+     * Save game result
+     * @throws Exception
+     */
+    public function saveResult(Request $request): View
     {
-        $startedAt = $request->input('startedAt');
-        $finishedAt = $request->input('finishedAt');
-        $game = $request->input('game');
-
-        $startedAt = Carbon::parse($startedAt);
-        $finishedAt = Carbon::parse($finishedAt);
+        $startedAt = Carbon::parse($request->post('startedAt'));
+        $finishedAt = Carbon::parse($request->post('finishedAt'));
+        $game = Game::where('label', $request->post('game'))->first();
+        $groupId = $request->post('group_id');
 
         $elapsedTime = $finishedAt->diffInSeconds($startedAt);
 
-        $user = Auth::user();
-        $userId = $user->id;
+        $scoreCalculator = ScoreFactory::getScoreCalculator($game->label);
+        $score = $scoreCalculator->calculateScore(Auth::id(), $request->post(), $elapsedTime);
 
-        $scoreWithoutBonus = $this->calculateScoreBasedOnTime($elapsedTime);
-
-        $scoreBonus = $this->calculateScoreBonus($userId, $game, $elapsedTime);
-
-        $score = $scoreWithoutBonus + $scoreBonus;
-
-        $score = min($score, 1000);
-
-        UserScore::create([
+        $userScoreArray = [
+            'game_id' => $game->id,
             'finished_at' => $finishedAt,
-            'score' => $score,
-            'user_id' => $userId,
             'started_at' => $startedAt,
-            'game' => $game,
+            'score' => $score['total'],
+            'user_id' => Auth::id(),
+        ];
+
+        if ($groupId !== null) {
+            $userScoreArray['group_id'] = $groupId;
+        }
+
+        $userScore = UserScore::create($userScoreArray);
+
+        $this->saveToCache($userScore->toArray());
+
+        return view('games.score', [
+            'message' => 'Score enregistré avec succès',
+            'score' => $score['total'],
+            'bonus' => $score['bonus'],
         ]);
-
-        return response()->json(['message' => 'Score enregistré avec succès', 'scoreWithoutBonus' => $scoreWithoutBonus, 'scoreBonus' => $scoreBonus]);
-    }
-    public function calculateScoreBasedOnTime(int $elapsedTime)
-    {
-        $maxScore = 1000;
-        $maxTime = 2 * 60 + 30;
-
-        if ($elapsedTime <= $maxTime) {
-            $score = $maxScore;
-        } else {
-            $additionalTime = $elapsedTime - $maxTime;
-            $decayFactor = 3;
-            $score = max($maxScore - ($additionalTime * $decayFactor), 0);
-        }
-
-        return $score;
     }
 
-    public function calculateScoreBonus(string $userId, string $game, int $currentElapsedTime): int
+    /**
+     * Save played game to the cache
+     * @throws Exception
+     */
+    private function saveToCache(array $userScore): void
     {
-        $averageTime = UserScore::where('user_id', $userId)
-            ->where('game', $game)
-            ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, finished_at)) as average_time')
-            ->value('average_time');
+        // Create interval to the next 12pm utc time
+        $utcDateTimeZone = new DateTimeZone('UTC');
+        $currentDateTime = new DateTime('now', $utcDateTimeZone);
+        $targetTime = new DateTime(
+            (int)$currentDateTime->format('H') < 12 ? '12:00:00' : 'tomorrow 12:00:00',
+            $utcDateTimeZone
+        );
+        $interval = $currentDateTime->diff($targetTime);
 
-        if ($averageTime !== null && $currentElapsedTime < (int)$averageTime) {
-            $timeDifference = $averageTime - $currentElapsedTime;
-
-            $bonus = $timeDifference * 2;
-
-            $maxBonus = 100;
-            return min($bonus, $maxBonus);
-        }
-
-        return 0;
+        $cacheKey = array_key_exists('group_id', $userScore) ?
+            CacheKeysManager::groupPlayed($userScore['user_id'], $userScore['group_id'], $userScore['game_id']) :
+            CacheKeysManager::soloPlayed($userScore['user_id'], $userScore['game_id']);
+        Cache::set($cacheKey, $targetTime->getTimestamp(), $interval);
     }
 }

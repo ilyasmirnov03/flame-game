@@ -25,7 +25,7 @@ Web application built on laravel sail with mysql and redis.
 
 5. Migrate and populate the database
     ```shell
-    ./vendor/bin/sail migrate --seed
+    ./vendor/bin/sail artisan migrate --seed
     ```
 
 6. Finally, generate the app key in your env file

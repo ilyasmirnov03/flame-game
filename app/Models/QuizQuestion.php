@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @mixin Builder
  */
-class QuizQuestion extends Model
-{
+class QuizQuestion extends Model {
     use HasFactory;
 
     protected $table = 'og_quiz_questions';
@@ -22,11 +21,13 @@ class QuizQuestion extends Model
      */
     public $timestamps = false;
 
-    public function answers(): HasMany {
+    public function answers(): HasMany
+    {
         return $this->hasMany(QuizAnswer::class);
     }
 
-    public function translations(): HasMany {
+    public function translations(): HasMany
+    {
         return $this->hasMany(QuizTranslation::class);
     }
 
@@ -36,7 +37,8 @@ class QuizQuestion extends Model
      * @param string $lang Language code, i.e. FR, DE, PL...
      * @return Builder
      */
-    private function getTranslations(string $lang): Builder {
+    private function getTranslations(string $lang): Builder
+    {
         $language = (new Language)->where('code', '=', strtoupper($lang))->first();
 
         if (!$language) {
@@ -60,7 +62,8 @@ class QuizQuestion extends Model
      * @param string $lang
      * @return array
      */
-    public function getManyTranslated(int $limit, string $lang): array {
+    public function getManyRandomisedTranslated(int $limit, string $lang): array
+    {
         $questions = $this
             ->inRandomOrder()
             ->limit($limit)
@@ -71,9 +74,13 @@ class QuizQuestion extends Model
 
         return $quizzes->map(function ($quiz) {
             return [
+                'id' => $quiz->id,
                 'question' => $quiz->translations->first()->question,
-                'answers' => $quiz->answers->flatMap(function ($answer) {
-                    return [$answer->translations->first()->answer];
+                'answers' => $quiz->answers->map(function ($answer) {
+                    return [
+                        'id' => $answer->id,
+                        'answer' => $answer->translations->first()->answer,
+                    ];
                 }),
             ];
         })->toArray();
@@ -86,7 +93,8 @@ class QuizQuestion extends Model
      * @param string $lang Language code, i.e. FR, DE, PL...
      * @return array
      */
-    public function getOneTranslated(string $id, string $lang): array {
+    public function getOneTranslated(string $id, string $lang): array
+    {
         $quiz = $this->getTranslations($lang)
             ->findOrFail($id);
 

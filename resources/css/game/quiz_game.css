@@ -1,0 +1,80 @@
+.quiz__answers {
+    list-style-type: none;
+    padding: 0 1rem;
+}
+
+.quiz__container {
+
+    & > article {
+        position: relative;
+    }
+
+    .confirm {
+        background-color: var(--green);
+    }
+}
+
+.quiz__answers label {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+
+.quiz__answers input {
+    top: 0;
+    left: 0;
+}
+
+.quiz__answers input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+}
+
+.quiz__title {
+    position: relative;
+    text-align: center;
+    padding: 0 1rem;
+    z-index: 2;
+}
+
+.quiz__title-style {
+    color: var(--blue-light);
+    font-size: calc(3rem + 1.390625vw);
+    position: absolute;
+    top: -10%;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.answer__0 {
+    background-color: var(--green);
+}
+
+.answer__1 {
+    background-color: var(--yellow);
+}
+
+.answer__2 {
+    background-color: var(--red);
+}
+
+.answer__3 {
+    background-color: var(--blue);
+}
+
+.answer {
+    transition: .15s;
+    max-width: 45rem;
+    word-wrap: break-word;
+}
+
+.begin, .confirm {
+    display: block;
+    margin: 0 auto;
+}
+
+input[type="radio"]:checked + label {
+    transform: scale(1.05);
+}
