@@ -104,6 +104,8 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
         return view('games.select_game', ['games' => $games, 'route' => 'flame.game']);
     })->name('select_game');
 
+    Route::get('/games/{gameId}/description', [GameController::class, 'getGameDescription']);
+
     // Solo games page
     Route::get('/solo/games/{game}', [GameController::class, 'soloGame'])
         ->middleware('user.can.play.solo')

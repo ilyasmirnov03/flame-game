@@ -8,6 +8,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 'resources/css/database.css',
                 "resources/js/app.js",
+                "resources/js/games.js",
                 "resources/js/running.js",
                 "resources/js/flame_map.js",
                 "resources/js/leave_group.js",
