@@ -8,12 +8,12 @@ use App\Models\Game;
 use DateTime;
 use DateTimeZone;
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\UserScore;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 
 class ScoreController extends Controller {
 
@@ -21,17 +21,17 @@ class ScoreController extends Controller {
      * Save game result
      * @throws Exception
      */
-    public function saveResult(Request $request): JsonResponse
+    public function saveResult(Request $request): View
     {
         $startedAt = Carbon::parse($request->post('startedAt'));
         $finishedAt = Carbon::parse($request->post('finishedAt'));
         $game = Game::where('label', $request->post('game'))->first();
-        $groupId = $request->post('group');
+        $groupId = $request->post('group_id');
 
         $elapsedTime = $finishedAt->diffInSeconds($startedAt);
 
         $scoreCalculator = ScoreFactory::getScoreCalculator($game->label);
-        $score = $scoreCalculator->calculateScore(Auth::id(), $game->id, $elapsedTime);
+        $score = $scoreCalculator->calculateScore(Auth::id(), $request->post(), $elapsedTime);
 
         $userScoreArray = [
             'game_id' => $game->id,
@@ -42,18 +42,17 @@ class ScoreController extends Controller {
         ];
 
         if ($groupId !== null) {
-            $userScore['group_id'] = $groupId;
+            $userScoreArray['group_id'] = $groupId;
         }
 
         $userScore = UserScore::create($userScoreArray);
 
         $this->saveToCache($userScore->toArray());
 
-        return response()->json([
+        return view('games.score', [
             'message' => 'Score enregistré avec succès',
-            'score' => $score['score'],
+            'score' => $score['total'],
             'bonus' => $score['bonus'],
-            'total' => $score['total']
         ]);
     }
 

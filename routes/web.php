@@ -2,6 +2,7 @@
 
 use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LeaderboardController;
@@ -96,9 +97,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('select_game');
 
     // Solo games page
-    Route::get('/solo/games/{game}', function (Game $game) {
-        return view('games.' . $game->label, ['minigame' => $game]);
-    })
+    Route::get('/solo/games/{game}', [GameController::class, 'soloGame'])
         ->middleware('user.can.play.solo')
         ->name('game');
 });
@@ -161,9 +160,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     })->name('select_game');
 
     // Group games page
-    Route::get('/flame/{group}/games/{game}', function (Group $group, Game $game) {
-        return view('games.' . $game->label, ['minigame' => $game, 'group' => $group]);
-    })
+    Route::get('/flame/{group}/games/{game}', [GameController::class, 'groupGame'])
         ->middleware('user.can.play.group')
         ->name('game');
 });
