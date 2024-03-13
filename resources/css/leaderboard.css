@@ -30,8 +30,9 @@
 }
 
 .podium {
+    color: var(--black);
     font-family: Baloo, sans-serif;
-    background: no-repeat bottom url('/images/podium_background.png');
+    background: no-repeat bottom url("/images/podium_background.png");
     background-size: cover;
     width: 100%;
     display: flex;
@@ -99,6 +100,7 @@
     padding: calc(0.5rem + 1vh);
     white-space: nowrap;
     font-family: Baloo, sans-serif;
+    color: var(--black);
 }
 
 .ranking__rating {
