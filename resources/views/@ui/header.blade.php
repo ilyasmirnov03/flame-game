@@ -1,5 +1,7 @@
 <header class="header">
-    <a href="{{ route('home') }}" class="header__logo"> LOGO </a>
+    <a href="{{ route('home') }}" class="header__logo">
+        <img src="{{asset('/images/logo.svg')}}" alt="accueil">
+</a>
     <a class="header__link">
         <img class="pwa__img" src="{{ asset('images/pwa.svg') }}" alt="Télécharger la PWA">
     </a>
