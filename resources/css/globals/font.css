@@ -17,6 +17,9 @@
 .dyslexique {
     font-family: "OpenDyslexic", sans-serif !important;
 }
+.dyslexique::placeholder {
+    font-family: "OpenDyslexic", sans-serif !important;
+}
 
 h1,
 h2,
