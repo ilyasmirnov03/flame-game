@@ -42,16 +42,14 @@
         }
         .univ__bg--logo {
             width: 3rem;
-            right: 55%;
-            top: 40%;
         }
         .univ__bg--points {
             top: 55%;
             left: 5%;
-            font-size: calc(2rem + 1.390625vw);
+            font-size: calc(1.5rem + 1.390625vw);
             color: var(--white);
-            background-color: #d23c49a5;
-            padding: 2rem;
+            background-color: #d23c49dd;
+            padding: 1rem;
             border-radius: 1rem;
             text-shadow: 3px 0 0 var(--black), 0 3px 0 var(--black),
                 -3px 0 0 var(--black), 0 -3px 0 var(--black);
@@ -59,12 +57,12 @@
         .univ__bg--points::before {
             content: "";
             position: absolute;
-            top: -22px;
+            top: -25px;
             left: 40%;
             margin-left: -10px;
             border-width: 0px 20px 25px;
             border-style: solid;
-            border-color: transparent transparent #d23c49a5 transparent;
+            border-color: transparent transparent #d23c49dd transparent;
         }
     }
     a {
