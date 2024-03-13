@@ -5,13 +5,13 @@ import htmx from 'htmx.org';
  * Started at ISO string date.
  * @type {string}
  */
-let startedAt = undefined;
+let startedAt;
 
 /**
  * Finished at ISO string date.
  * @type {string}
  */
-let finishedAt = undefined;
+let finishedAt;
 
 /**
  * Current answer
