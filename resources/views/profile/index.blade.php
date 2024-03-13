@@ -5,12 +5,12 @@
         <div class="flame">
             <img class="flame__img" src="{{ asset('images/flamme_logo.svg') }}" alt="Skin de votre flame">
             <div class="flame__scorewrapper">
-                <h1 class="flame__score"> Score </h1>
-                <h2 class="flame__score"> {{$user->scores->sum('score')}} </h2>
+                <h1 class="flame__score font dyslexie" > Score </h1>
+                <h2 class="flame__score font dyslexie"> {{$user->scores->sum('score')}} </h2>
             </div>
         </div>
         <div class="avatar">
-            <h2 class="avatar__name dyslexie">{{ $user->name }}</h2>
+            <h2 class="avatar__name font dyslexie">{{ $user->name }}</h2>
             <div class="avatar__displaywrapper">
                 <img class="avatar__display" src="{{ asset('images/avatar.png') }}" alt="votre avatar">
             </div>
