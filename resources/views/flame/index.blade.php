@@ -13,7 +13,11 @@
         <div class="groups">
             @foreach ($user->userGroups as $group)
                 <a href="{{ route('group.flame', ['group' => $group]) }}" class="groups__div">
-                    <img src="{{ asset('images/logo.png')}}" alt="Logo de votre groupe">
+                    @if(isset($group['image']) && $group['image'])
+                        <img src="{{ asset('images/group_icons/' . $group['image']) }}" alt="Logo">
+                    @else
+                        <img src="{{ asset('images/group_icons/Drapeau_France_VF.svg') }}" alt="Logo par défaut">
+                    @endif
                     <p class="font dyslexie"> {{$group->name}} </p>
                 </a>
             @endforeach

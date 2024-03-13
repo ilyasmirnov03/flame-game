@@ -5,7 +5,7 @@ namespace App\Classes\Factories\Score;
 use App\Models\UserScore;
 
 class RunningScore extends ScoreFactory {
-    public function calculateScore(string $userId, string $gameId, int $elapsedTime): array
+    public function calculateScore(string $userId, array $game, int $elapsedTime): array
     {
         $maxScore = 1000;
         $maxTime = 2 * 60 + 30;
@@ -18,7 +18,7 @@ class RunningScore extends ScoreFactory {
             $score = max($maxScore - ($additionalTime * $decayFactor), 0);
         }
 
-        $bonusPoints = $this->calculateScoreBonus($userId, $gameId, $elapsedTime);
+        $bonusPoints = $this->calculateScoreBonus($userId, $game['game_id'], $elapsedTime);
 
         return [
             'score' => $score,
@@ -27,10 +27,10 @@ class RunningScore extends ScoreFactory {
         ];
     }
 
-    public function calculateScoreBonus(string $userId, string $gameId, int $elapsedTime): int
+    public function calculateScoreBonus(string $userId, array $game, int $elapsedTime): int
     {
         $averageTime = UserScore::where('user_id', $userId)
-            ->where('game_id', $gameId)
+            ->where('game_id', $game['game_id'])
             ->selectRaw('AVG(TIMESTAMPDIFF(SECOND, started_at, finished_at)) as average_time')
             ->value('average_time');
 
