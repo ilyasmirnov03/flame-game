@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
-class ScoreController extends Controller {
+class ScoreController extends Controller
+{
 
     /**
      * Save game result
@@ -31,7 +32,7 @@ class ScoreController extends Controller {
         $elapsedTime = $finishedAt->diffInSeconds($startedAt);
 
         $scoreCalculator = ScoreFactory::getScoreCalculator($game->label);
-        $score = $scoreCalculator->calculateScore(Auth::id(), $request->post(), $elapsedTime);
+        $score = $scoreCalculator->calculateScore(Auth::id(), ['game_id' => $game->id, ...$request->post()], $elapsedTime);
 
         $userScoreArray = [
             'game_id' => $game->id,
