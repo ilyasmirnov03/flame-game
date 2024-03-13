@@ -2,6 +2,7 @@
 
 @section('assets')
     @vite(['resources/js/leave_group.js'])
+    @vite(['resources/js/flame_map.js'])
 @endsection
 
 @section('content')
@@ -15,10 +16,10 @@
             <h2> {{ $group['name'] }} </h2>
             <img id="params" class="univ__params--group" src="{{ asset('images/params.svg')}}" alt="Ouvrir les paramètres de groupe">
         </div>
-        <div class="univ__bg">
+        <div class="univ__bg" data-score="{{ $score }}">
             <img class="univ__bg--img" src="{{ asset('images/flamme_univ.png')}}" alt="Univers de votre flamme">
             <img class="univ__bg--logo" src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flamme">
-            <p class="univ__bg--points"> {{ $score }}</p>
+            <p id="score" class="univ__bg--points"> {{ $score }}</p>
         </div>
         <a href="{{ route('group.select_game', ['group' => $group])}}"> Avancer </a>
     </section>
