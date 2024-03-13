@@ -20,6 +20,11 @@ class QuizAnswer extends Model
         'is_right'
     ];
 
+    protected $fillable = [
+        'is_right',
+        'quiz_question_id',
+    ];
+
     /**
      * Not use timestamps for this model.
      * @var bool

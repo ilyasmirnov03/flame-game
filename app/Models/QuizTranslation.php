@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class QuizTranslation extends Model
-{
+/**
+ * @mixin Builder
+ */
+class QuizTranslation extends Model {
     use HasFactory;
 
     protected $table = 'og_quiz_translations';
@@ -18,7 +21,14 @@ class QuizTranslation extends Model
      */
     public $timestamps = false;
 
-    public function language(): BelongsTo {
+    protected $fillable = [
+        'question',
+        'language_id',
+        'quiz_question_id'
+    ];
+
+    public function language(): BelongsTo
+    {
         return $this->belongsTo(Language::class);
     }
 }

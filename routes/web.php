@@ -2,6 +2,14 @@
 
 use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Database\FunFactController;
+use App\Http\Controllers\Database\GameTranslationsController;
+use App\Http\Controllers\Database\LanguagesController;
+use App\Http\Controllers\Database\QuizAnswerController;
+use App\Http\Controllers\Database\QuizAnswerTranslationController;
+use App\Http\Controllers\Database\QuizController;
+use App\Http\Controllers\Database\QuizQuestionTranslationController;
+use App\Http\Controllers\Database\RewardsController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
@@ -177,10 +185,34 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-
 Route::get('/rewards', [UserRewardsController::class, 'index'])->name('rewards');
 Route::post('/rewards/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('rewards.obtain');
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
 Route::view('/params', 'params')->name('params');
+
+/**
+ * Database space
+ */
+Route::prefix('database')
+    ->middleware('user.can.edit.og.data')
+    ->name('database.')
+    ->group(function () {
+        Route::resource('fun-fact', FunFactController::class);
+        Route::resource('language', LanguagesController::class);
+        Route::resource('reward', RewardsController::class);
+        Route::resource('game', GameTranslationsController::class);
+        Route::resource('quiz', QuizController::class)->only([
+            'index', 'store', 'destroy'
+        ]);
+        Route::resource('quiz-translation', QuizQuestionTranslationController::class)->only([
+            'store', 'edit', 'update'
+        ]);
+        Route::resource('quiz-answer', QuizAnswerController::class)->only([
+            'index', 'store', 'destroy'
+        ]);
+        Route::resource('quiz-answer-translation', QuizAnswerTranslationController::class)->only([
+            'store', 'edit', 'update'
+        ]);
+    });
