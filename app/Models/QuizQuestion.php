@@ -31,6 +31,10 @@ class QuizQuestion extends Model {
         return $this->hasMany(QuizTranslation::class);
     }
 
+    protected $fillable = [
+        'label'
+    ];
+
     /**
      * Get model with eagerly loaded translations.
      *
