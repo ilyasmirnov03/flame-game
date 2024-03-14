@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const group = document.querySelector('input[name="group"]');
 
     let timer;
+    let watchPositionTimer;
     let totalTime = 0;
     let totalDistance = 0;
     let isRaceStarted = false;
@@ -53,8 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        isRaceStarted = true;
+
         startedAt = new Date().toISOString();
-        navigator.geolocation.watchPosition(updateDistance, handleGeolocationError);
+        watchPositionTimer = navigator.geolocation.watchPosition(updateDistance, handleGeolocationError);
         timer = setInterval(updateTimerDisplay, 1000);
     }
 
@@ -112,6 +115,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function stopRace() {
         clearInterval(timer);
         finishedAt = new Date().toISOString();
+        isRaceStarted = false;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.clearWatch(watchPositionTimer);
+        }
 
         if (totalDistance >= 1000) {
             const body = {
