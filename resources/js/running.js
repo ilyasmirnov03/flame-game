@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
     const timeDisplay = document.getElementById("timeDisplay");
     const distanceDisplay = document.getElementById("distanceDisplay");
-    const mainSection = document.getElementById("mainSection");
     const group = document.querySelector('input[name="group"]');
 
     let timer;
@@ -14,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let isRaceStarted = false;
     let startedAt;
     let finishedAt;
+    let lastPosition;
 
     startButton.addEventListener("click", function () {
         if (!isRaceStarted) {
@@ -25,58 +25,47 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    function startRace() {
-        if (!mainSection.classList.contains("section-filtered ")) {
-            mainSection.classList.remove("section-filtered");
-        }
-        totalTime = 0;
-        totalDistance = 0;
-        startedAt = new Date().toISOString();
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function () {
-                isRaceStarted = true;
-
-                timer = setInterval(function () {
-                    totalTime += 1;
-                    updateTimerDisplay();
-                }, 1000);
-
-                let lastPosition;
-
-                function updatePosition() {
-                    navigator.geolocation.getCurrentPosition(function (
-                        position
-                    ) {
-                        if (isRaceStarted) {
-                            if (lastPosition) {
-                                const distanceDelta = calculateDistance(
-                                    lastPosition.coords.latitude,
-                                    lastPosition.coords.longitude,
-                                    position.coords.latitude,
-                                    position.coords.longitude
-                                );
-                                totalDistance += distanceDelta;
-                                updateDistanceDisplay();
-                                if (totalDistance >= 1000) {
-                                    stopRace();
-                                }
-                            }
-                            lastPosition = position;
-                        }
-                    },
-                    handleGeolocationError);
-                }
-                setInterval(updatePosition, 5000);
-            }, handleGeolocationError);
-        } else {
-            alert(
-                "La géolocalisation n'est pas prise en charge par votre navigateur."
+    /**
+     * Update ran distance
+     * @param position{GeolocationPosition}
+     */
+    function updateDistance(position) {
+        if (typeof lastPosition !== "undefined") {
+            const distanceDelta = calculateDistance(
+                lastPosition.coords.latitude,
+                lastPosition.coords.longitude,
+                position.coords.latitude,
+                position.coords.longitude
             );
-            stopRace();
+            totalDistance += distanceDelta;
+            updateDistanceDisplay();
+            if (totalDistance >= 1000) {
+                stopRace();
+            }
         }
+        lastPosition = position;
     }
 
+    function startRace() {
+        if (!navigator.geolocation) {
+            alert("La géolocalisation n'est pas prise en charge par votre navigateur.");
+            stopRace();
+            return;
+        }
+
+        startedAt = new Date().toISOString();
+        navigator.geolocation.watchPosition(updateDistance, handleGeolocationError);
+        timer = setInterval(updateTimerDisplay, 1000);
+    }
+
+    /**
+     * Calculate distance from two coordinates and return in meters.
+     * @param lat1{number} Last position latitude
+     * @param lon1{number} Last position longitude
+     * @param lat2{number} New position latitude
+     * @param lon2{number} New position longitude
+     * @returns {number}
+     */
     function calculateDistance(lat1, lon1, lat2, lon2) {
         const R = 6371e3;
         const phi1 = (lat1 * Math.PI) / 180;
@@ -87,14 +76,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const a =
             Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
             Math.cos(phi1) *
-                Math.cos(phi2) *
-                Math.sin(deltaLambda / 2) *
-                Math.sin(deltaLambda / 2);
+            Math.cos(phi2) *
+            Math.sin(deltaLambda / 2) *
+            Math.sin(deltaLambda / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return R * c;
     }
 
+    /**
+     * watchPosition error callback.
+     * @param error{GeolocationPositionError}
+     */
     function handleGeolocationError(error) {
         console.error(`Erreur de géolocalisation : ${error.message}`);
         alert(
@@ -104,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateTimerDisplay() {
+        totalTime++;
         const minutes = Math.floor(totalTime / 60);
         const seconds = totalTime % 60;
         timeDisplay.textContent = `${minutes}:${
@@ -112,13 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateDistanceDisplay() {
-        distanceDisplay.textContent = `Distance parcourue : ${ totalDistance.toFixed(1)} m`;
+        distanceDisplay.textContent = `Distance parcourue : ${totalDistance.toFixed(1)} m`;
     }
 
     function stopRace() {
-        isRaceStarted = false;
         clearInterval(timer);
-
         finishedAt = new Date().toISOString();
 
         if (totalDistance >= 1000) {
