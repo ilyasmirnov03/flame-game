@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reward;
+use Illuminate\View\View;
 
-class UserRewardsController extends Controller
-{
-    public function index()
+class UserRewardsController extends Controller {
+    public function index(): View
     {
         $user = Auth::user();
 
@@ -20,10 +20,13 @@ class UserRewardsController extends Controller
 
         $maxScore = $allRewards->max('score_needed');
 
-        return view('user_rewards', compact('userRewards', 'totalPoints', 'allRewards', 'maxScore'));
+        return view(
+            'user_rewards',
+            compact('userRewards', 'totalPoints', 'allRewards', 'maxScore')
+        );
     }
 
-    public function obtainReward($rewardId)
+    public function obtainReward(string $rewardId): RedirectResponse
     {
         $user = Auth::user();
 
@@ -38,7 +41,8 @@ class UserRewardsController extends Controller
 
             return redirect()->route('rewards')->with('message', 'Récompense obtenue avec succès.');
         } else {
-            return redirect()->route('rewards')->with('message', 'Vous n\'avez pas assez de points pour obtenir cette récompense.');
+            return redirect()->route('rewards')
+                ->with('message', 'Vous n\'avez pas assez de points pour obtenir cette récompense.');
         }
     }
 }

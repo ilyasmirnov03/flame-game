@@ -30,8 +30,12 @@
                 @foreach ($languages as $i => $language)
                     <td>
                         <p>{{ $answer->translations[$i]->answer }}</p>
-                        <button hx-get="{{route('database.quiz-answer-translation.edit', $answer->translations[$i]->id)}}"
-                                hx-target="closest td">Edit
+                        <button
+                                hx-get="{{
+                                    route('database.quiz-answer-translation.edit', $answer->translations[$i]->id)
+                                }}"
+                                hx-target="closest td">
+                            Edit
                         </button>
                     </td>
                 @endforeach
