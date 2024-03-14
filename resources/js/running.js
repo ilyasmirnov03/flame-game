@@ -112,10 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateDistanceDisplay() {
-        let distanceToShow;
-        const distanceInKilometers = totalDistance / 1000;
-        distanceToShow = distanceInKilometers.toFixed(1);
-        distanceDisplay.textContent = `Distance parcourue : ${distanceToShow} KM`;
+        distanceDisplay.textContent = `Distance parcourue : ${ totalDistance.toFixed(1)} m`;
     }
 
     function stopRace() {

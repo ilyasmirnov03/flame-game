@@ -18,7 +18,7 @@ class RunningScore extends ScoreFactory {
             $score = max($maxScore - ($additionalTime * $decayFactor), 0);
         }
 
-        $bonusPoints = $this->calculateScoreBonus($userId, $game['game_id'], $elapsedTime);
+        $bonusPoints = $this->calculateScoreBonus($userId, $game, $elapsedTime);
 
         return [
             'score' => $score,
