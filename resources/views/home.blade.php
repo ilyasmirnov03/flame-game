@@ -5,7 +5,7 @@
     <div class="home__today">
         <h2 class="home__today--title font dyslexie">Aujourd'hui :</h2>
         @if ($currentStep['data'])
-        <div class="home__today--div">
+        <div class="home__today--div location-card">
             <p class="font dyslexie">{{ $currentStep['data']['ville'] }} - {{ $currentStep['data']['departement'] }}</p>
             <p class="font dyslexie">{{ $currentStep['data']['date'] }} - {{ $currentStep['data']['territoire'] }}</p>
         </div>
@@ -18,7 +18,7 @@
         <h2 class="home__tocome--title font dyslexie">Étapes à venir :</h2>
         @if (!empty($upcomingSteps))
             @foreach ($upcomingSteps as $etape)
-                <div class="home__tocome--div">
+                <div class="home__tocome--div location-card">
                     <div class="home__tocome--div-txt">
                         <p class="font dyslexie"><span class="home__ville"> {{ $etape['ville'] }}  </span> - {{ $etape['departement'] }}</p>
                         <p class="font dyslexie">{{ $etape['date'] }} - {{ $etape['territoire'] }}</p>
@@ -37,7 +37,7 @@
         <h2 class="home__done--title font dyslexie">Étapes passées :</h2>
         @if (!empty($pastSteps))
             @foreach ($pastSteps as $etape)
-                <div class="home__done--div">
+                <div class="home__done--div location-card">
                     <div class="home__done--div-txt">
                         <p class="font dyslexie"> <span class="home__ville"> {{ $etape['ville'] }}  </span> - {{ $etape['departement'] }}</p>
                         <p class="font dyslexie">{{ $etape['date'] }} - {{ $etape['territoire'] }}</p>

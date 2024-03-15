@@ -36,7 +36,7 @@
 }
 
 .group__title {
-    margin: 0rem;
+    margin: 0;
     font-size: calc(2rem + 1.390625vw);
     text-align: center;
 }
@@ -45,7 +45,7 @@
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    margin-bottom: 9rem;
+
     .group__form--input {
         font-family: "K2D", sans-serif;
         color: var(--black);
@@ -56,22 +56,26 @@
         width: 100%;
         outline: none;
     }
+
     .group__form--input::placeholder {
         font-size: calc(1rem + 1.390625vw);
         font-family: "K2D", sans-serif;
         color: var(--black);
     }
+
     .group__form--range {
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 2rem 0rem;
+        padding: 2rem 0;
+
         .group__form--range-label {
             font-family: "K2D", sans-serif;
             color: var(--black);
             font-size: calc(1rem + 1.390625vw);
             margin-bottom: 0.5rem;
         }
+
         .group__form--range-input {
             position: relative;
             width: 100%;
@@ -96,6 +100,7 @@
             border-radius: 50%;
             margin-top: -7px;
         }
+
         .group__form--range-value {
             font-family: "K2D", sans-serif;
             color: var(--black);
@@ -125,6 +130,7 @@
             border: 2px solid #000;
             border-radius: 50%;
         }
+
         .group__form--range-input::before {
             font-family: "K2D", sans-serif;
             color: var(--black);
@@ -139,13 +145,14 @@
             font-size: calc(0.8rem + 1.390625vw);
             content: "50";
             position: absolute;
-            right: 0px;
+            right: 0;
         }
     }
+
     .group__form--toggle {
         display: flex;
         justify-content: space-between;
-        padding: 2rem 0rem;
+        padding: 2rem 0;
     }
 
     .group__form--toggle-input {
@@ -158,13 +165,16 @@
         color: var(--black);
         font-size: calc(1rem + 1.390625vw);
     }
-    button {
+
+    & button {
         width: 60%;
         margin: auto;
     }
+
     .group__form--icon {
         display: flex;
         flex-direction: column;
+
         .group__form--icon-label {
             font-family: "K2D", sans-serif;
             color: var(--black);
@@ -190,19 +200,20 @@
             cursor: pointer;
         }
     }
+
     .group__icon--choice {
         position: relative;
-        margin: auto;
         width: 10rem;
         height: 7rem;
         border-radius: 1rem;
         border: 2px solid var(--black);
-        margin-bottom: 3rem;
+        margin: auto auto 3rem;
         background-color: #1715150f;
         background-repeat: no-repeat;
         background-size: 50%;
         background-position: center;
     }
+
     .group__icon--popup {
         overflow: auto;
         width: 20rem;
@@ -215,6 +226,7 @@
         top: 50%;
         transform: translate(-50%, -50%);
     }
+
     .group__edit--img {
         position: absolute;
         right: 0.2rem;

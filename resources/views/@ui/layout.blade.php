@@ -16,11 +16,14 @@
 
 <body class="daltonism-container">
 @section('flame-active', 'active')
-@include('@ui.header')
-<main>
-    @yield('content')
+<main class="layout">
+    @include('@ui.header')
+    <div class="layout__main-section">
+        @yield('content')
+    </div>
+    @include('@ui.nav')
 </main>
-@include('@ui.nav')
+@include('./fun_fact')
 
 </body>
 

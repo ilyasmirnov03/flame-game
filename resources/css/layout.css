@@ -1,0 +1,14 @@
+.layout {
+    height: 100svh;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    & > .layout__main-section {
+        overflow-y: scroll;
+    }
+
+    .navbar {
+        align-self: end;
+    }
+}
