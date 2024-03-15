@@ -2,10 +2,10 @@
     <a href="{{ route('home') }}" class="header__logo">
         <img src="{{ asset('/images/logo.svg') }}" alt="accueil">
     </a>
-    <a href="{{ route('rewards') }}" class="header__link">
+    <a href="{{ route('rewards.index') }}" class="header__link">
         <img src="{{ asset('images/recompenses.svg') }}" alt="Voir ses récompenses">
     </a>
-    <a href="{{ route('profile.profile') }}" class="header__link">
+    <a href="{{ route('profile.index') }}" class="header__link">
         <img src="{{ asset('images/profil.svg') }}" alt="Voir son profil">
     </a>
 </header>

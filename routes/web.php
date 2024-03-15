@@ -60,7 +60,7 @@ Route::prefix('/profile')->name('profile.')->group(function () {
 
     Route::get('/', function () {
         return view('profile.index', ['user' => Auth::user()]);
-    })->name("profile")->middleware(['auth']);
+    })->name("index")->middleware(['auth']);
 
     // Access edit page
     Route::get('/edit', function () {
@@ -184,8 +184,10 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::get('/rewards', [UserRewardsController::class, 'index'])->name('rewards');
-Route::post('/rewards/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('rewards.obtain');
+Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function() {
+    Route::get('/', [UserRewardsController::class, 'index'])->name('index');
+    Route::post('/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('obtain');
+});
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
