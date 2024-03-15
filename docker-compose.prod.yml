@@ -15,7 +15,7 @@ services:
       APP_DEBUG: false
       APP_ENV: 'production'
       DB_PASSWORD: '${DB_PASSWORD}'
-      REDIS_PASSWORD: '${REDIS_PASSWORD}'
+      APP_KEY: '${APP_KEY}'
     volumes:
       - './:/var/www/'
     networks:

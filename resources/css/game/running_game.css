@@ -1,5 +1,4 @@
 .rungame {
-    margin-bottom: 10rem;
     .rungame__title {
         position: relative;
         text-align: center;
@@ -9,6 +8,7 @@
         line-height: 1;
         z-index: 900;
     }
+
     .rungame__title--blue {
         color: var(--blue-light);
         font-size: calc(3rem + 1.390625vw);
@@ -18,19 +18,23 @@
         transform: translateX(-50%);
         z-index: 1;
     }
+
     .rungame__gif {
         width: 100%;
     }
+
     .rungame__timer {
         font-size: calc(2rem + 1.390625vw);
         font-weight: 600;
         margin: 1rem;
         text-align: center;
     }
+
     .rungame__btn {
         display: block;
         margin: 2rem auto;
     }
+
     .rungame__distance {
         text-align: center;
     }
@@ -65,8 +69,4 @@
 
 #popupResult {
     margin-top: 10px;
-}
-
-.section-filtered {
-    filter: blur(4px);
 }

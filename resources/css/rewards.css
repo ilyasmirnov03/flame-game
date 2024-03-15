@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 8rem;
+
     .rewards__title {
-        margin: 0rem;
         font-size: calc(2rem + 1.390625vw);
         align-self: flex-start;
-        margin-left: 2rem;
+        margin: 0 0 0 2rem;
     }
+
     .rewards__div {
         position: relative;
         border-radius: 1rem;
@@ -19,16 +19,19 @@
         z-index: 90;
         background-color: var(--green);
         overflow: visible;
+
         .rewards__div--total,
         .reward__progress {
             position: absolute;
             bottom: 0;
             width: 100%;
+
             .reward__content {
                 display: flex;
                 align-items: center;
                 gap: 1rem;
                 position: relative;
+
                 .reward__content--btn {
                     border-radius: 1rem;
                     padding: 0.5rem 0.8rem;
@@ -36,16 +39,20 @@
                     background-color: var(--green);
                     color: var(--white);
                 }
+
                 .reward__content--btn[disabled] {
                     background-color: var(--inactiv);
                 }
             }
         }
+
         .reward__progress--right {
             right: 4rem;
+
             .reward__content {
                 flex-direction: row-reverse;
             }
+
             .reward__content--obt {
                 position: absolute;
                 top: -0.5rem;
@@ -55,12 +62,14 @@
 
         .reward__progress--left {
             left: 4rem;
+
             .reward__content--obt {
                 position: absolute;
                 top: -0.5rem;
                 left: 1.5rem;
             }
         }
+
         .rewards__div--total {
             background-color: var(--black);
             border-radius: 1rem;
@@ -77,6 +86,7 @@
             left: 0.8rem;
             z-index: 100;
         }
+
         .reward__progress--left::after {
             content: "";
             position: absolute;

@@ -5,16 +5,14 @@
     padding: 1rem;
     position: relative;
     z-index: 999;
+
     .header__logo {
         margin-right: auto;
         max-height: 3rem;
-    }
-
-    .header__logo {
         width: calc(3rem + 4vw);
     }
 
     .header__link {
-        padding: 0rem 0.5rem;
+        padding: 0 0.5rem;
     }
 }

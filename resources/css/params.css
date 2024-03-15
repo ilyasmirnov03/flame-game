@@ -1,12 +1,12 @@
 .params {
     padding: 1rem 2rem;
-    margin-bottom: 9rem;
+
     .params__top {
         display: flex;
         justify-content: center;
         align-items: center;
 
-        h1 {
+        & h1 {
             font-size: calc(1.75rem + 1.390625vw);
             margin: 0;
         }
@@ -24,6 +24,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .access__div--select {
             background-color: var(--white);
             border-color: var(--grey);
@@ -34,12 +35,14 @@
             font-size: calc(0.813rem + 1.390625vw);
         }
     }
+
     .access__div--font {
         padding-left: 1rem;
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        label {
+
+        & label {
             font-size: calc(0.813rem + 1.390625vw);
             font-family: "K2D", sans-serif;
         }
@@ -96,20 +99,17 @@ input:checked + .slider:before {
 
 /* DALTONISME */
 .daltonism-protanopia {
-    filter: grayscale(100%) sepia(50%) hue-rotate(-30deg) brightness(80%)
-        contrast(80%);
+    filter: grayscale(100%) sepia(50%) hue-rotate(-30deg) brightness(80%) contrast(80%);
     height: 100vh;
 }
 
 .daltonism-deuteranopia {
-    filter: grayscale(80%) sepia(20%) hue-rotate(40deg) brightness(80%)
-        contrast(80%);
+    filter: grayscale(80%) sepia(20%) hue-rotate(40deg) brightness(80%) contrast(80%);
     height: 100vh;
 }
 
 .daltonism-tritanopia {
-    filter: grayscale(5%) sepia(25%) hue-rotate(150deg) brightness(80%)
-        contrast(80%);
+    filter: grayscale(5%) sepia(25%) hue-rotate(150deg) brightness(80%) contrast(80%);
     height: 100vh;
 }
 

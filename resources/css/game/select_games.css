@@ -1,35 +1,39 @@
 .games {
     padding: 2rem;
-    margin-bottom: 9rem;
-    h1 {
+
+    & h1 {
         line-height: 1;
         margin: 0;
         text-align: center;
         font-size: calc(3rem + 1.390625vw);
     }
-    a {
+
+    & a {
         position: relative;
         text-decoration: none;
         overflow: hidden;
         height: 10vh;
-        margin: 2rem 0rem;
+        margin: 2rem 0;
         display: flex;
         align-items: center;
         gap: 1rem;
         background-color: var(--green);
         border-radius: 1rem;
         z-index: 1;
-        img {
+
+        & img {
             margin-top: 1rem;
             width: 5rem;
         }
-        h2 {
+
+        & h2 {
             text-transform: capitalize;
             margin: 0;
             font-size: calc(2.5rem + 1.390625vw);
             color: var(--white);
         }
     }
+
     .games__info {
         z-index: 999;
         margin: 0;
@@ -39,27 +43,32 @@
         width: 2rem;
     }
 }
+
 .game__popup {
     position: fixed;
     top: 5rem;
     height: 100%;
     z-index: 1;
     background-color: var(--white);
-    padding: 0rem 2rem;
+    padding: 0 2rem;
+
     .game__popup--content {
         display: flex;
         flex-direction: column;
+
         .close {
             text-align: end;
             font-size: 3rem;
             cursor: pointer;
         }
-        h2 {
+
+        & h2 {
             font-size: calc(2rem + 1.390625vw);
             text-align: center;
             margin: 0;
         }
-        p {
+
+        & p {
             text-align: justify;
         }
     }

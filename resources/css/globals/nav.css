@@ -1,12 +1,9 @@
 .navbar {
-    position: fixed;
-    bottom: 0;
     background-color: var(--blue-light);
     padding: 1.5rem 1rem;
     width: 100%;
-    z-index: 999;
 
-    ul {
+    & ul {
         display: flex;
         justify-content: space-around;
         background-color: transparent;
@@ -14,14 +11,14 @@
         padding: 0;
         margin: 0;
 
-        li {
+        & li {
             background-color: transparent;
 
-            a {
+            & a {
                 background-color: transparent;
                 text-decoration: none;
 
-                img {
+                & img {
                     background-color: transparent;
                     filter: brightness(0%);
                 }

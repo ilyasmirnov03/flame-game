@@ -22,7 +22,7 @@ jobs:
         run: cp .env.example .env
 
       - name: Start docker compose
-        run: DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} docker compose -f docker-compose.prod.yml up -d --build
+        run: APP_KEY=${{ secrets.APP_KEY }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} docker compose -f docker-compose.prod.yml up -d --build
 
   install-dependencies:
 
@@ -70,6 +70,3 @@ jobs:
 
       - name: Cache views
         run: docker exec flame-game-app php artisan view:cache
-
-      - name: Generate key
-        run: docker exec flame-game-app php artisan key:generate
