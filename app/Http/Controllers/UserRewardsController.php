@@ -31,7 +31,7 @@ class UserRewardsController extends Controller {
         $user = Auth::user();
 
         if ($user->rewards->contains($rewardId)) {
-            return redirect()->route('rewards')->with('message', 'Vous avez déjà obtenu cette récompense.');
+            return redirect()->route('rewards.index')->with('message', 'Vous avez déjà obtenu cette récompense.');
         }
 
         $reward = Reward::findOrFail($rewardId);
@@ -39,9 +39,9 @@ class UserRewardsController extends Controller {
         if ($user->scores()->sum('score') >= $reward->score_needed) {
             $user->rewards()->attach($rewardId, ['selected' => 0]);
 
-            return redirect()->route('rewards')->with('message', 'Récompense obtenue avec succès.');
+            return redirect()->route('rewards.index')->with('message', 'Récompense obtenue avec succès.');
         } else {
-            return redirect()->route('rewards')
+            return redirect()->route('rewards.index')
                 ->with('message', 'Vous n\'avez pas assez de points pour obtenir cette récompense.');
         }
     }
