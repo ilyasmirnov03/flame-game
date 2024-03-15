@@ -2,15 +2,17 @@
     display: flex;
     justify-content: space-around;
     margin-top: 2rem;
+
     .inscription__btn,
     .connexion__btn {
-        padding: 0px;
+        padding: 0;
         background-color: transparent;
         border: none;
         text-transform: uppercase;
         font-family: "Baloo", sans-serif;
         font-size: calc(1rem + 1.390625vw);
     }
+
     .actif {
         color: var(--yellow);
         border-bottom: 1px solid var(--yellow);
@@ -18,12 +20,13 @@
 }
 
 .forms-section {
-    margin-bottom: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
+
 .forms {
     display: flex;
     align-items: flex-start;
@@ -56,6 +59,7 @@
         z-index: 1;
     }
 }
+
 fieldset {
     background-color: transparent;
 }
@@ -65,7 +69,7 @@ fieldset {
 .inscription__name,
 .inscription__mail,
 .inscription__password {
-    margin: 1rem 0rem;
+    margin: 1rem 0;
     font-family: "K2D", sans-serif;
     color: var(--black);
     font-size: calc(0.75rem + 1.390625vw);
@@ -74,12 +78,14 @@ fieldset {
     border-bottom: 2px solid var(--black);
     outline: none;
 }
+
 .connexion__miss-password {
     background-color: transparent;
     color: var(--black);
     text-align: center;
     margin-top: -2rem;
 }
+
 .connexion__mail::placeholder,
 .connexion__password::placeholder,
 .inscription__name::placeholder,
@@ -108,9 +114,11 @@ fieldset {
     transform: translateX(0);
     transition: all 0.3s ease-out;
 }
+
 .switcher-signup {
     margin-left: 2rem;
 }
+
 .switcher-login {
     margin-right: 2rem;
 }

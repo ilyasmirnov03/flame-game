@@ -139,7 +139,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     // Search group
     Route::get('/search', [GroupController::class, 'searchGroups'])->name('content');
 
-    // Join group 
+    // Join group
     Route::post('/join', [GroupController::class, 'joinGroup'])->name('join');
 
     // Create group
@@ -178,7 +178,6 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
 /**
  * User score
  */
-
 Route::post('/user_score', [ScoreController::class, 'saveResult'])
     ->middleware('auth');
 

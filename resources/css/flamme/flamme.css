@@ -7,14 +7,14 @@
     height: 16vh;
     overflow: hidden;
 
-    img {
+    & img {
         position: absolute;
         left: 1rem;
         top: 0.2rem;
     }
 
-    h1,
-    h2 {
+    & h1,
+    & h2 {
         line-height: 0.6;
         margin: 0;
         text-transform: uppercase;
@@ -22,22 +22,22 @@
         font-size: calc(3rem + 1.390625vw);
         right: 1rem;
         text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
-            -2px 0 0 var(--white), 0 -2px 0 var(--white);
+        -2px 0 0 var(--white), 0 -2px 0 var(--white);
     }
 
-    h1 {
+    & h1 {
         top: 1rem;
     }
 
-    h2 {
+    & h2 {
         bottom: 1rem;
     }
 }
 
 .allgroups {
-    padding: 0rem 2rem;
-    margin-bottom: 10rem;
-    h2 {
+    padding: 0 2rem;
+
+    & h2 {
         text-transform: uppercase;
         font-size: calc(2rem + 1.390625vw);
         margin-bottom: 1rem;
@@ -64,16 +64,15 @@
             height: 14vh;
             padding: 1rem;
 
-            img {
+            & img {
                 width: 3rem;
             }
 
-            p {
-                margin: 0;
-                margin-top: -0.5rem;
+            & p {
+                margin: -0.5rem 0 0;
                 font-size: calc(1.5rem + 1.390625vw);
                 text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
-                    -2px 0 0 var(--white), 0 -2px 0 var(--white);
+                -2px 0 0 var(--white), 0 -2px 0 var(--white);
             }
         }
 
@@ -88,7 +87,7 @@
             height: 14vh;
             padding: 1rem;
 
-            img {
+            & img {
                 width: 3rem;
             }
         }

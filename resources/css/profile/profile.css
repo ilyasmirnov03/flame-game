@@ -1,11 +1,10 @@
 .profilewrapper {
-    padding: 0rem 2rem;
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: stretch;
     gap: 1.5rem;
-    margin-bottom: 9rem;
 }
 
 .flame {
@@ -36,7 +35,7 @@
     text-transform: uppercase;
     font-size: min(calc(1.5rem + 5vw), 4rem);
     text-shadow: 2px 0 0 var(--white), 0 2px 0 var(--white),
-        -2px 0 0 var(--white), 0 -2px 0 var(--white);
+    -2px 0 0 var(--white), 0 -2px 0 var(--white);
 }
 
 .avatar {

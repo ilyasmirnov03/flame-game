@@ -24,11 +24,13 @@
             <div class="groups__add" id="openPopup">
                 <img src="{{ asset('images/add.svg')}}" alt="Ajouter ou créer un groupe">
             </div>
-                <div class="popup__content hidden" id="popupGroup">
-                    <a class="font dyslexie" href="{{ route('group.create')}}">Créer un groupe</a>
-                    <a class="font dyslexie" href="{{ route('group.search')}}">Rejoindre un groupe</a>
-                    <span class="popup-close" id="closePopup"><img src="{{ asset('images/close.svg')}}" alt="Fermer la popup"></span>
-                </div>
+            <div class="popup__content hidden" id="popupGroup">
+                <a class="font dyslexie" href="{{ route('group.create')}}">Créer un groupe</a>
+                <a class="font dyslexie" href="{{ route('group.search')}}">Rejoindre un groupe</a>
+                <span class="popup-close" id="closePopup">
+                    <img src="{{ asset('images/close.svg')}}" alt="Fermer la popup">
+                </span>
+            </div>
         </div>
     </section>
 @endsection

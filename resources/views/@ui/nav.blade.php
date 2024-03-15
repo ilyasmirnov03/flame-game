@@ -1,4 +1,3 @@
-@include('./fun_fact')
 <nav class="navbar">
     <ul>
         <li class="{{ Request::is('anecdote') ? 'active' : '' }}  open-fun-fact-popup">
