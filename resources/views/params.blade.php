@@ -8,6 +8,12 @@
                 <img src="{{ asset('images/reset.svg')}}" alt="Réinitialiser les paramètres">
             </button>
         </div>
+        <div>
+            <h2 class="font dyslexie"> Langues </h2>
+            @foreach($locales as $locale)
+                <a href="{{route('lang', $locale)}}">{{$locale}}</a>
+            @endforeach
+        </div>
         <div class="notif">
             <h2 class="font dyslexie"> Notifications </h2>
             <div class="notif__div">
@@ -40,7 +46,7 @@
             </div>
             <div class="access__div">
                 <p class="font dyslexie"> Mode daltonisme </p>
-                <select class="access__div--select" id="selectDaltonisme">
+                <select class="select" id="selectDaltonisme">
                     <option value="none">Aucun</option>
                     <option value="protanopia">Protanopia</option>
                     <option value="deuteranopia">Deuteranopia</option>
