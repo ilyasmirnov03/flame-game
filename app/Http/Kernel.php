@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\EnsureUserInGroup;
+use App\Http\Middleware\SetLocale;
 use App\Http\Middleware\UserCanEditOGData;
 use App\Http\Middleware\UserCanPlayGroupGame;
 use App\Http\Middleware\UserCanPlaySoloGame;
@@ -41,6 +42,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\FunFact::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SetLocale::class,
         ],
 
         'api' => [
