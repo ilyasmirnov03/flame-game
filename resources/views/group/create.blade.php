@@ -20,7 +20,8 @@
     <form class="group__form" action="{{ route('group.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
-        <input class="group__form--input font dyslexie" maxlength="16" placeholder="{{__('forms.name')}}" type="text" name="name"
+        <input class="group__form--input font dyslexie" maxlength="16" placeholder="{{__('forms.name')}}" type="text"
+               name="name"
                required>
 
         <div class="group__form--range">

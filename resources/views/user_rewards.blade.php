@@ -9,7 +9,7 @@
             <?php $isLeft = true; ?>
             @foreach ($allRewards->sortByDesc('score_needed') as $reward)
                 <div class="reward__progress @if ($isLeft) reward__progress--left @else reward__progress--right @endif"
-                    style="height: {{ 100 - ($reward->score_needed / $maxScore) * 100 }}%;">
+                     style="height: {{ 100 - ($reward->score_needed / $maxScore) * 100 }}%;">
                     <div class="reward__content">
                         <img src="{{ $reward->icon }}" alt="{{ $reward->name }}">
                         @if ($userRewards->contains($reward))
@@ -18,12 +18,14 @@
                             <form action="{{ route('rewards.obtain', ['rewardId' => $reward->id]) }}" method="post">
                                 @csrf
                                 <button class="reward__content--btn font dyslexie" type="submit"
-                                    @if ($totalPoints < $reward->score_needed) disabled @endif>{{__('rewards.obtain')}}</button>
+                                    @disabled($totalPoints < $reward->score_needed)>
+                                    {{__('rewards.obtain')}}
+                                </button>
                             </form>
                         @endif
                     </div>
                 </div>
-                <?php $isLeft = !$isLeft; ?>
+                    <?php $isLeft = !$isLeft; ?>
             @endforeach
         </div>
     </div>

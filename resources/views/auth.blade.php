@@ -18,7 +18,8 @@
                         @error('email')
                         <span class="connexion__error">{{ $message }}</span>
                         @enderror
-                        <input class="connexion__password font dyslexie" type="password" placeholder="{{__('auth.password')}}"
+                        <input class="connexion__password font dyslexie" type="password"
+                               placeholder="{{__('auth.password')}}"
                                name="password"
                                id="password_connexion" required/>
                         @error('password')
@@ -27,7 +28,7 @@
                     </fieldset>
                     <input class="btn__blue font dyslexie" type="submit" value="{{__('auth.login-action')}}"/>
                     {{-- TODO: forgotten password --}}
-                    {{--<a class="connexion__miss-password font dyslexie" href="#"> {{__('auth.forgot-password')}} </a>--}}
+                    {{--<a class="connexion__miss-password font dyslexie">{{__('auth.forgot-password')}}</a>--}}
                 </form>
             </div>
             <div class="form-wrapper @if ($baseActive == 'signup') is-active @endif">
@@ -51,7 +52,8 @@
                         @error('email')
                         <span class="inscription__error font dyslexie">{{ $message }}</span>
                         @enderror
-                        <input class="inscription__password font dyslexie" type="password" placeholder="{{__('auth.password')}}"
+                        <input class="inscription__password font dyslexie" type="password"
+                               placeholder="{{__('auth.password')}}"
                                name="password"
                                id="password_inscription" required/>
                         @error('password')
