@@ -18,7 +18,7 @@
                             <form action="{{ route('rewards.obtain', ['rewardId' => $reward->id]) }}" method="post">
                                 @csrf
                                 <button class="reward__content--btn font dyslexie" type="submit"
-                                    @if ($totalPoints < $reward->score_needed) disabled @endif>Obtenir</button>
+                                    @if ($totalPoints < $reward->score_needed) disabled @endif>{{__('rewards.obtain')}}</button>
                             </form>
                         @endif
                     </div>

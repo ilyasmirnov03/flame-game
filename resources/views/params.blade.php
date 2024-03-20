@@ -3,28 +3,28 @@
 @section('content')
     <section class="params">
         <div class="params__top">
-            <h1 class="font dyslexie"> Paramètres </h1>
+            <h1 class="font dyslexie"> {{ __('settings.title') }} </h1>
             <button class="reset__btn" id="resetButton">
-                <img src="{{ asset('images/reset.svg')}}" alt="Réinitialiser les paramètres">
+                <img src="{{ asset('images/reset.svg')}}" alt="{{ __('settings.Reset les paramètres') }}">
             </button>
         </div>
         <div>
-            <h2 class="font dyslexie"> Langues </h2>
+            <h2 class="font dyslexie"> {{ __('settings.languages') }} </h2>
             @foreach($locales as $locale)
-                <a href="{{route('lang', $locale)}}">{{$locale}}</a>
+                <a href="{{route('lang', $locale)}}">{{ $locale }}</a>
             @endforeach
         </div>
         <div class="notif">
-            <h2 class="font dyslexie"> Notifications </h2>
+            <h2 class="font dyslexie"> {{ __('settings.notifications') }} </h2>
             <div class="notif__div">
-                <p class="font dyslexie"> Notification d'inactivité </p>
+                <p class="font dyslexie"> {{ __('settings.inactivity-notification') }} </p>
                 <label class="toggle-switch">
                     <input type="checkbox">
                     <span class="slider"></span>
                 </label>
             </div>
             <div class="notif__div">
-                <p class="font dyslexie"> Notification d'anecdote </p>
+                <p class="font dyslexie"> {{ __('settings.fun-fact-notification') }} </p>
                 <label class="toggle-switch">
                     <input type="checkbox">
                     <span class="slider"></span>
@@ -32,30 +32,30 @@
             </div>
         </div>
         <div class="access">
-            <h2 class="font dyslexie"> Accessibilité </h2>
+            <h2 class="font dyslexie"> {{ __('settings.accessibility') }} </h2>
             <div class="access__div--font">
-                <label class="font dyslexie" for="fontSize">Taille de la police</label>
+                <label class="font dyslexie" for="fontSize">{{ __('settings.font-size') }}</label>
                 <input type="range" id="fontSize" min="1" max="20" step="1" value="4">
             </div>
             <div class="access__div">
-                <p class="font dyslexie"> Mode dyslexie </p>
+                <p class="font dyslexie"> {{ __('settings.dyslexia-mode') }} </p>
                 <label class="toggle-switch">
                     <input id="dyslexie" type="checkbox">
                     <span class="slider"></span>
                 </label>
             </div>
             <div class="access__div">
-                <p class="font dyslexie"> Mode daltonisme </p>
+                <p class="font dyslexie"> {{ __('settings.color-blindness-mode') }} </p>
                 <select class="select" id="selectDaltonisme">
-                    <option value="none">Aucun</option>
-                    <option value="protanopia">Protanopia</option>
-                    <option value="deuteranopia">Deuteranopia</option>
-                    <option value="tritanopia">Tritanopia</option>
-                    <option value="achromatopsia">Achromatopsia</option>
+                    <option value="none">{{ __('settings.none') }}</option>
+                    <option value="protanopia">{{ __('settings.protanopia') }}</option>
+                    <option value="deuteranopia">{{ __('settings.deuteranopia') }}</option>
+                    <option value="tritanopia">{{ __('settings.tritanopia') }}</option>
+                    <option value="achromatopsia">{{ __('settings.achromatopsia') }}</option>
                 </select>
             </div>
             <div class="access__div">
-                <p class="font dyslexie"> Mode sombre </p>
+                <p class="font dyslexie"> {{ __('settings.dark-mode') }} </p>
                 <label class="toggle-switch">
                     <input id="dark" type="checkbox">
                     <span class="slider"></span>

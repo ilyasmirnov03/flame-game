@@ -11,6 +11,6 @@
             <img class="univ__bg--logo" src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flamme">
             <p id="score" class="univ__bg--points dyslexie"> {{ $score }}</p>
         </div>
-        <a class="font dyslexie" href="{{ route('flame.select_game')}}"> Avancer </a>
+        <a class="font dyslexie" href="{{ route('flame.select_game')}}"> {{__('flame.progress')}} </a>
     </section>
 @endsection
