@@ -13,9 +13,10 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'Password',
     'password-error' => 'The provided password is incorrect.',
+    'email-error' => 'Provided email was not found',
+    'login-generic-error' => 'An error occurred during login.',
+    'signup-generic-error' => 'An error occurred during signup.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'logout' => 'Log out',
     'login' => 'Login',
@@ -23,6 +24,7 @@ return [
     'create-account' => 'Create your account',
     'forgot-password' => 'I forgot my password',
     'email' => 'E-mail address',
+    'password' => 'Password',
     'login-action' => 'Log in',
     'signup-action' => 'Sign up',
     'nickname' => 'Nickname'
