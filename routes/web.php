@@ -10,6 +10,7 @@ use App\Http\Controllers\Database\QuizAnswerTranslationController;
 use App\Http\Controllers\Database\QuizController;
 use App\Http\Controllers\Database\QuizQuestionTranslationController;
 use App\Http\Controllers\Database\RewardsController;
+use App\Http\Controllers\FlameController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
@@ -90,10 +91,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('index');
 
     // Solo flame page
-    Route::get('/solo', function () {
-        $score = Auth::user()->scores->sum('score');
-        return view('flame.solo_flame', ['score' => $score]);
-    })->name('solo');
+    Route::get('/solo', [FlameController::class, 'index'])->name('solo');
 
     // Solo game selection
     Route::get('/solo/games', function () {
@@ -184,7 +182,7 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function() {
+Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function () {
     Route::get('/', [UserRewardsController::class, 'index'])->name('index');
     Route::post('/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('obtain');
 });

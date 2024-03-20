@@ -1,48 +1,51 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const container = document.querySelector(".univ__bg");
-    const score = parseInt(container.getAttribute("data-score"));
-    positionElements(score);
-});
+const svgReady = () => {
+    const svgObject = document.querySelector(".univ__bg--img").contentDocument;
+    const marker = svgObject.getElementById("repere");
+    const children = Array.from(marker.children);
+    children.shift();
+    children.pop();
+    const totalScore = parseInt(
+        document.querySelector(".univ__bg").getAttribute("data-total-score")
+    );
+    const minScore = parseInt(
+        document.querySelector(".univ__bg").getAttribute("data-min-score")
+    );
+    const userScore = parseInt(
+        document.querySelector(".univ__bg").getAttribute("data-score")
+    );
 
-function positionElements(score) {
-    const logo = document.querySelector(".univ__bg--logo");
-    const scoreElement = document.getElementById("score");
+    const scoreInterval = (totalScore - minScore) / children.length;
 
-    let pointX, pointY;
-    if (score >= 0 && score <= 333) {
-        pointX = 6;
-        pointY = 26.5;
-        scoreElement.style.left = pointX - 1.2 + "rem";
-        scoreElement.style.top = pointY - 8 + "rem";
-        const style = document.createElement("style");
-        style.innerHTML = `
-            #score::before {
-                content: "";
-                position: absolute;
-                top: 70px;
-                bottom: -25px;
-                left: 40%;
-                margin-left: -10px;
-                border-width: 25px 20px 0px;
-                border-style: solid;
-                border-color: #d23c49dd transparent transparent transparent;
-            }
-        `;
-        document.head.appendChild(style);
-    } else if (score >= 334 && score <= 666) {
-        pointX = 12.5;
-        pointY = 15;
-        scoreElement.style.left = pointX - 1.2 + "rem";
-        scoreElement.style.top = pointY + 5.6 + "rem";
-    } else if (score >= 667 && score <= 999) {
-        pointX = 5;
-        pointY = 4;
-        scoreElement.style.left = pointX - 1.2 + "rem";
-        scoreElement.style.top = pointY + 5.6 + "rem";
+    let closestChildIndex = 0;
+    let closestScore = minScore;
+
+    for (let i = 0; i < children.length; i++) {
+        const score = minScore + scoreInterval * i;
+        if (score <= userScore) {
+            closestChildIndex = i;
+            closestScore = score;
+        } else {
+            break;
+        }
     }
 
-    if (pointX !== undefined && pointY !== undefined) {
-        logo.style.left = pointX + "rem";
-        logo.style.top = pointY + "rem";
-    }
-}
+    const closestChild = children[closestChildIndex];
+    const cx = closestChild.getAttribute("cx");
+    const cy = closestChild.getAttribute("cy");
+
+    const svgNS = "http://www.w3.org/2000/svg";
+
+    const text = document.createElementNS(svgNS, "text");
+    text.setAttribute("x", cx);
+    text.setAttribute("y", cy);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("fill", "#f1f1f1");
+    text.setAttribute("font-family", '"Baloo", sans-serif');
+    text.setAttribute("font-size", "8rem");
+    text.textContent = userScore;
+
+    const markerPlace = svgObject.getElementById("route");
+    markerPlace.appendChild(text);
+};
+
+document.addEventListener("DOMContentLoaded", svgReady);
