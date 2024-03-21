@@ -40,12 +40,22 @@ const svgReady = () => {
     text.setAttribute("y", cy);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("fill", "#f1f1f1");
+    text.setAttribute("background", "#000000");
     text.setAttribute("font-family", '"Baloo", sans-serif');
     text.setAttribute("font-size", "8rem");
     text.textContent = userScore;
-
     const markerPlace = svgObject.querySelector("svg");
     markerPlace.appendChild(text);
+
+    // Create text background
+    const box = text.getBBox();
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", box.x.toString());
+    rect.setAttribute("y", box.y.toString());
+    rect.setAttribute("width", box.width.toString());
+    rect.setAttribute("height", box.height.toString());
+    rect.setAttribute("fill", "black");
+    markerPlace.insertBefore(rect, text);
 };
 
-document.addEventListener("DOMContentLoaded", svgReady);
+window.addEventListener("load", svgReady);
