@@ -11,6 +11,6 @@ class CreateMiniGames {
      */
     public function handle(): void
     {
-        Artisan::call('db:seed', array('--class' => 'GamesSeeder', '--force'));
+        Artisan::call('db:seed', array('--class' => 'GamesSeeder', '--force' => true));
     }
 }
