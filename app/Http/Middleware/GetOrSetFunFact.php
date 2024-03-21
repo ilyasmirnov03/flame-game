@@ -18,20 +18,24 @@ class GetOrSetFunFact
         $expirationTime = $now->diffInSeconds($midnight);
 
         if (!Cache::get($funFactKey)) {
-            $funFactWithTranslations = FunFact::with('translations')->inRandomOrder()->first();
+            $funFactWithTranslations = FunFact::with('translations')
+                ->inRandomOrder()
+                ->first()
+                ->toArray();
             Cache::set($funFactKey, json_encode($funFactWithTranslations), $expirationTime);
         } else {
-            $funFactWithTranslations = json_decode(Cache::get($funFactKey));
+            $funFactWithTranslations = json_decode(Cache::get($funFactKey), true);
         }
 
         $lang = Language::where('code', strtoupper(app()->getLocale()))->first();
+
         $translatedFunFactIndex = array_search(
             $lang->id,
-            array_column($funFactWithTranslations->translations, 'language_id')
+            array_column($funFactWithTranslations['translations'], 'language_id')
         );
 
         if ($translatedFunFactIndex !== false) {
-            $translatedFact = $funFactWithTranslations->translations[$translatedFunFactIndex]->fact;
+            $translatedFact = $funFactWithTranslations['translations'][$translatedFunFactIndex]['fact'];
         } else {
             $translatedFact = '';
         }
