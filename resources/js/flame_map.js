@@ -44,7 +44,7 @@ const svgReady = () => {
     text.setAttribute("font-size", "8rem");
     text.textContent = userScore;
 
-    const markerPlace = svgObject.getElementById("route");
+    const markerPlace = svgObject.querySelector("svg");
     markerPlace.appendChild(text);
 };
 

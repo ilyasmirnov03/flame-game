@@ -147,13 +147,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     Route::get('/create', [GroupController::class, 'create'])->name("create");
 
     // Group space
-    Route::get('/flame/{group}', function (Group $group) {
-        $score = UserScore::where('group_id', $group->id)->sum('score');
-        return view('group.space', [
-            'group' => $group,
-            'score' => $score,
-        ]);
-    })->name('flame')->middleware('user.in.group');
+    Route::get('/flame/{group}', [FlameController::class, 'show'])->name("flame");
 
     // Leave group
     Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
