@@ -10,6 +10,7 @@ use App\Http\Controllers\Database\QuizAnswerTranslationController;
 use App\Http\Controllers\Database\QuizController;
 use App\Http\Controllers\Database\QuizQuestionTranslationController;
 use App\Http\Controllers\Database\RewardsController;
+use App\Http\Controllers\FlameController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
@@ -20,7 +21,6 @@ use App\Http\Controllers\UserRewardsController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
-use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -90,10 +90,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('index');
 
     // Solo flame page
-    Route::get('/solo', function () {
-        $score = Auth::user()->scores->sum('score');
-        return view('flame.solo_flame', ['score' => $score]);
-    })->name('solo');
+    Route::get('/solo', [FlameController::class, 'index'])->name('solo');
 
     // Solo game selection
     Route::get('/solo/games', function () {
@@ -149,13 +146,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     Route::get('/create', [GroupController::class, 'create'])->name("create");
 
     // Group space
-    Route::get('/flame/{group}', function (Group $group) {
-        $score = UserScore::where('group_id', $group->id)->sum('score');
-        return view('group.space', [
-            'group' => $group,
-            'score' => $score,
-        ]);
-    })->name('flame')->middleware('user.in.group');
+    Route::get('/flame/{group}', [FlameController::class, 'show'])->name("flame");
 
     // Leave group
     Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
