@@ -17,8 +17,10 @@
             <img id="params" class="univ__params--group" src="{{ asset('images/params.svg')}}"
                  alt="Ouvrir les paramètres de groupe">
         </div>
-        <div class="univ__bg" data-score="{{ $score }}" data-total-score="{{ $totalScore }}" data-min-score="{{ $minScore }}">
-            <object type="image/svg+xml" data="{{ asset('images/flame_bg/' . $imageName)}}" class="univ__bg--img"></object>
+        <div class="univ__bg" data-score="{{ $score }}" data-total-score="{{ $totalScore }}"
+             data-min-score="{{ $minScore }}">
+            <object type="image/svg+xml" data="{{ asset('images/flame_bg/' . $imageName)}}"
+                    class="univ__bg--img"></object>
         </div>
         <a class="font dyslexie"
            href="{{ route('group.select_game', ['group' => $group])}}"> {{__('flame.progress')}} </a>

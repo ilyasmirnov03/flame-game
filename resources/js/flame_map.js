@@ -17,13 +17,11 @@ const svgReady = () => {
     const scoreInterval = (totalScore - minScore) / children.length;
 
     let closestChildIndex = 0;
-    let closestScore = minScore;
 
     for (let i = 0; i < children.length; i++) {
         const score = minScore + scoreInterval * i;
         if (score <= userScore) {
             closestChildIndex = i;
-            closestScore = score;
         } else {
             break;
         }
