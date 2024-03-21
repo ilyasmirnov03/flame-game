@@ -165,7 +165,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
             $game['timeToNextGame'] = Cache::get(CacheKeysManager::groupPlayed(Auth::id(), $group->id, $game['id']));
         }
         return view('games.select_game', ['games' => $games, 'route' => 'group.game', 'group' => $group]);
-    })->name('select_game');
+    })->name('select_game')->middleware('user.in.group');
 
     // Group games page
     Route::get('/flame/{group}/games/{game}', [GameController::class, 'groupGame'])
@@ -189,7 +189,8 @@ Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function (
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
-Route::view('/params', 'params')->name('params');
+Route::view('/params', 'params', ['locales' => config('app.available_locales', [])])
+    ->name('params');
 
 /**
  * Database space

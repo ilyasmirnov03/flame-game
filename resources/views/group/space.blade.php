@@ -14,20 +14,22 @@
                 <img src="{{ asset('images/group_icons/Drapeau_France_VF.svg') }}" alt="Logo par défaut">
             @endif
             <h2 class="font dyslexie"> {{ $group['name'] }} </h2>
-            <img id="params" class="univ__params--group" src="{{ asset('images/params.svg')}}" alt="Ouvrir les paramètres de groupe">
+            <img id="params" class="univ__params--group" src="{{ asset('images/params.svg')}}"
+                 alt="Ouvrir les paramètres de groupe">
         </div>
         <div class="univ__bg" data-score="{{ $score }}">
             <img class="univ__bg--img" src="{{ asset('images/flamme_univ.png')}}" alt="Univers de votre flamme">
             <img class="univ__bg--logo" src="{{ asset('images/flamme_logo.svg')}}" alt="Skin de votre flamme">
             <p id="score" class="univ__bg--points dyslexie"> {{ $score }}</p>
         </div>
-        <a class="font dyslexie" href="{{ route('group.select_game', ['group' => $group])}}"> Avancer </a>
+        <a class="font dyslexie"
+           href="{{ route('group.select_game', ['group' => $group])}}"> {{__('flame.progress')}} </a>
     </section>
     <div class="hidden popupgrp" id="groupSettingsPopup">
         <img class="close" id="close" src="{{ asset('images/close.svg')}}" alt="Fermer">
         <form action="{{ route('group.leave', ['group' => $group]) }}" method="POST">
             @csrf
-            <button class="btn font dyslexie" type="submit">Quitter le groupe</button>
+            <button class="btn font dyslexie" type="submit">{{__('group.quit')}}</button>
         </form>
     </div>
 @endsection
