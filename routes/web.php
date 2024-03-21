@@ -184,14 +184,15 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function() {
+Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function () {
     Route::get('/', [UserRewardsController::class, 'index'])->name('index');
     Route::post('/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('obtain');
 });
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
-Route::view('/params', 'params')->name('params');
+Route::view('/params', 'params', ['locales' => config('app.available_locales', [])])
+    ->name('params');
 
 /**
  * Database space
@@ -217,3 +218,15 @@ Route::prefix('database')
             'store', 'edit', 'update'
         ]);
     });
+
+/**
+ * Set locale
+ */
+Route::get('/lang/{lang}', function (string $lang) {
+    if (!in_array($lang, config('app.available_locales', []))) {
+        $lang = 'en';
+    }
+    app()->setLocale($lang);
+    session()->put('locale', $lang);
+    return redirect()->route('params');
+})->name('lang');

@@ -7,8 +7,10 @@
 @section('content')
     <section class="search_group">
         <div class="group__header">
-            <a class="group__header--return font dyslexie" href="{{ route('flame.index') }}"> Retour </a>
-            <input id="searchInput" class="group__header--search font dyslexie" placeholder="Rechercher..." type="text" name="search"
+            <a class="group__header--return font dyslexie" href="{{ route('flame.index') }}"> {{__('common.back')}} </a>
+            <input id="searchInput" class="group__header--search font dyslexie" placeholder="{{__('common.search')}}..."
+                   type="text"
+                   name="search"
                    hx-target="#groupContainer"
                    hx-get="{{ route('group.content') }}"
                    hx-trigger="input delay:250ms"
