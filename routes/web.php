@@ -21,7 +21,6 @@ use App\Http\Controllers\UserRewardsController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
-use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -210,3 +209,15 @@ Route::prefix('database')
             'store', 'edit', 'update'
         ]);
     });
+
+/**
+ * Set locale
+ */
+Route::get('/lang/{lang}', function (string $lang) {
+    if (!in_array($lang, config('app.available_locales', []))) {
+        $lang = 'en';
+    }
+    app()->setLocale($lang);
+    session()->put('locale', $lang);
+    return redirect()->route('params');
+})->name('lang');
