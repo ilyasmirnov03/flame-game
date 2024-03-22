@@ -49,39 +49,16 @@
         .univ__bg--logo {
             width: 3rem;
         }
-
         .univ__bg--points {
-            top: 55%;
-            left: 5%;
-            font-size: calc(1.5rem + 1.390625vw);
-            color: var(--white);
-            background-color: #d23c49dd;
-            padding: 1rem;
-            border-radius: 1rem;
-            text-shadow: 3px 0 0 var(--black), 0 3px 0 var(--black),
-            -3px 0 0 var(--black), 0 -3px 0 var(--black);
-        }
-
-        .univ__bg--points::before {
-            content: "";
-            position: absolute;
-            top: -25px;
-            left: 40%;
-            margin-left: -10px;
-            border-width: 0 20px 25px;
-            border-style: solid;
-            border-color: transparent transparent #d23c49dd transparent;
+            z-index: 90;
         }
     }
 
     & a {
-        position: absolute;
-        bottom: 6vh;
-        left: 50%;
-        transform: translateX(-50%);
         font-family: "Baloo", sans-serif;
         width: 80%;
         margin: auto;
+        margin-top: 1rem;
         text-decoration: none;
         text-align: center;
         background-color: var(--green);
@@ -89,7 +66,7 @@
         font-size: calc(2rem + 1.390625vw);
         color: var(--white);
         text-shadow: 3px 0 0 var(--black), 0 3px 0 var(--black),
-        -3px 0 0 var(--black), 0 -3px 0 var(--black);
+            -3px 0 0 var(--black), 0 -3px 0 var(--black);
     }
 }
 
@@ -122,6 +99,6 @@
         font-family: "Baloo", sans-serif;
         font-size: calc(1.8rem + 1.390625vw);
         text-shadow: 1px 0 0 var(--black), 0 1px 0 var(--black),
-        -1px 0 0 var(--black), 0 -1px 0 var(--black);
+            -1px 0 0 var(--black), 0 -1px 0 var(--black);
     }
 }

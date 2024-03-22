@@ -52,7 +52,7 @@ class ScoreController extends Controller
         $this->saveToCache($userScore->toArray());
 
         return view('games.score', [
-            'message' => 'Score enregistré avec succès',
+            'message' => __('game.success'),
             'score' => $score['total'],
             'bonus' => $score['bonus'],
         ]);

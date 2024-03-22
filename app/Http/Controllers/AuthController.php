@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
 
-    public function signup(SignupRequest $request) {
+    public function signup(SignupRequest $request): RedirectResponse {
         $credentials = $request->validated();
 
         $user = new User();
@@ -29,7 +27,7 @@ class AuthController extends Controller {
         }
 
         return back()->withErrors([
-            'email' => 'Une erreur est survenue lors de l\'enregistrement.',
+            'email' => __('auth.signup-generic-error'),
         ])->onlyInput('email');
     }
 
@@ -46,12 +44,12 @@ class AuthController extends Controller {
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => __('auth.login-generic-error'),
         ])->onlyInput('email');
     }
 
     /**
-     * Handle a log out
+     * Handle a logout
      */
     public function logout(): RedirectResponse {
         Auth::logout();

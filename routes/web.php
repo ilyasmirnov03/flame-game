@@ -10,6 +10,7 @@ use App\Http\Controllers\Database\QuizAnswerTranslationController;
 use App\Http\Controllers\Database\QuizController;
 use App\Http\Controllers\Database\QuizQuestionTranslationController;
 use App\Http\Controllers\Database\RewardsController;
+use App\Http\Controllers\FlameController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
@@ -20,7 +21,6 @@ use App\Http\Controllers\UserRewardsController;
 use App\Models\Game;
 use App\Models\Group;
 use App\Models\User;
-use App\Models\UserScore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -90,10 +90,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     })->name('index');
 
     // Solo flame page
-    Route::get('/solo', function () {
-        $score = Auth::user()->scores->sum('score');
-        return view('flame.solo_flame', ['score' => $score]);
-    })->name('solo');
+    Route::get('/solo', [FlameController::class, 'index'])->name('solo');
 
     // Solo game selection
     Route::get('/solo/games', function () {
@@ -149,13 +146,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     Route::get('/create', [GroupController::class, 'create'])->name("create");
 
     // Group space
-    Route::get('/flame/{group}', function (Group $group) {
-        $score = UserScore::where('group_id', $group->id)->sum('score');
-        return view('group.space', [
-            'group' => $group,
-            'score' => $score,
-        ]);
-    })->name('flame')->middleware('user.in.group');
+    Route::get('/flame/{group}', [FlameController::class, 'show'])->name("flame");
 
     // Leave group
     Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
@@ -167,7 +158,7 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
             $game['timeToNextGame'] = Cache::get(CacheKeysManager::groupPlayed(Auth::id(), $group->id, $game['id']));
         }
         return view('games.select_game', ['games' => $games, 'route' => 'group.game', 'group' => $group]);
-    })->name('select_game');
+    })->name('select_game')->middleware('user.in.group');
 
     // Group games page
     Route::get('/flame/{group}/games/{game}', [GameController::class, 'groupGame'])
@@ -184,14 +175,15 @@ Route::post('/user_score', [ScoreController::class, 'saveResult'])
 /**
  * Views
  */
-Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function() {
+Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function () {
     Route::get('/', [UserRewardsController::class, 'index'])->name('index');
     Route::post('/obtain/{rewardId}', [UserRewardsController::class, 'obtainReward'])->name('obtain');
 });
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
-Route::view('/params', 'params')->name('params');
+Route::view('/params', 'params', ['locales' => config('app.available_locales', [])])
+    ->name('params');
 
 /**
  * Database space
@@ -217,3 +209,15 @@ Route::prefix('database')
             'store', 'edit', 'update'
         ]);
     });
+
+/**
+ * Set locale
+ */
+Route::get('/lang/{lang}', function (string $lang) {
+    if (!in_array($lang, config('app.available_locales', []))) {
+        $lang = 'en';
+    }
+    app()->setLocale($lang);
+    session()->put('locale', $lang);
+    return redirect()->route('params');
+})->name('lang');

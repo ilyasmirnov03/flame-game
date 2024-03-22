@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="leaderboardLinks">
-        <a class="leaderboardLinks__link font dyslexie" href="{{ route('leaderboard.solo.index') }}">Solo</a>
-        <a class="leaderboardLinks__link font dyslexie" href="{{ route('leaderboard.group.index') }}">Group</a>
+        <a class="leaderboardLinks__link font dyslexie"
+           href="{{ route('leaderboard.solo.index') }}">{{__('common.solo')}}</a>
+        <a class="leaderboardLinks__link font dyslexie"
+           href="{{ route('leaderboard.group.index') }}">{{__('common.group')}}</a>
     </div>
     <div class="leaderboard">
         @if ($page == 1)
@@ -39,33 +41,35 @@
         @endif
         <table role="presentation" class="leaderboard__ranking" aria-label="classement des joueurs">
             <tbody class="ranking">
-                @foreach ($ranking as $rankable)
-                    @if ($rankable->rank > 3)
-                        <tr class="ranking @if ($rankable->id == Auth::id()) ranking--user @endif">
-                            <td class="ranking__rating ranking__cell font dyslexie">#{{ $rankable->rank }}</td>
-                            <td class="ranking__name ranking__cell font dyslexie">
-                                {{ $rankable->name }} @if ($rankable->id == Auth::id()) (vous) @endif
-                            </td>
-                            <td class="ranking__score ranking__cell font dyslexie">{{ $rankable->scores_sum_score }}</td>
-                        </tr>
-                    @endif
-                @endforeach
+            @foreach ($ranking as $rankable)
+                @if ($rankable->rank > 3)
+                    <tr class="ranking @if ($rankable->id == Auth::id()) ranking--user @endif">
+                        <td class="ranking__rating ranking__cell font dyslexie">#{{ $rankable->rank }}</td>
+                        <td class="ranking__name ranking__cell font dyslexie">
+                            {{ $rankable->name }} @if ($rankable->id == Auth::id())
+                                ({{__('common.you')}})
+                            @endif
+                        </td>
+                        <td class="ranking__score ranking__cell font dyslexie">{{ $rankable->scores_sum_score }}</td>
+                    </tr>
+                @endif
+            @endforeach
             </tbody>
         </table>
         <div class="leaderboard__controls">
 
             <a class="leaderboard__controlLink font dyslexie"
-                @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo'))
-                    href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}"
-                @else
-                    href="{{ route('leaderboard.group.page', ['page' => $page > 1 ? $page - 1 : 1]) }}"
-                @endif>Précédent</a>
+               @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo'))
+                   href="{{ route('leaderboard.solo.page', ['page' => $page > 1 ? $page - 1 : 1]) }}"
+               @else
+                   href="{{ route('leaderboard.group.page', ['page' => $page > 1 ? $page - 1 : 1]) }}"
+                    @endif>{{__('pagination.previous')}}</a>
             <a class="leaderboard__controlLink font dyslexie"
-                @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo'))
-                    href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}"
-                @else
-                    href="{{ route('leaderboard.group.page', ['page' => $page + 1]) }}"
-                @endif>Suivant</a>
+               @if (str_starts_with(Route::currentRouteName(), 'leaderboard.solo'))
+                   href="{{ route('leaderboard.solo.page', ['page' => $page + 1]) }}"
+               @else
+                   href="{{ route('leaderboard.group.page', ['page' => $page + 1]) }}"
+                    @endif>{{__('pagination.next')}}</a>
         </div>
     </div>
 @endsection

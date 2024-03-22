@@ -101,10 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         htmlElement.style.setProperty("--white", whiteValue);
         htmlElement.style.setProperty("--black", blackValue);
-        pwaImage.src = isDarkMode
-            ? window.pwaWhiteImagePath
-            : window.pwaImagePath;
-
         localStorage.setItem("darkMode", isDarkMode?.toString());
     }
 

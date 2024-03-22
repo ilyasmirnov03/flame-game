@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateDistanceDisplay() {
-        distanceDisplay.textContent = `Distance parcourue : ${totalDistance.toFixed(1)} m`;
+        distanceDisplay.textContent = `${totalDistance.toFixed(1)} m`;
     }
 
     function stopRace() {
