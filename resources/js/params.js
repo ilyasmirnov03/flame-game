@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const htmlElement = document.documentElement;
     const allText = document.querySelectorAll(".font");
     const darkModeToggle = document.getElementById("dark");
-    const pwaImage = document.querySelector(".pwa__img");
     const resetButton = document.getElementById("resetButton");
 
     applyStoredSettings();
