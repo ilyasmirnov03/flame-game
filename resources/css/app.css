@@ -19,6 +19,7 @@
 @import "./leaderboard.css";
 @import "./game/quiz_game.css";
 @import "layout.css";
+@import '/node_modules/@shoelace-style/shoelace/dist/themes/light.css';
 
 :root {
     --white: #f1f1f1;
