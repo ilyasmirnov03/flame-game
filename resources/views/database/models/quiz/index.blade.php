@@ -26,10 +26,25 @@
                     <td>{{ $quiz->label }}</td>
                     @foreach ($languages as $i => $language)
                         <td>
-                            <p>{{ $quiz->translations[$i] ? $quiz->translations[$i]->question : '' }}</p>
-                            <button hx-get="{{route('database.quiz-translation.edit', $quiz->translations[$i]->id)}}"
-                                    hx-target="closest td">Edit
-                            </button>
+                            @php
+                                $translation = $quiz->translations->where('language_id', $language->id)->first();
+                            @endphp
+
+                            @if($translation)
+                                <p>{{ $translation->question }}</p>
+                                <button hx-get="{{ route('database.quiz-translation.edit', $translation->id) }}"
+                                        hx-target="closest td">Edit
+                                </button>
+                            @else
+                                <form hx-post="{{route('database.quiz-translation.store')}}" hx-swap="this">
+                                    @csrf
+                                    <input type="hidden" name="language_id" value="{{$language->id}}">
+                                    <input type="hidden" name="quiz_question_id" value="{{$quiz->id}}">
+                                    <label for="question">Question</label>
+                                    <input type="text" id="question" name="question">
+                                    <input type="submit" value="Save">
+                                </form>
+                            @endif
                         </td>
                     @endforeach
                     <td>

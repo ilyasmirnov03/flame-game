@@ -13,11 +13,12 @@ class QuizAnswerTranslationController extends Controller {
      */
     public function store(Request $request): View
     {
-        $answer = QuizAnswersTranslation::create([
+        $translation = QuizAnswersTranslation::create([
             'answer' => $request->input('answer'),
-            'language_id' => $request->input('language_id')
+            'language_id' => $request->input('language_id'),
+            'quiz_answer_id' => $request->input('quiz_answer_id'),
         ]);
-        return view('database.models.quiz-answer.translation-one', compact('answer'));
+        return view('database.models.quiz-answer.translation-one', compact('translation'));
     }
 
     /**
