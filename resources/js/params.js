@@ -27,7 +27,7 @@ function setupHandlers() {
     const darkModeToggle = document.getElementById("dark");
 
     document.getElementById("resetButton")?.addEventListener("click", resetSettings);
-    document.getElementById('languageSelect').addEventListener('sl-select', selectLanguage);
+    document.getElementById('languageSelect')?.addEventListener('sl-select', selectLanguage);
 
     fontSizeElement?.addEventListener("sl-change", () =>
         applyFontSize(fontSizeElement.value)

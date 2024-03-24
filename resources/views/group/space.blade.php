@@ -13,7 +13,7 @@
             @else
                 <img src="{{ asset('images/group_icons/Drapeau_France_VF.svg') }}" alt="Logo par défaut">
             @endif
-            <h2 class="font dyslexie"> {{ $group['name'] }} </h2>
+            <h2> {{ $group['name'] }} </h2>
             <img id="params" class="univ__params--group" src="{{ asset('images/params.svg')}}"
                  alt="Ouvrir les paramètres de groupe">
         </div>
@@ -22,14 +22,14 @@
             <object type="image/svg+xml" data="{{ asset('images/flame_bg/' . $imageName)}}"
                     class="univ__bg--img"></object>
         </div>
-        <a class="font dyslexie"
+        <a
            href="{{ route('group.select_game', ['group' => $group])}}"> {{__('flame.progress')}} </a>
     </section>
     <div class="hidden popupgrp" id="groupSettingsPopup">
         <img class="close" id="close" src="{{ asset('images/close.svg')}}" alt="Fermer">
         <form action="{{ route('group.leave', ['group' => $group]) }}" method="POST">
             @csrf
-            <button class="btn font dyslexie" type="submit">{{__('group.quit')}}</button>
+            <button class="btn" type="submit">{{__('group.quit')}}</button>
         </form>
     </div>
 @endsection

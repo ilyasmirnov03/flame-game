@@ -4,12 +4,12 @@
     <a href="{{ route('flame.solo') }}">
         <div class="flamme__indiv">
             <img src="{{ asset('images/flamme_logo.svg') }}" alt="Flame skin">
-            <h1 class="font dyslexie"> {{__('flame.my-flame')}} </h1>
-            <h2 class="font dyslexie"> {{ $score }} </h2>
+            <h1> {{__('flame.my-flame')}} </h1>
+            <h2> {{ $score }} </h2>
         </div>
     </a>
     <section class="allgroups">
-        <h2 class="font dyslexie">{{__('flame.groups')}}</h2>
+        <h2>{{__('flame.groups')}}</h2>
         <div class="groups">
             @foreach ($user->userGroups as $group)
                 <a href="{{ route('group.flame', ['group' => $group]) }}" class="groups__div">
@@ -18,15 +18,15 @@
                     @else
                         <img src="{{ asset('images/group_icons/Drapeau_France_VF.svg') }}" alt="Default logo">
                     @endif
-                    <p class="font dyslexie"> {{$group->name}} </p>
+                    <p> {{$group->name}} </p>
                 </a>
             @endforeach
             <div class="groups__add" id="openPopup">
                 <img src="{{ asset('images/add.svg')}}" alt="Add or create a group">
             </div>
             <div class="popup__content hidden" id="popupGroup">
-                <a class="font dyslexie" href="{{ route('group.create')}}">{{__('group.create')}}</a>
-                <a class="font dyslexie" href="{{ route('group.search')}}">{{__('group.join')}}</a>
+                <a href="{{ route('group.create')}}">{{__('group.create')}}</a>
+                <a href="{{ route('group.search')}}">{{__('group.join')}}</a>
                 <span class="popup-close" id="closePopup">
                     <img src="{{ asset('images/close.svg')}}" alt="Close the popup">
                 </span>

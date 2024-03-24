@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="rewards">
-        <h2 class="rewards__title font dyslexie">{{ $totalPoints }} points</h2>
+        <h2 class="rewards__title">{{ $totalPoints }} points</h2>
 
         <div class="rewards__div">
             <div class="rewards__div--total" style="height: {{ 100 - ($totalPoints / $maxScore) * 100 }}%;"></div>
@@ -17,7 +17,7 @@
                         @else
                             <form action="{{ route('rewards.obtain', ['rewardId' => $reward->id]) }}" method="post">
                                 @csrf
-                                <button class="reward__content--btn font dyslexie" type="submit"
+                                <button class="reward__content--btn" type="submit"
                                     @disabled($totalPoints < $reward->score_needed)>
                                     {{__('rewards.obtain')}}
                                 </button>
