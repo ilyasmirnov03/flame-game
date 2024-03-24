@@ -8,6 +8,7 @@
         <input type="submit" value="Save">
     </form>
     <table>
+        <caption>Fun facts</caption>
         <thead>
         <tr>
             <th>ID</th>

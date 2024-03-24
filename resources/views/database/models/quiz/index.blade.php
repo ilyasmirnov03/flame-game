@@ -9,6 +9,7 @@
             <input type="submit" value="Save">
         </form>
         <table>
+            <caption>Quizzes</caption>
             <thead>
             <tr>
                 <th>ID</th>

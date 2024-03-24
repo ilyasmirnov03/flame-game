@@ -14,6 +14,7 @@
         <input type="submit" value="Save">
     </form>
     <table>
+        <caption>Quiz answers</caption>
         <thead>
         <tr>
             <th>Quiz ID</th>
