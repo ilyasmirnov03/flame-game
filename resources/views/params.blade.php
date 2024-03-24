@@ -23,14 +23,14 @@
         </article>
         <article class="notif">
             <h2> {{ __('settings.notifications') }} </h2>
-            <sl-switch>{{ __('settings.inactivity-notification') }}</sl-switch>
-            <sl-switch>{{ __('settings.fun-fact-notification') }}</sl-switch>
+            <sl-switch size="large">{{ __('settings.inactivity-notification') }}</sl-switch>
+            <sl-switch size="large">{{ __('settings.fun-fact-notification') }}</sl-switch>
         </article>
         <article class="access">
             <h2> {{ __('settings.accessibility') }} </h2>
             <sl-range id="fontSize" label="{{ __('settings.font-size') }}" min="1" max="32" step="1"
                       value="16"></sl-range>
-            <sl-switch id="dyslexia">{{ __('settings.dyslexia-mode') }}</sl-switch>
+            <sl-switch size="large" id="dyslexia">{{ __('settings.dyslexia-mode') }}</sl-switch>
             <sl-select id="selectColorBlindness" placeholder="{{ __('settings.none') }}"
                        label="{{ __('settings.color-blindness-mode') }}">
                 <sl-option value="none">{{ __('settings.none') }}</sl-option>
@@ -39,7 +39,7 @@
                 <sl-option value="tritanopia">{{ __('settings.tritanopia') }}</sl-option>
                 <sl-option value="achromatopsia">{{ __('settings.achromatopsia') }}</sl-option>
             </sl-select>
-            <sl-switch id="dark">{{ __('settings.dark-mode') }}</sl-switch>
+            <sl-switch size="large" id="dark">{{ __('settings.dark-mode') }}</sl-switch>
         </article>
     </section>
 @endsection
