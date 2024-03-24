@@ -20,7 +20,7 @@ class AuthController extends Controller {
         $user->email = $credentials['email'];
         $user->save();
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->has('remember-me'))) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('home'));
@@ -37,7 +37,7 @@ class AuthController extends Controller {
     public function login(LoginRequest $request): RedirectResponse {
         $credentials = $request->validated();
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->has('remember-me'))) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('home'));

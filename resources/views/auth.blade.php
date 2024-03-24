@@ -24,6 +24,7 @@
                         <span class="connexion__error">{{ $message }}</span>
                         @enderror
                     </fieldset>
+                    <sl-checkbox size="large" name="remember-me">{{__('auth.remember-me')}}</sl-checkbox>
                     <input class="btn__blue" type="submit" value="{{ __('auth.login-action') }}"/>
                     {{-- TODO: forgotten password --}}
                     {{-- <a class="connexion__miss-password">{{__('auth.forgot-password')}}</a> --}}
@@ -55,6 +56,7 @@
                         <span class="inscription__error">{{ $message }}</span>
                         @enderror
                     </fieldset>
+                    <sl-checkbox size="large" name="remember-me">{{__('auth.remember-me')}}</sl-checkbox>
                     <input class="btn__blue" type="submit" value="{{ __('auth.signup-action') }}"/>
                 </form>
             </div>
