@@ -27,6 +27,6 @@ return [
     'password' => 'Password',
     'login-action' => 'Log in',
     'signup-action' => 'Sign up',
-    'nickname' => 'Nickname'
-
+    'nickname' => 'Nickname',
+    'remember-me' => 'Remember me',
 ];

@@ -27,6 +27,6 @@ return [
     'password' => 'Mot de passe',
     'login-action' => 'Se connecter',
     'signup-action' => 'Créer son compte',
-    'nickname' => 'Pseudo'
-
+    'nickname' => 'Pseudo',
+    'remember-me' => 'Se souvenir de moi',
 ];
