@@ -1,111 +1,153 @@
-document.addEventListener("DOMContentLoaded", function () {
+/**
+ * Select a language from menu
+ * @param e{Event}
+ */
+function selectLanguage(e) {
+    if (typeof e.detail.item.value !== 'string') {
+        console.error('Error: menu item doesn\'t have proper value.');
+        return;
+    }
+    fetch(e.detail.item.value)
+        .then(() => {
+            window.location.reload();
+        })
+        .catch(() => {
+            console.error('Error: error on language change request.');
+        });
+}
+
+/**
+ * Setup event listeners
+ * @event DOMContentLoaded
+ */
+function setupHandlers() {
     const fontSizeElement = document.getElementById("fontSize");
-    const dyslexieElement = document.getElementById("dyslexie");
-    const selectDaltonisme = document.getElementById("selectDaltonisme");
-    const daltonismContainer = document.querySelector(".daltonism-container");
-    const htmlElement = document.documentElement;
-    const allText = document.querySelectorAll(".font");
+    const dyslexieElement = document.getElementById("dyslexia");
+    const selectColorBlindness = document.getElementById("selectColorBlindness");
     const darkModeToggle = document.getElementById("dark");
-    const resetButton = document.getElementById("resetButton");
 
-    applyStoredSettings();
-    updateFormValues();
+    document.getElementById("resetButton")?.addEventListener("click", resetSettings);
+    document.getElementById('languageSelect').addEventListener('sl-select', selectLanguage);
 
-    fontSizeElement?.addEventListener("change", () =>
+    fontSizeElement?.addEventListener("sl-change", () =>
         applyFontSize(fontSizeElement.value)
     );
-    dyslexieElement?.addEventListener("click", toggleDyslexie);
-    selectDaltonisme?.addEventListener("change", () =>
-        applyDaltonisme(selectDaltonisme.value)
+    dyslexieElement?.addEventListener("sl-input", toggleDyslexia);
+    selectColorBlindness?.addEventListener("sl-input", () =>
+        applyColorBlindness(selectColorBlindness.value)
     );
-    darkModeToggle?.addEventListener("change", () =>
+    darkModeToggle?.addEventListener("sl-input", () => {
         applyDarkMode(darkModeToggle.checked)
+    });
+}
+
+/**
+ * Reset settings
+ */
+function resetSettings() {
+    localStorage.clear();
+    updateFormValues();
+    window.location.reload();
+}
+
+/**
+ * Update values on inputs from local storage on load
+ */
+function updateFormValues() {
+    const fontSizeElement = document.getElementById("fontSize");
+    const dyslexiaElement = document.getElementById("dyslexia");
+    const selectColorBlindness = document.getElementById("selectColorBlindness");
+    const darkModeToggle = document.getElementById("dark");
+
+    if (!fontSizeElement) {
+        return;
+    }
+
+    fontSizeElement.value =
+        localStorage.getItem("fontSize") !== null
+            ? localStorage.getItem("fontSize")
+            : 4;
+
+    dyslexiaElement.checked = localStorage.getItem("dyslexia") === "true";
+    selectColorBlindness.value = localStorage.getItem("colorBlindness") || "none";
+    darkModeToggle.checked = localStorage.getItem("darkMode") === "true";
+}
+
+/**
+ * Apply stored settings from local storage
+ * @event DOMContentLoaded
+ */
+function applyStoredSettings() {
+    const storedFontSize = localStorage.getItem("fontSize");
+    if (storedFontSize) {
+        applyFontSize(storedFontSize);
+    }
+
+    const storedDyslexia = localStorage.getItem("dyslexia");
+    if (storedDyslexia === "true") {
+        toggleDyslexia();
+    }
+
+    const storedColorBlindness = localStorage.getItem("colorBlindness");
+    if (storedColorBlindness) {
+        applyColorBlindness(storedColorBlindness);
+    }
+
+    const storedDarkMode = localStorage.getItem("darkMode");
+    if (storedDarkMode === "true") {
+        applyDarkMode(true);
+    }
+}
+
+/**
+ * Apply font size setting from local storage
+ * @param value{string}
+ */
+function applyFontSize(value) {
+    document.documentElement.style.fontSize = `${value}px`;
+    localStorage.setItem("fontSize", value);
+}
+
+/**
+ * Toggle dyslexia setting
+ */
+function toggleDyslexia() {
+    document.body.classList.toggle('dyslexia');
+    const isDyslexiaEnabled = document.body.classList.contains("dyslexia");
+    localStorage.setItem("dyslexia", isDyslexiaEnabled.toString());
+}
+
+/**
+ * Apply color blindness setting
+ * @param value{string}
+ */
+function applyColorBlindness(value) {
+    document.body.classList.remove(
+        "cb-protanopia",
+        "cb-deuteranopia",
+        "cb-tritanopia",
+        "cb-achromatopsia"
     );
-    resetButton?.addEventListener("click", resetSettings);
+    value !== "none" && document.body.classList.add(`cb-${value}`);
+    localStorage.setItem("colorBlindness", value);
+}
 
-    function applyStoredSettings() {
-        const storedFontSize = localStorage.getItem("fontSize");
-        if (storedFontSize) {
-            applyFontSize(storedFontSize);
-        }
+/**
+ * Apply dark mode setting
+ * @param isDarkMode{boolean}
+ */
+function applyDarkMode(isDarkMode) {
+    const whiteValue = isDarkMode ? "#020d19" : "#f1f1f1";
+    const blackValue = isDarkMode ? "#f1f1f1" : "#020d19";
 
-        const storedDyslexie = localStorage.getItem("dyslexie");
-        if (storedDyslexie === "true") {
-            toggleDyslexie();
-        }
+    document.documentElement.style.setProperty("--white", whiteValue);
+    document.documentElement.style.setProperty("--black", blackValue);
+    document.documentElement.classList.toggle('sl-theme-dark', isDarkMode);
+    localStorage.setItem("darkMode", isDarkMode.toString());
+}
 
-        const storedDaltonisme = localStorage.getItem("daltonisme");
-        if (storedDaltonisme) {
-            applyDaltonisme(storedDaltonisme);
-        }
-
-        const storedDarkMode = localStorage.getItem("darkMode");
-        if (storedDarkMode === "true") {
-            applyDarkMode(true);
-        }
-    }
-
-    function updateFormValues() {
-        if (!fontSizeElement) {
-            return;
-        }
-
-        fontSizeElement.value =
-            localStorage.getItem("fontSize") !== null
-                ? localStorage.getItem("fontSize")
-                : 4;
-
-        dyslexieElement.checked = localStorage.getItem("dyslexie") === "true";
-        selectDaltonisme.value = localStorage.getItem("daltonisme") || "none";
-        darkModeToggle.checked = localStorage.getItem("darkMode") === "true";
-    }
-
-    function applyFontSize(value) {
-        const minMultiplier = 0.7;
-        const maxMultiplier = 3;
-        const adjustedValue =
-            minMultiplier +
-            (maxMultiplier - minMultiplier) * (parseFloat(value) / 20);
-        allText.forEach((textElement) => {
-            textElement.style.fontSize = `${adjustedValue}em`;
-        });
-        localStorage.setItem("fontSize", value);
-    }
-
-    function toggleDyslexie() {
-        const elementsToStyle = document.querySelectorAll(".dyslexie");
-        elementsToStyle.forEach(function (element) {
-            element.classList.toggle("dyslexique");
-        });
-        const isDyslexieEnabled =
-            elementsToStyle[0].classList.contains("dyslexique");
-        localStorage.setItem("dyslexie", isDyslexieEnabled.toString());
-    }
-
-    function applyDaltonisme(value) {
-        daltonismContainer.classList.remove(
-            "daltonism-protanopia",
-            "daltonism-deuteranopia",
-            "daltonism-tritanopia",
-            "daltonism-achromatopsia"
-        );
-        value !== "none" &&
-            daltonismContainer.classList.add(`daltonism-${value}`);
-        localStorage.setItem("daltonisme", value);
-    }
-
-    function applyDarkMode(isDarkMode) {
-        const whiteValue = isDarkMode ? "#020d19" : "#f1f1f1";
-        const blackValue = isDarkMode ? "#f1f1f1" : "#020d19";
-
-        htmlElement.style.setProperty("--white", whiteValue);
-        htmlElement.style.setProperty("--black", blackValue);
-        localStorage.setItem("darkMode", isDarkMode?.toString());
-    }
-
-    function resetSettings() {
-        localStorage.clear();
-        updateFormValues();
-        location.reload();
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    applyStoredSettings();
+    updateFormValues();
+    setupHandlers();
 });

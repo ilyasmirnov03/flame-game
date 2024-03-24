@@ -3,6 +3,7 @@
 return [
     'title' => 'Settings',
     'languages' => 'Languages',
+    'language-choose' => 'Choose language',
     'notifications' => 'Notifications',
     'inactivity-notification' => 'Inactivity notifications',
     'fun-fact-notification' => 'Fun fact notification',

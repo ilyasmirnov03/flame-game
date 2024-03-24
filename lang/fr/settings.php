@@ -3,6 +3,7 @@
 return [
     'title' => 'Paramètres',
     'languages' => 'Langues',
+    'language-choose' => 'Choisissez une langue',
     'notifications' => 'Notifications',
     'inactivity-notification' => 'Notifications d\'inactivité',
     'fun-fact-notification' => 'Notification d\'anecdotes',
