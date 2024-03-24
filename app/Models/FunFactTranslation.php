@@ -16,13 +16,20 @@ class FunFactTranslation extends Model
      */
     protected $table = 'og_fun_fact_translations';
 
+    protected $fillable = [
+        'fact',
+        'language_id',
+        'fun_fact_id',
+    ];
+
     /**
      * Not use timestamps for this model.
      * @var bool
      */
     public $timestamps = false;
 
-    public function language(): BelongsTo {
+    public function language(): BelongsTo
+    {
         return $this->belongsTo(Language::class);
     }
 }

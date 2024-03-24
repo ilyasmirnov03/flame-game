@@ -20,13 +20,18 @@ class FunFact extends Model
      */
     protected $table = 'og_fun_facts';
 
+    protected $fillable = [
+        'label'
+    ];
+
     /**
      * Not use timestamps for this model.
      * @var bool
      */
     public $timestamps = false;
 
-    public function translations(): HasMany {
+    public function translations(): HasMany
+    {
         return $this->hasMany(FunFactTranslation::class);
     }
 }

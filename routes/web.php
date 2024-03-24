@@ -3,6 +3,7 @@
 use App\Classes\CacheKeysManager;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Database\FunFactController;
+use App\Http\Controllers\Database\FunFactTranslationController;
 use App\Http\Controllers\Database\GameTranslationsController;
 use App\Http\Controllers\Database\LanguagesController;
 use App\Http\Controllers\Database\QuizAnswerController;
@@ -192,10 +193,15 @@ Route::prefix('database')
     ->middleware('user.can.edit.og.data')
     ->name('database.')
     ->group(function () {
-        Route::resource('fun-fact', FunFactController::class);
         Route::resource('language', LanguagesController::class);
         Route::resource('reward', RewardsController::class);
         Route::resource('game', GameTranslationsController::class);
+        Route::resource('fun-fact', FunFactController::class)->only([
+            'index', 'store', 'destroy'
+        ]);
+        Route::resource('fun-fact-translation', FunFactTranslationController::class)->only([
+            'store', 'edit', 'update'
+        ]);
         Route::resource('quiz', QuizController::class)->only([
             'index', 'store', 'destroy'
         ]);

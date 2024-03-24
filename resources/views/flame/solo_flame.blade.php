@@ -9,8 +9,8 @@
         <div class="univ__bg" data-score="{{ $score }}" data-total-score="{{ $totalScore }}"
              data-min-score="{{ $minScore }}">
             <object type="image/svg+xml" data="{{ asset('images/flame_bg/' . $imageName)}}"
-                    class="univ__bg--img"></object>
+                    class="univ__bg--img" ></object>
         </div>
-        <a class="font dyslexie" href="{{ route('flame.select_game')}}"> {{__('flame.progress')}} </a>
+        <a href="{{ route('flame.select_game')}}"> {{__('flame.progress')}} </a>
     </section>
 @endsection
