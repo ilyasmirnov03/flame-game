@@ -23,7 +23,7 @@
     </div>
     @include('@ui.nav')
 </main>
-@include('./fun-fact')
+@include('fun_fact')
 
 </body>
 
