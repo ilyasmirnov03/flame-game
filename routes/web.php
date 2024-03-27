@@ -64,10 +64,7 @@ Route::prefix('/profile')->name('profile.')->group(function () {
     })->name("index")->middleware(['auth']);
 
     // Access edit page
-    Route::get('/edit', function () {
-        $user = Auth::user();
-        return view('profile.edit', ['user' => $user]);
-    })->name("edit")->middleware(['auth']);
+    Route::get('/edit', [UserRewardsController::class, 'getUserRewards'])->name("edit")->middleware(['auth']);
 
     // Request an edit
     Route::post('/edit', [ProfileController::class, 'changeInfos'])->name("edit")->middleware(['auth']);

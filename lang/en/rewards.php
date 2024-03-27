@@ -1,5 +1,10 @@
 <?php
 
 return [
-    'obtain' => 'Obtain'
+    'obtain' => 'Obtain',
+    'hat' => 'Hat',
+    'top' => 'Top',
+    'bottom' => 'Bottom',
+    'shoes' => 'Shoes',
+    'flame' => 'Flame'
 ];
