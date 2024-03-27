@@ -7,7 +7,7 @@
             <form method="POST" class="profileInfos__form">
                 @csrf
                 <input class="profileInfos__input" type="text" name="name" value="{{ $user->name }}">
-                <input class="profileInfos__input" type="mail" name="email" value="{{ $user->email }}">
+                <input class="profileInfos__input" type="email" name="email" value="{{ $user->email }}">
                 @if ($message = Session::get('success'))
                     <span>{{ Session::get('success') }}</span>
                 @endif
