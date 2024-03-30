@@ -1,5 +1,9 @@
 @extends('@ui.layout')
 
+@section('assets')
+    @vite('resources/js/settings/configureSettings.js')
+@endsection
+
 @section('content')
     <section class="params">
         <article class="params__top">

@@ -3,10 +3,9 @@ import {SETTINGS_LOCAL_STORAGE} from "./constants/settings.local-storage.constan
 /**
  * Open the dialog
  * @param popup{HTMLDialogElement}
- * @param openBtn{HTMLDialogElement}
  * @event click
  */
-function openDialog(popup, openBtn) {
+function openDialog(popup) {
     popup.show();
 }
 
@@ -32,7 +31,7 @@ function init() {
         localStorage.setItem(SETTINGS_LOCAL_STORAGE.FUN_FACT_LAST_SEEN_DATE, currentDate.toISOString());
     }
 
-    $openBtn.addEventListener('click', () => openDialog($dialog, $openBtn));
+    $openBtn.addEventListener('click', () => openDialog($dialog));
     $closeBtn.addEventListener('click', () => closeDialog($dialog));
 
     // Update open btn state

@@ -15,6 +15,7 @@ export default defineConfig({
                 "resources/js/groups.js",
                 "resources/js/libs/htmx.js",
                 "resources/js/quiz.js",
+                "resources/js/settings/configureSettings.js",
             ],
             refresh: true,
         }),

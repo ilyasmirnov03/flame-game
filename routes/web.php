@@ -180,8 +180,8 @@ Route::name('rewards.')->prefix('rewards')->middleware('auth')->group(function (
 
 Route::get('/', [StepsController::class, 'show'])->name('home');
 
-Route::view('/params', 'params', ['locales' => config('app.available_locales', [])])
-    ->name('params');
+Route::view('/settings', 'settings', ['locales' => config('app.available_locales', [])])
+    ->name('settings');
 
 /**
  * Database space

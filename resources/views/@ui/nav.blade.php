@@ -20,8 +20,8 @@
                 <img src="{{ asset('images/score.svg') }}" alt="Découvrir le classement">
             </a>
         </li>
-        <li class="{{ Request::is('params') ? 'active' : '' }}">
-            <a href="{{ route('params') }}">
+        <li class="{{ Request::is('settings') ? 'active' : '' }}">
+            <a href="{{ route('settings') }}">
                 <img src="{{ asset('images/params.svg') }}" alt="Ouvrir les paramètres">
             </a>
         </li>
