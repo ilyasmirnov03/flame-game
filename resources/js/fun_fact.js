@@ -1,50 +1,43 @@
-const funfactPopup = document.getElementById("funFactPopup");
-const closePopup = document.querySelector(".close");
-const funfactBtn = document.querySelector(".open-fun-fact-popup");
-const homePageLi = document.querySelector(".navbar li:nth-child(3)");
-const navItems = document.querySelectorAll(".navbar li");
+import {SETTINGS_LOCAL_STORAGE} from "./constants/settings.local-storage.constant.js";
 
-let previousActivePage = null;
-
-const currentDate = new Date();
-const lastSeenDate = localStorage.getItem("funfact_last_seen_date");
-
-if (
-    !lastSeenDate ||
-    new Date(lastSeenDate).getDate() !== currentDate.getDate()
-) {
-    funfactPopup.style.display = "flex";
-    navItems.forEach((item) => {
-        item.classList.remove("active");
-    });
-    funfactBtn.classList.add("active");
-
-    localStorage.setItem("funfact_last_seen_date", currentDate.toISOString());
-} else {
-    localStorage.setItem("funfact_seen_today", "true");
+/**
+ * Open the dialog
+ * @param popup{HTMLDialogElement}
+ * @param openBtn{HTMLDialogElement}
+ * @event click
+ */
+function openDialog(popup, openBtn) {
+    popup.show();
 }
 
-funfactBtn.addEventListener("click", function () {
-    previousActivePage = document.querySelector(".navbar li.active");
+/**
+ * Close the dialog
+ * @param popup{HTMLDialogElement}
+ * @event click
+ */
+function closeDialog(popup) {
+    popup.hide();
+}
 
-    funfactPopup.style.display = "flex";
-    navItems.forEach((item) => {
-        item.classList.remove("active");
-    });
-    funfactBtn.classList.add("active");
-});
+function init() {
+    const $dialog = document.querySelector('sl-dialog');
+    const $openBtn = document.querySelector('.open-fun-fact-popup');
+    const $closeBtn = document.querySelector(".close");
 
-closePopup.addEventListener("click", function () {
-    funfactPopup.style.display = "none";
-    funfactBtn.classList.remove("active");
+    const currentDate = new Date();
+    const lastSeenDate = localStorage.getItem(SETTINGS_LOCAL_STORAGE.FUN_FACT_LAST_SEEN_DATE);
 
-    const seenToday = localStorage.getItem("funfact_seen_today");
-
-    if (seenToday) {
-        if (previousActivePage) {
-            previousActivePage.classList.add("active");
-        }
-    } else {
-        homePageLi.classList.add("active");
+    if (lastSeenDate == null && new Date(lastSeenDate).getDate() !== currentDate.getDate()) {
+        $dialog.show();
+        localStorage.setItem(SETTINGS_LOCAL_STORAGE.FUN_FACT_LAST_SEEN_DATE, currentDate.toISOString());
     }
-});
+
+    $openBtn.addEventListener('click', () => openDialog($dialog, $openBtn));
+    $closeBtn.addEventListener('click', () => closeDialog($dialog));
+
+    // Update open btn state
+    $dialog.addEventListener('sl-hide', () => $openBtn.classList.remove('active'));
+    $dialog.addEventListener('sl-show', () => $openBtn.classList.add('active'));
+}
+
+window.addEventListener('DOMContentLoaded', init);

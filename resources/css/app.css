@@ -5,7 +5,6 @@
 @import "./profile/profile.css";
 @import "./profile/edit.css";
 @import "./auth.css";
-@import "./fun_fact.css";
 @import "./params.css";
 @import "./rewards.css";
 @import "./home.css";
@@ -21,6 +20,7 @@
 @import "layout.css";
 @import '/node_modules/@shoelace-style/shoelace/dist/themes/light.css';
 @import '/node_modules/@shoelace-style/shoelace/dist/themes/dark.css';
+@import './globals/margin.css';
 
 :root {
     --white: #f1f1f1;
