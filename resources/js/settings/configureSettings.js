@@ -48,8 +48,10 @@ function setupHandlers() {
  * Reset settings
  */
 function resetSettings() {
-    localStorage.clear();
-    updateFormValues();
+    localStorage.removeItem(SETTINGS_LOCAL_STORAGE.FONT_SIZE);
+    localStorage.removeItem(SETTINGS_LOCAL_STORAGE.COLOR_BLINDNESS);
+    localStorage.removeItem(SETTINGS_LOCAL_STORAGE.DYSLEXIA);
+    localStorage.removeItem(SETTINGS_LOCAL_STORAGE.DARK_MODE);
     window.location.reload();
 }
 
