@@ -1,4 +1,3 @@
-import "./profil";
 import "./settings/applySettings";
 import "./flame";
 import "./pwa_button";

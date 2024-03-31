@@ -27,7 +27,7 @@ class AuthController extends Controller {
         }
 
         return back()->withErrors([
-            'email' => __('auth.signup-generic-error'),
+            'signupEmail' => __('auth.signup-generic-error'),
         ])->onlyInput('email');
     }
 
@@ -44,7 +44,7 @@ class AuthController extends Controller {
         }
 
         return back()->withErrors([
-            'email' => __('auth.login-generic-error'),
+            'loginEmail' => __('auth.login-generic-error'),
         ])->onlyInput('email');
     }
 

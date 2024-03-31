@@ -41,11 +41,11 @@ use Illuminate\Support\Facades\Route;
  * Authentication pages
  */
 Route::get('/login', function () {
-    return view('auth', ['baseActive' => 'connexion']);
+    return view('auth', ['signup' => false]);
 })->name("login.view")->middleware(['guest']);
 
 Route::get('/signup', function () {
-    return view('auth', ['baseActive' => 'signup']);
+    return view('auth', ['signup' => true]);
 })->name("signup.view")->middleware(['guest']);
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
