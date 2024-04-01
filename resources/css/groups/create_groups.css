@@ -1,0 +1,46 @@
+.group__title {
+    margin: 0;
+    font-size: calc(2rem + 1.390625vw);
+    text-align: center;
+}
+
+#groupIcons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.group__form--icon-option {
+    border-radius: 1rem;
+    border: 1px solid var(--black);
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+}
+
+.group__form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    & button {
+        width: 60%;
+        margin: auto;
+    }
+
+    .group__icon--choice {
+        width: 10rem;
+        height: 7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+        border: 2px solid var(--black);
+        background-color: #1715150f;
+
+        & img {
+            height: 90%;
+        }
+    }
+}

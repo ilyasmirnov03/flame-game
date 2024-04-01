@@ -1,15 +1,8 @@
-const popup = document.getElementById("popupGroup");
-const openPopup = document.getElementById("openPopup");
-const closePopup = document.getElementById("closePopup");
+function init() {
+    const popup = document.querySelector('sl-dialog.group-join');
+    const openPopup = document.getElementById("openPopup");
 
-if (openPopup) {
-    openPopup.addEventListener("click", function () {
-        popup.classList.remove("hidden");
-    });
+    openPopup.addEventListener("click", () => popup.show());
 }
 
-if (closePopup) {
-    closePopup.addEventListener("click", function () {
-        popup.classList.add("hidden");
-    });
-}
+window.addEventListener('DOMContentLoaded', init);

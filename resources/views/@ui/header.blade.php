@@ -9,8 +9,3 @@
         <img src="{{ asset('images/profil.svg') }}" alt="Voir son profil">
     </a>
 </header>
-
-<script>
-    window.pwaImagePath = "{{ asset('images/pwa.svg') }}";
-    window.pwaWhiteImagePath = "{{ asset('images/pwa_white.svg') }}";
-</script>
