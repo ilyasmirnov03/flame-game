@@ -19,9 +19,9 @@ function closeDialog(popup) {
 }
 
 function init() {
-    const $dialog = document.querySelector('sl-dialog');
+    const $dialog = document.querySelector('sl-dialog.fun-fact');
     const $openBtn = document.querySelector('.open-fun-fact-popup');
-    const $closeBtn = document.querySelector(".close");
+    const $closeBtn = document.querySelector(".close-fun-fact");
 
     const currentDate = new Date();
     const lastSeenDate = localStorage.getItem(SETTINGS_LOCAL_STORAGE.FUN_FACT_LAST_SEEN_DATE);
