@@ -55,11 +55,6 @@ export function applyColorBlindness(value) {
  * @param isDarkMode{boolean}
  */
 export function applyDarkMode(isDarkMode) {
-    const whiteValue = isDarkMode ? "#020d19" : "#f1f1f1";
-    const blackValue = isDarkMode ? "#f1f1f1" : "#020d19";
-
-    document.documentElement.style.setProperty("--white", whiteValue);
-    document.documentElement.style.setProperty("--black", blackValue);
     document.documentElement.classList.toggle('sl-theme-dark', isDarkMode);
     localStorage.setItem(SETTINGS_LOCAL_STORAGE.DARK_MODE, isDarkMode.toString());
 }
