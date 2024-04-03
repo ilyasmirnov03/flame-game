@@ -1,5 +1,4 @@
 import "./settings/applySettings";
-import "./flame";
 import "./pwa_button";
 import "./fun_fact";
 import "./libs/shoelace";
