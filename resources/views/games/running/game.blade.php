@@ -12,6 +12,9 @@
     @if(!is_null($group ?? null))
         <input type="hidden" name="group" value="{{ $group->id }}">
     @endif
+
+    <sl-drawer class="game-result"></sl-drawer>
+
     <section class="rungame" id="mainSection">
         <h1 class="rungame__title">{{__('game.run.title')}}</h1>
         <h2 class="rungame__title--blue">{{__('game.run')}}</h2>
@@ -22,6 +25,4 @@
             {{__('game.run.distance')}}: <span id="distanceDisplay">0 m</span>
         </p>
     </section>
-
-    <article id="scoreResult"></article>
 @endsection

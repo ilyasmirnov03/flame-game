@@ -9,5 +9,6 @@ return [
     'result' => 'Result',
     'score' => 'Score',
     'points' => 'Points',
-    'success' => 'Your score was successfully saved'
+    'success' => 'Your score was successfully saved',
+    'score-error' => 'An error occurred while saving your score.'
 ];

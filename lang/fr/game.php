@@ -9,5 +9,6 @@ return [
     'result' => 'Résultat',
     'score' => 'Score',
     'points' => 'Points',
-    'success' => 'Score enregistré avec succès'
+    'success' => 'Score enregistré avec succès',
+    'score-error' => 'Une erreur s\'est produite lors de la sauvegarde des points du jeu.'
 ];

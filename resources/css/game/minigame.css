@@ -1,3 +1,7 @@
+sl-drawer.game-result {
+    --size: 100vw;
+}
+
 .minigame {
     position: relative;
     padding: 2rem;

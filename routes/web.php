@@ -91,13 +91,7 @@ Route::prefix('/flame')->name('flame.')->middleware(['auth'])->group(function ()
     Route::get('/solo', [FlameController::class, 'index'])->name('solo');
 
     // Solo game selection
-    Route::get('/solo/games', function () {
-        $games = Game::get()->toArray();
-        foreach ($games as &$game) {
-            $game['timeToNextGame'] = Cache::get(CacheKeysManager::soloPlayed(Auth::id(), $game['id']));
-        }
-        return view('games.select_game', ['games' => $games, 'route' => 'flame.game']);
-    })->name('select_game');
+    Route::get('/solo/games', [GameController::class, 'getSoloGames'])->name('select_game');
 
     Route::get('/games/{gameId}/description', [GameController::class, 'getGameDescription']);
 
@@ -150,13 +144,8 @@ Route::prefix('group')->name('group.')->middleware(['auth'])->group(function () 
     Route::post('/leave/{group}', [GroupController::class, 'leaveGroup'])->name('leave');
 
     // Group games selection
-    Route::get('/flame/{group}/games', function (Group $group) {
-        $games = Game::get()->toArray();
-        foreach ($games as &$game) {
-            $game['timeToNextGame'] = Cache::get(CacheKeysManager::groupPlayed(Auth::id(), $group->id, $game['id']));
-        }
-        return view('games.select_game', ['games' => $games, 'route' => 'group.game', 'group' => $group]);
-    })->name('select_game')->middleware('user.in.group');
+    Route::get('/flame/{group}/games', [GameController::class, 'getGroupGames'])
+        ->name('select_game')->middleware('user.in.group');
 
     // Group games page
     Route::get('/flame/{group}/games/{game}', [GameController::class, 'groupGame'])

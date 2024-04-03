@@ -2,25 +2,31 @@
 
 namespace App\Classes\Factories\Score;
 
+use App\Enums\GameRules;
 use App\Models\QuizAnswer;
+use Exception;
 
-class QuizScore extends ScoreFactory {
+class QuizScore extends ScoreFactory
+{
 
-    public function calculateScore(string $userId, array $game, int $elapsedTime): array
+    /**
+     * @throws Exception
+     */
+    public function calculateScore(string $userId, array $game, int $elapsedTime): ScoreViewStore
     {
         $answers = json_decode($game['answers'], true);
-        $maxScore = 1000;
+        $maxScore = GameRules::MAX_SCORE->value;
         $quizAnswer = new QuizAnswer();
         $rightAnswersAmount = $quizAnswer
             ->whereIn('id', array_values($answers))
             ->where('is_right', 1)
             ->count();
-        $score = ($maxScore / count($answers)) * $rightAnswersAmount;
-        return [
-            'score' => min($score, $maxScore),
+        $score = min(($maxScore / count($answers)) * $rightAnswersAmount, $maxScore);
+        return new ScoreViewStore(view('games.quiz.score', [
+            'message' => __('game.success'),
+            'score' => $score,
             'bonus' => 0,
-            'total' => min($score, $maxScore)
-        ];
+        ]), $score, 0);
     }
 
     /**

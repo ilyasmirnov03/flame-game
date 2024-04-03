@@ -3,9 +3,14 @@
 namespace App\Classes\Factories\Score;
 
 use App\Models\UserScore;
+use Exception;
 
 class RunningScore extends ScoreFactory {
-    public function calculateScore(string $userId, array $game, int $elapsedTime): array
+
+    /**
+     * @throws Exception
+     */
+    public function calculateScore(string $userId, array $game, int $elapsedTime): ScoreViewStore
     {
         $maxScore = 1000;
         $maxTime = 2 * 60 + 30;
@@ -19,12 +24,12 @@ class RunningScore extends ScoreFactory {
         }
 
         $bonusPoints = $this->calculateScoreBonus($userId, $game, $elapsedTime);
-
-        return [
-            'score' => $score,
-            'bonus' => $bonusPoints,
-            'total' => min($score + $bonusPoints, $maxScore)
-        ];
+        $finalScore = min($score + $bonusPoints, $maxScore);
+        return new ScoreViewStore(view('games.running.score', [
+            'message' => __('game.success'),
+            'score' => $finalScore,
+            'bonus' => 0,
+        ]), $finalScore, $bonusPoints);
     }
 
     public function calculateScoreBonus(string $userId, array $game, int $elapsedTime): int
