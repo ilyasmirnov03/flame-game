@@ -13,6 +13,8 @@
         <input type="hidden" name="group" value="{{ $group->id }}">
     @endif
 
+    <sl-drawer class="game-result"></sl-drawer>
+
     <button class="btn__blue begin">{{__('common.start')}}</button>
 
     <div class="quiz__container">
@@ -34,6 +36,4 @@
         @endforeach
         <button class="btn confirm hidden" disabled>{{__('common.confirm')}}</button>
     </div>
-
-    <article id="scoreResult"></article>
 @endsection

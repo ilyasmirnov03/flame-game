@@ -1,9 +1,7 @@
-import "./profil";
-import "./params";
-import "./flame";
+import "./settings/applySettings";
 import "./pwa_button";
 import "./fun_fact";
-import "./libs/shoelace.js";
+import "./libs/shoelace";
 
 /**
  * Get CSRF token from meta tag if set on page.

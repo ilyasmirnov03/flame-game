@@ -1,5 +1,9 @@
 @extends('@ui.layout')
 
+@section('assets')
+    @vite('resources/js/flame.js')
+@endsection
+
 @section('content')
     <a href="{{ route('flame.solo') }}">
         <div class="flamme__indiv">
@@ -13,24 +17,17 @@
         <div class="groups">
             @foreach ($user->userGroups as $group)
                 <a href="{{ route('group.flame', ['group' => $group]) }}" class="groups__div">
-                    @if(isset($group['image']) && $group['image'])
-                        <img src="{{ asset('images/group_icons/' . $group['image']) }}" alt="Group logo">
-                    @else
-                        <img src="{{ asset('images/group_icons/Drapeau_France_VF.svg') }}" alt="Default logo">
-                    @endif
+                    <img src="{{ asset('images/group_icons/' . $group['image']) }}" alt="Group logo">
                     <p> {{$group->name}} </p>
                 </a>
             @endforeach
             <div class="groups__add" id="openPopup">
                 <img src="{{ asset('images/add.svg')}}" alt="Add or create a group">
             </div>
-            <div class="popup__content hidden" id="popupGroup">
-                <a href="{{ route('group.create')}}">{{__('group.create')}}</a>
-                <a href="{{ route('group.search')}}">{{__('group.join')}}</a>
-                <span class="popup-close" id="closePopup">
-                    <img src="{{ asset('images/close.svg')}}" alt="Close the popup">
-                </span>
-            </div>
         </div>
     </section>
+    <sl-dialog class="group-join" label="{{__('group.new-dialog-title')}}">
+        <a href="{{ route('group.create')}}" class="btn__green">{{__('group.create')}}</a>
+        <a href="{{ route('group.search')}}" class="btn__green">{{__('group.join')}}</a>
+    </sl-dialog>
 @endsection

@@ -32,30 +32,29 @@ class ScoreController extends Controller
         $elapsedTime = $finishedAt->diffInSeconds($startedAt);
 
         $scoreCalculator = ScoreFactory::getScoreCalculator($game->label);
-        $score = $scoreCalculator
-            ->calculateScore(Auth::id(), ['game_id' => $game->id, ...$request->post()], $elapsedTime);
+        try {
+            $score = $scoreCalculator
+                ->calculateScore(Auth::id(), ['game_id' => $game->id, ...$request->post()], $elapsedTime);
+            $userScoreArray = [
+                'game_id' => $game->id,
+                'finished_at' => $finishedAt,
+                'started_at' => $startedAt,
+                'score' => $score->getTotalScore(),
+                'user_id' => Auth::id(),
+            ];
 
-        $userScoreArray = [
-            'game_id' => $game->id,
-            'finished_at' => $finishedAt,
-            'started_at' => $startedAt,
-            'score' => $score['total'],
-            'user_id' => Auth::id(),
-        ];
+            if ($groupId !== null) {
+                $userScoreArray['group_id'] = $groupId;
+            }
 
-        if ($groupId !== null) {
-            $userScoreArray['group_id'] = $groupId;
+            $userScore = UserScore::create($userScoreArray);
+
+            $this->saveToCache($userScore->toArray());
+
+            return $score->getView();
+        } catch (Exception $e) {
+            return view('games.score-error');
         }
-
-        $userScore = UserScore::create($userScoreArray);
-
-        $this->saveToCache($userScore->toArray());
-
-        return view('games.score', [
-            'message' => __('game.success'),
-            'score' => $score['total'],
-            'bonus' => $score['bonus'],
-        ]);
     }
 
     /**

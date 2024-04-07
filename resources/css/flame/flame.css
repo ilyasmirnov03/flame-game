@@ -93,3 +93,9 @@
         }
     }
 }
+
+.group-join::part(body) {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}

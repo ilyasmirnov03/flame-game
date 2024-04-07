@@ -4,7 +4,7 @@
     align-items: center;
     padding: 1rem;
     position: relative;
-    z-index: 999;
+    z-index: 700;
 
     .header__logo {
         margin-right: auto;

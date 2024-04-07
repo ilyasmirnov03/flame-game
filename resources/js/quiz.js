@@ -39,6 +39,10 @@ const $confirmButton = document.querySelector('button.confirm');
  */
 function init() {
     document.querySelector('.begin').addEventListener('click', startGame);
+    document.querySelector('.game-result')
+        .addEventListener('sl-request-close', (e) => {
+            e.preventDefault();
+        });
     $confirmButton.addEventListener('click', nextQuestion);
     for (const answer of $quizAnswers) {
         answer.addEventListener('change', selectAnswer);
@@ -122,16 +126,18 @@ function finishGame(answers) {
     if (group?.value != null) {
         body['group_id'] = group.value;
     }
-
+    // TODO: add loader
     htmx.ajax('POST', '/user_score', {
         headers: {
             'X-CSRF-TOKEN': getCSRFToken(),
         },
         swap: 'innerHTML',
-        target: '#scoreResult',
+        target: '.game-result',
         values: body,
     }).then(() => {
+        // TODO: remove loader
         $confirmButton.remove();
+        document.querySelector('.game-result').show();
     });
 }
 

@@ -16,10 +16,6 @@ class QuizAnswer extends Model
 
     protected $table = 'og_quiz_answers';
 
-    protected $hidden = [
-        'is_right'
-    ];
-
     protected $fillable = [
         'is_right',
         'quiz_question_id',

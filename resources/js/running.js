@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const timeDisplay = document.getElementById("timeDisplay");
     const distanceDisplay = document.getElementById("distanceDisplay");
     const group = document.querySelector('input[name="group"]');
+    document.querySelector('.game-result')
+        .addEventListener('sl-request-close', (e) => {
+            e.preventDefault();
+        });
 
     let timer;
     let watchPositionTimer;
@@ -136,8 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     'X-CSRF-TOKEN': getCSRFToken(),
                 },
                 swap: 'innerHTML',
-                target: '#scoreResult',
+                target: '.game-result',
                 values: body,
+            }).then(() => {
+                document.querySelector('.game-result').show();
             });
         }
     }

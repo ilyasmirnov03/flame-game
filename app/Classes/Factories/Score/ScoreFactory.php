@@ -14,7 +14,7 @@ abstract class ScoreFactory {
         return new $classes[$game] ?? null;
     }
 
-    abstract public function calculateScore(string $userId, array $game, int $elapsedTime): array;
+    abstract public function calculateScore(string $userId, array $game, int $elapsedTime): ScoreViewStore;
 
     abstract public function calculateScoreBonus(string $userId, array $game, int $elapsedTime): int;
 }

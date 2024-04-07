@@ -1,7 +1,5 @@
-<div id="funFactPopup" class="funfact">
-    <div class="funfact__content">
-        <h2 class="funfact__content--title">{{ __('fun-fact.title') }}</h2>
-        <p class="funfact__content--desc">{{ $dailyFunFact }}</p>
-        <button class="close btn__blue"> {{ __('fun-fact.button') }} </button>
-    </div>
-</div>
+<sl-dialog class="fun-fact">
+    <h2 slot="label" class="m-0">{{ __('fun-fact.title') }}</h2>
+    {{ $dailyFunFact }}
+    <button slot="footer" class="btn__blue close-fun-fact">{{ __('fun-fact.button') }}</button>
+</sl-dialog>

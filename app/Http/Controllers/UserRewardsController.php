@@ -45,4 +45,17 @@ class UserRewardsController extends Controller {
                 ->with('message', 'Vous n\'avez pas assez de points pour obtenir cette récompense.');
         }
     }
+
+    /**
+     * Get user rewards
+     */
+    public function getUserRewards(): View
+    {
+        $userRewards = Auth::user()->load('rewards')->rewards;
+        $sortedUserRewards = [];
+        foreach ($userRewards as $reward) {
+            $sortedUserRewards[$reward->position][] = $reward;
+        }
+        return view('profile.edit', ['user' => Auth::user(), 'rewards' => $sortedUserRewards]);
+    }
 }

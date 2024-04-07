@@ -16,4 +16,5 @@ return [
     'back' => 'Back',
     'search' => 'Search',
     'join' => 'Join',
+    'close' => 'Close',
 ];

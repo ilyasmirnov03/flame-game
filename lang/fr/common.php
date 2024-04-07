@@ -15,5 +15,6 @@ return [
     'create' => 'Créer',
     'back' => 'Retour',
     'search' => 'Recherche',
-    'join' => 'Rejoindre'
+    'join' => 'Rejoindre',
+    'close' => 'Fermer'
 ];
