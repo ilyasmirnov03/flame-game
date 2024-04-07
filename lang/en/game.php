@@ -5,6 +5,7 @@ return [
     'run.title' => 'Your daily run',
     'run.distance' => 'Run distance',
     'quiz' => 'Quiz',
+    'quiz.your-answer' => 'Your answer',
     'question' => 'Question',
     'result' => 'Result',
     'score' => 'Score',

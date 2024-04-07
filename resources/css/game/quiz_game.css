@@ -78,3 +78,35 @@
 input[type="radio"]:checked + label {
     transform: scale(1.05);
 }
+
+sl-drawer.game-result {
+    .quiz__results {
+
+        .quiz__won-points {
+            font-size: 2rem;
+            color: var(--green);
+
+            &.none {
+                color: var(--sl-color-gray-400);
+            }
+        }
+
+        article {
+            padding: 1rem 0;
+        }
+
+        article:not(:last-child) {
+            border-bottom: 2px solid var(--sl-color-gray-300);
+        }
+
+        .answer {
+            .green {
+                color: var(--green);
+            }
+
+            .red {
+                color: var(--red);
+            }
+        }
+    }
+}
